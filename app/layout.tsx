@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Cairo, Amiri, Noto_Sans, Noto_Serif, Tajawal } from "next/font/google";
+import { Noto_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import "./index.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -34,9 +35,9 @@ const amiri = Amiri({
 });
 
 // Fallback fonts
-const notoSans = Noto_Sans({
-  variable: "--font-noto-sans",
-  subsets: ["latin", "arabic"],
+const notoSansArabic = Noto_Sans_Arabic({
+  variable: "--font-noto-sans-arabic",
+  subsets: ["arabic"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
@@ -68,7 +69,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${cairo.variable} ${amiri.variable} ${notoSans.variable} ${notoSerif.variable} ${tajawal.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${cairo.variable} ${amiri.variable} ${notoSansArabic.variable} ${notoSerif.variable} ${tajawal.variable} antialiased`}
       >
         <I18nProvider>
           <ThemeProvider>
