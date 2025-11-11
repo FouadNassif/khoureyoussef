@@ -1,4 +1,5 @@
 import storyTranslations from './story';
+import miraclesTranslations from './miracles';
 
 export default {
     translation: {
@@ -7,6 +8,7 @@ export default {
             story: "القصة",
             miracles: "المعجزات",
             gallery: "المعرض",
+            news: "الأخبار",
             contact: "اتصل بنا"
         },
         hero: {
@@ -28,6 +30,7 @@ export default {
             planVisit: "خطط لزيارتك"
         },
         ...storyTranslations.story,
+        ...miraclesTranslations,
         miracles: {
             title: "المعجزات الإلهية",
             subtitle: "شهادات الإيمان والنعمة",
@@ -49,6 +52,12 @@ export default {
             mapTitle: "خريطة الموقع",
             followUs: "تابعنا",
             location: "موقع الكنيسة"
+        },
+        news: {
+            title: "أحدث الأخبار",
+            subtitle: "ابق على اطلاع بفعاليات المجتمع وإعلاناتنا",
+            readMore: "اقرأ المزيد",
+            viewAll: "عرض جميع الأخبار"
         },
         footer: {
             about: "عن مار ميخائيل",

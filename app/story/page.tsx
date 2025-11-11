@@ -67,7 +67,7 @@ const Story = () => {
                 Sacred Biography
               </span>
             </div>
-            <h1 className="font-cormorant text-5xl md:text-7xl font-bold mb-6 text-foreground">
+            <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-foreground">
               {t("story.title")}
             </h1>
             <p className="text-xl text-muted-foreground">
@@ -106,7 +106,7 @@ const Story = () => {
                 className="mb-16 last:mb-0"
               >
                 <Card className="p-8 md:p-10 hover:shadow-sacred transition-sacred bg-card border-border">
-                  <h2 className="font-cormorant text-3xl md:text-4xl font-bold mb-6 text-foreground">
+                  <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6 text-foreground">
                     {section.title}
                   </h2>
                   <div className="prose prose-lg max-w-none">
@@ -131,7 +131,7 @@ const Story = () => {
               transition={{ duration: 0.8 }}
             >
               <Card className="p-8 md:p-10 hover:shadow-sacred transition-sacred bg-card border-border">
-                <h2 className="font-cormorant text-3xl md:text-4xl font-bold mb-6 text-foreground">
+                <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6 text-foreground">
                   {aboutSection.title}
                 </h2>
                 <div className="prose prose-lg max-w-none space-y-6">
@@ -161,7 +161,7 @@ const Story = () => {
             className="max-w-3xl mx-auto text-center"
           >
             <div className="text-6xl text-primary mb-6">"</div>
-            <p className="font-cormorant text-2xl md:text-3xl text-foreground mb-6 leading-relaxed">
+            <p className="font-serif text-2xl md:text-3xl text-foreground mb-6 leading-relaxed">
               Through faith and devotion, Mar Mikhael became a vessel of divine
               grace, bringing light to the darkness and hope to the hopeless.
             </p>

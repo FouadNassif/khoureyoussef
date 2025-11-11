@@ -22,7 +22,7 @@ const Footer = () => {
               <div className="w-10 h-10 rounded-full gradient-divine flex items-center justify-center">
                 <Church className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="font-cormorant text-xl font-bold">
+              <span className="font-serif text-xl font-bold">
                 Mar Mikhael
               </span>
             </div>
@@ -33,7 +33,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-cormorant text-lg font-semibold mb-4">
+            <h3 className="font-serif text-lg font-semibold mb-4">
               Quick Links
             </h3>
             <div className="flex flex-col gap-2">
@@ -66,7 +66,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-cormorant text-lg font-semibold mb-4">
+            <h3 className="font-serif text-lg font-semibold mb-4">
               Contact
             </h3>
             <div className="flex flex-col gap-3">

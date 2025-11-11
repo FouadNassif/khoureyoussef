@@ -76,7 +76,7 @@ export default function Page() {
                     Sacred Legacy
                   </span>
                 </div>
-                <h2 className="font-cormorant text-4xl md:text-5xl font-bold mb-6 text-foreground">
+                <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
                   A Life of Divine Grace
                 </h2>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
@@ -117,7 +117,7 @@ export default function Page() {
                   {t("home.latestMiracle")}
                 </span>
               </div>
-              <h2 className="font-cormorant text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-foreground">
                 {t("home.featuredMiracleTitle")}
               </h2>
             </div>
@@ -129,7 +129,7 @@ export default function Page() {
                   <span>{t("home.miracleDate")}</span>
                 </div>
 
-                <h3 className="font-cormorant text-3xl font-bold text-foreground">
+                <h3 className="font-serif text-3xl font-bold text-foreground">
                   {t("home.miracleHeading")}
                 </h3>
 
@@ -162,7 +162,7 @@ export default function Page() {
                 Divine Interventions
               </span>
             </div>
-            <h2 className="font-cormorant text-4xl md:text-5xl font-bold mb-4 text-foreground">
+            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-foreground">
               {t("miracles.title")}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -198,7 +198,7 @@ export default function Page() {
                   <div className="w-14 h-14 rounded-full gradient-divine flex items-center justify-center mx-auto mb-4 glow-divine">
                     <item.icon className="w-7 h-7 text-primary-foreground" />
                   </div>
-                  <h3 className="font-cormorant text-xl font-semibold mb-3">
+                  <h3 className="font-serif text-xl font-semibold mb-3">
                     {item.title}
                   </h3>
                   <p className="text-muted-foreground">{item.description}</p>
@@ -236,7 +236,7 @@ export default function Page() {
                   Sacred Place
                 </span>
               </div>
-              <h2 className="font-cormorant text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
                 {t("home.visitSaint")}
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">

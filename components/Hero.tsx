@@ -102,7 +102,7 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="font-cormorant text-5xl md:text-7xl lg:text-8xl font-bold mb-4 text-foreground"
+            className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-4 text-foreground"
           >
             {t("hero.title")}
           </motion.h1>
@@ -112,7 +112,7 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-primary font-cormorant mb-6"
+            className="text-xl md:text-2xl text-primary font-serif mb-6"
           >
             {t("hero.subtitle")}
           </motion.p>

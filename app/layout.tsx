@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Cairo, Amiri, Noto_Sans, Noto_Serif, Tajawal } from "next/font/google";
 import "./globals.css";
 import "./index.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -8,11 +8,51 @@ import { I18nProvider } from "@/components/I18nProvider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// Cairo - Primary font: Excellent for both Arabic and English, modern and readable
+const cairo = Cairo({
+  variable: "--font-cairo",
+  subsets: ["latin", "arabic"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+// Amiri - For headings: Classical Arabic style that works beautifully with English
+const amiri = Amiri({
+  variable: "--font-amiri",
+  subsets: ["latin", "arabic"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+// Fallback fonts
+const notoSans = Noto_Sans({
+  variable: "--font-noto-sans",
+  subsets: ["latin", "arabic"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const notoSerif = Noto_Serif({
+  variable: "--font-noto-serif",
+  subsets: ["latin", "arabic"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const tajawal = Tajawal({
+  variable: "--font-tajawal",
+  subsets: ["latin", "arabic"],
+  weight: ["400", "500", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +68,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${cairo.variable} ${amiri.variable} ${notoSans.variable} ${notoSerif.variable} ${tajawal.variable} antialiased`}
       >
         <I18nProvider>
           <ThemeProvider>

@@ -1,4 +1,5 @@
 import storyTranslations from './story';
+import miraclesTranslations from './miracles';
 
 export default {
     translation: {
@@ -7,6 +8,7 @@ export default {
             story: "Story",
             miracles: "Miracles",
             gallery: "Gallery",
+            news: "News",
             contact: "Contact"
         },
         hero: {
@@ -28,6 +30,7 @@ export default {
             planVisit: "Plan Your Visit"
         },
         ...storyTranslations.story,
+        ...miraclesTranslations,
         miracles: {
             title: "Divine Miracles",
             subtitle: "Testimonies of Faith and Grace",
@@ -49,6 +52,12 @@ export default {
             mapTitle: "Location Map",
             followUs: "Follow Us",
             location: "Church Location"
+        },
+        news: {
+            title: "Latest News",
+            subtitle: "Stay updated with our community events and announcements",
+            readMore: "Read More",
+            viewAll: "View All News"
         },
         footer: {
             about: "About Mar Mikhael",

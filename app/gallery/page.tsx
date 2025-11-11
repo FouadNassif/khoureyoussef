@@ -45,7 +45,7 @@ const Gallery = () => {
                 Visual Journey
               </span>
             </div>
-            <h1 className="font-cormorant text-5xl md:text-7xl font-bold mb-6 text-foreground">
+            <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-foreground">
               {t("gallery.title")}
             </h1>
             <p className="text-xl text-muted-foreground">

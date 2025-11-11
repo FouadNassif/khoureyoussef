@@ -127,7 +127,8 @@ All colors MUST be HSL.
     body {
         background-color: hsl(var(--background));
         color: hsl(var(--foreground));
-        font-family: 'Inter', sans-serif;
+        /* Cairo is specifically designed for Arabic and English - excellent readability for both */
+        font-family: 'Cairo', 'Noto Sans Arabic', 'Noto Sans', 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
     }
 
     h1,
@@ -136,7 +137,8 @@ All colors MUST be HSL.
     h4,
     h5,
     h6 {
-        font-family: 'Cormorant Garamond', serif;
+        /* Amiri for headings - classical Arabic style that pairs beautifully with English */
+        font-family: 'Amiri', 'Cairo', 'Noto Serif', 'Tajawal', 'Georgia', serif;
         font-weight: 600;
     }
 }

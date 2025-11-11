@@ -29,6 +29,7 @@ const Navigation = ({ show = true }: NavigationProps) => {
     { path: "/story", label: t("nav.story") },
     { path: "/miracles", label: t("nav.miracles") },
     { path: "/gallery", label: t("nav.gallery") },
+    { path: "/news", label: t("nav.news") },
     { path: "/contact", label: t("nav.contact") },
   ];
 
@@ -50,11 +51,11 @@ const Navigation = ({ show = true }: NavigationProps) => {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-full gradient-divine flex items-center justify-center glow-divine">
-              <span className="text-primary-foreground font-cormorant text-xl font-bold">
+              <span className="text-primary-foreground font-serif text-xl font-bold">
                 M
               </span>
             </div>
-            <span className="font-cormorant text-2xl font-bold text-foreground hidden sm:block">
+            <span className="font-serif text-2xl font-bold text-foreground hidden sm:block">
               Mar Mikhael
             </span>
           </Link>

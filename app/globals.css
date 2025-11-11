@@ -11,8 +11,4 @@
 /* Theme is controlled via .dark class applied by next-themes */
 /* Colors are defined in index.css and use CSS variables */
 
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* Fonts are defined in index.css - this file just imports Tailwind */

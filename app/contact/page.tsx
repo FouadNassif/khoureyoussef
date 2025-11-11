@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -14,14 +14,41 @@ import {
   Facebook,
   Instagram,
   MessageCircle,
+  Heart,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 const Contact = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [headerRef, headerInView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
+  const [expandedMiracle, setExpandedMiracle] = useState<number | null>(null);
+
+  // Get all miracles from translations - memoized to update when language changes
+  const miracles = useMemo(() => {
+    const miraclesList = [];
+    for (let i = 1; i <= 9; i++) {
+      const title = t(`miracle${i}.title`, { defaultValue: '' });
+      if (title && title !== `miracle${i}.title`) {
+        miraclesList.push({
+          key: `miracle${i}`,
+          title: t(`miracle${i}.title`),
+          date: t(`miracle${i}.date`),
+          type: t(`miracle${i}.type`),
+          location: t(`miracle${i}.location`),
+          content: t(`miracle${i}.content`),
+        });
+      }
+    }
+    return miraclesList;
+  }, [t, i18n.language]);
+
+  const toggleMiracle = (index: number) => {
+    setExpandedMiracle(expandedMiracle === index ? null : index);
+  };
 
   return (
     <div className="min-h-screen">
@@ -42,7 +69,7 @@ const Contact = () => {
                 Get in Touch
               </span>
             </div>
-            <h1 className="font-cormorant text-5xl md:text-7xl font-bold mb-6 text-foreground">
+            <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-foreground">
               {t("contact.title")}
             </h1>
             <p className="text-xl text-muted-foreground">
@@ -63,16 +90,16 @@ const Contact = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <Card className="p-8 bg-card border-border shadow-sacred">
-                <h2 className="font-cormorant text-3xl font-bold mb-6 text-foreground">
+              <Card className="p-8 bg-card border-border shadow-sacred h-full flex flex-col">
+                <h2 className="font-serif text-3xl font-bold mb-6 text-foreground">
                   {t("contact.mapTitle")}
                 </h2>
-                <div className="rounded-lg overflow-hidden shadow-sacred h-[400px]">
+                <div className="rounded-lg overflow-hidden shadow-sacred flex-1" style={{ minHeight: '500px' }}>
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.5!2d35.8!3d33.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDU0JzAwLjAiTiAzNcKwNDgnMDAuMCJF!5e0!3m2!1sen!2slb!4v1234567890"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8730.305835123228!2d35.91068943537858!3d34.28938687221933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1521f8828e7f3113%3A0xbe751175368fc07a!2sMar%20Mikhael%20-%20Church!5e1!3m2!1sen!2slb!4v1762716689923!5m2!1sen!2slb"
                     width="100%"
                     height="100%"
-                    style={{ border: 0 }}
+                    style={{ border: 0, minHeight: '500px' }}
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
@@ -81,12 +108,12 @@ const Contact = () => {
 
                 {/* Social Media Links */}
                 <div className="mt-8">
-                  <h3 className="font-cormorant text-xl font-bold mb-4 text-foreground">
+                  <h3 className="font-serif text-xl font-bold mb-4 text-foreground">
                     {t("contact.followUs")}
                   </h3>
                   <div className="flex gap-4">
                     <a
-                      href="https://facebook.com"
+                      href="https://www.facebook.com/khoureeddis"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center hover:scale-110 transition-sacred glow-divine"
@@ -94,20 +121,12 @@ const Contact = () => {
                       <Facebook className="w-6 h-6 text-primary-foreground" />
                     </a>
                     <a
-                      href="https://instagram.com"
+                      href="https://www.instagram.com/pere_yousef_abimaroun_maatouk/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center hover:scale-110 transition-sacred glow-divine"
                     >
                       <Instagram className="w-6 h-6 text-primary-foreground" />
-                    </a>
-                    <a
-                      href="https://wa.me/9611234567"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center hover:scale-110 transition-sacred glow-divine"
-                    >
-                      <MessageCircle className="w-6 h-6 text-primary-foreground" />
                     </a>
                   </div>
                 </div>
@@ -120,26 +139,25 @@ const Contact = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="space-y-8"
             >
-              <div>
-                <h2 className="font-cormorant text-3xl font-bold mb-6 text-foreground">
+              <div className="h-full flex flex-col">
+                <h2 className="font-serif text-3xl font-bold mb-6 text-foreground">
                   {t("contact.location")}
                 </h2>
-                <div className="space-y-6">
+                <div className="grid grid-cols-1 gap-6 flex-1" style={{ gridTemplateRows: 'repeat(3, 1fr)' }}>
                   <Card className="p-6 bg-card border-border hover:shadow-sacred transition-sacred">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center shrink-0">
                         <MapPin className="w-6 h-6 text-primary-foreground" />
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <h3 className="font-semibold mb-2 text-foreground">
                           Address
                         </h3>
                         <p className="text-muted-foreground">
                           Church of Mar Mikhael
                           <br />
-                          Sereel Village
+                          Sereel Village - Zgharta
                           <br />
                           Lebanon
                         </p>
@@ -149,10 +167,10 @@ const Contact = () => {
 
                   <Card className="p-6 bg-card border-border hover:shadow-sacred transition-sacred">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center shrink-0">
                         <Clock className="w-6 h-6 text-primary-foreground" />
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <h3 className="font-semibold mb-2 text-foreground">
                           Service Times
                         </h3>
@@ -167,22 +185,25 @@ const Contact = () => {
                     </div>
                   </Card>
 
-                  <Card className="p-6 bg-card border-border hover:shadow-sacred transition-sacred">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center flex-shrink-0">
+                  <Card className="p-6 bg-card border-border hover:shadow-sacred transition-sacred cursor-pointer group">
+                    <a 
+                      href="tel:+96171797514" 
+                      className="flex items-start gap-4 no-underline"
+                    >
+                      <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center shrink-0 group-hover:scale-110 transition-sacred">
                         <Phone className="w-6 h-6 text-primary-foreground" />
                       </div>
-                      <div>
-                        <h3 className="font-semibold mb-2 text-foreground">
+                      <div className="flex-1">
+                        <h3 className="font-semibold mb-2 text-foreground group-hover:text-primary transition-sacred">
                           Contact
                         </h3>
-                        <p className="text-muted-foreground">
-                          Available for visits and inquiries
+                        <p className="text-muted-foreground group-hover:text-foreground transition-sacred">
+                          Maria Sassine
                           <br />
-                          Pilgrims always welcome
+                          <span className="text-primary font-semibold">+961 71 797 514</span>
                         </p>
                       </div>
-                    </div>
+                    </a>
                   </Card>
                 </div>
               </div>
@@ -190,7 +211,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
       <Footer />
     </div>
   );

@@ -64,6 +64,8 @@ export default {
                 sm: "calc(var(--radius) - 4px)",
             },
             fontFamily: {
+                serif: ['"Amiri"', '"Cairo"', '"Noto Serif"', '"Tajawal"', 'Georgia', 'serif'],
+                sans: ['"Cairo"', '"Noto Sans Arabic"', '"Noto Sans"', '"Tajawal"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
                 cormorant: ['"Cormorant Garamond"', 'serif'],
                 inter: ['Inter', 'sans-serif'],
             },
