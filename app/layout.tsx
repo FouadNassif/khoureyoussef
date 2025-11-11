@@ -1,24 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Cairo, Amiri, Noto_Sans, Noto_Serif, Tajawal } from "next/font/google";
-import { Noto_Sans_Arabic } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Cairo,
+  Amiri,
+  Noto_Serif,
+  Tajawal,
+  Noto_Sans_Arabic,
+} from "next/font/google";
 import "./globals.css";
 import "./index.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { I18nProvider } from "@/components/I18nProvider";
 
+// Geist Sans (UI)
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
+// Geist Mono (code / mono text)
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
 });
 
-// Cairo - Primary font: Excellent for both Arabic and English, modern and readable
+// Cairo – modern Arabic + Latin
 const cairo = Cairo({
   variable: "--font-cairo",
   subsets: ["latin", "arabic"],
@@ -26,7 +35,7 @@ const cairo = Cairo({
   display: "swap",
 });
 
-// Amiri - For headings: Classical Arabic style that works beautifully with English
+// Amiri – elegant Arabic/English serif for titles
 const amiri = Amiri({
   variable: "--font-amiri",
   subsets: ["latin", "arabic"],
@@ -34,7 +43,7 @@ const amiri = Amiri({
   display: "swap",
 });
 
-// Fallback fonts
+// Noto Sans Arabic – fallback for Arabic sans
 const notoSansArabic = Noto_Sans_Arabic({
   variable: "--font-noto-sans-arabic",
   subsets: ["arabic"],
@@ -42,13 +51,15 @@ const notoSansArabic = Noto_Sans_Arabic({
   display: "swap",
 });
 
+// Noto Serif – serif for English/Latin
 const notoSerif = Noto_Serif({
   variable: "--font-noto-serif",
-  subsets: ["latin", "arabic"],
+  subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
+// Tajawal – modern, clean Arabic font
 const tajawal = Tajawal({
   variable: "--font-tajawal",
   subsets: ["latin", "arabic"],
@@ -69,14 +80,22 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${cairo.variable} ${amiri.variable} ${notoSansArabic.variable} ${notoSerif.variable} ${tajawal.variable} antialiased`}
+        className={`
+          ${geistSans.variable}
+          ${geistMono.variable}
+          ${cairo.variable}
+          ${amiri.variable}
+          ${notoSansArabic.variable}
+          ${notoSerif.variable}
+          ${tajawal.variable}
+          antialiased
+        `}
       >
         <I18nProvider>
-          <ThemeProvider>
-            {children}
-          </ThemeProvider>
+          <ThemeProvider>{children}</ThemeProvider>
         </I18nProvider>
       </body>
     </html>
   );
 }
+
