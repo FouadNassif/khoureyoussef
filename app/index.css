@@ -16,10 +16,10 @@ All colors MUST be HSL.
         --popover: 45 15% 98%;
         --popover-foreground: 30 15% 20%;
 
-        /* Muted yellow - main color (not bright) */
-        --primary: 45 60% 55%;
+        /* Golden amber yellow - main color (warmer, richer tone) */
+        --primary: 38 75% 58%;
         --primary-foreground: 0 0% 100%;
-        --primary-glow: 45 65% 60%;
+        --primary-glow: 38 80% 63%;
 
         /* Off-white (not snow or bright white) */
         --secondary: 45 25% 94%;
@@ -29,27 +29,27 @@ All colors MUST be HSL.
         --muted: 45 20% 95%;
         --muted-foreground: 30 10% 45%;
 
-        /* Yellow accent */
-        --accent: 45 50% 90%;
+        /* Golden Yellow accent */
+        --accent: 38 65% 92%;
         --accent-foreground: 30 20% 25%;
-        --accent-deep: 45 55% 50%;
+        --accent-deep: 38 70% 52%;
 
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 210 40% 98%;
 
         --border: 45 25% 90%;
         --input: 45 25% 94%;
-        --ring: 45 65% 55%;
+        --ring: 38 75% 58%;
 
         --radius: 0.75rem;
 
-        /* White and Yellow gradients */
-        --gradient-divine: linear-gradient(135deg, hsl(45 60% 55%), hsl(45 65% 60%));
+        /* Golden Yellow gradients */
+        --gradient-divine: linear-gradient(135deg, hsl(38 75% 58%), hsl(38 80% 63%));
         --gradient-heavenly: linear-gradient(180deg, hsl(45 20% 96%), hsl(45 15% 94%));
-        --gradient-sacred: linear-gradient(135deg, hsl(45 50% 90%), hsl(45 25% 94%));
+        --gradient-sacred: linear-gradient(135deg, hsl(38 70% 92%), hsl(45 25% 94%));
 
-        /* Yellow effects */
-        --glow-divine: 0 8px 32px hsla(45, 60%, 55%, 0.25);
+        /* Golden Yellow effects */
+        --glow-divine: 0 8px 32px hsla(38, 75%, 58%, 0.3);
         --shadow-soft: 0 4px 24px hsla(30, 15%, 20%, 0.08);
         --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -81,9 +81,9 @@ All colors MUST be HSL.
         --popover: 30 18% 15%;
         --popover-foreground: 45 25% 95%;
 
-        --primary: 45 60% 55%;
+        --primary: 38 75% 58%;
         --primary-foreground: 0 0% 100%;
-        --primary-glow: 45 65% 60%;
+        --primary-glow: 38 80% 63%;
 
         --secondary: 30 15% 22%;
         --secondary-foreground: 45 25% 95%;
@@ -91,22 +91,22 @@ All colors MUST be HSL.
         --muted: 30 15% 20%;
         --muted-foreground: 30 10% 65%;
 
-        --accent: 45 50% 28%;
+        --accent: 38 65% 32%;
         --accent-foreground: 45 25% 95%;
-        --accent-deep: 45 55% 35%;
+        --accent-deep: 38 70% 38%;
 
         --destructive: 0 62.8% 30.6%;
         --destructive-foreground: 210 40% 98%;
 
         --border: 30 15% 25%;
         --input: 30 15% 22%;
-        --ring: 45 65% 55%;
+        --ring: 38 75% 58%;
 
-        --gradient-divine: linear-gradient(135deg, hsl(45 60% 55%), hsl(45 65% 60%));
+        --gradient-divine: linear-gradient(135deg, hsl(38 75% 58%), hsl(38 80% 63%));
         --gradient-heavenly: linear-gradient(180deg, hsl(30 20% 12%), hsl(30 15% 20%));
-        --gradient-sacred: linear-gradient(135deg, hsl(45 50% 28%), hsl(30 15% 22%));
+        --gradient-sacred: linear-gradient(135deg, hsl(38 70% 32%), hsl(30 15% 22%));
 
-        --glow-divine: 0 8px 32px hsla(45, 60%, 55%, 0.35);
+        --glow-divine: 0 8px 32px hsla(38, 75%, 58%, 0.4);
         --shadow-soft: 0 4px 24px hsla(0, 0%, 0%, 0.3);
         --sidebar-background: 240 5.9% 10%;
         --sidebar-foreground: 240 4.8% 95.9%;

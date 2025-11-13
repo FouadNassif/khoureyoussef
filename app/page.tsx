@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
+import LoadingScreen from "@/components/LoadingScreen";
 import { Sparkles, Book, Calendar, Play } from "lucide-react";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { gsap } from "gsap";
@@ -21,6 +22,7 @@ export default function Page() {
   const { t, i18n } = useTranslation();
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [showNavbar, setShowNavbar] = useState(false);
+  const [showLoading, setShowLoading] = useState(true);
 
   const [aboutRef, aboutInView] = useInView({
     triggerOnce: true,
@@ -44,10 +46,16 @@ export default function Page() {
     if (hasVisited) {
       setIsInitialLoad(false);
       setShowNavbar(true);
+      setShowLoading(false);
     } else {
       sessionStorage.setItem('hasVisited', 'true');
+      // Loading screen will handle its own completion
     }
   }, []);
+
+  const handleLoadingComplete = () => {
+    setShowLoading(false);
+  };
 
   const handleHeroAnimationComplete = () => {
     setIsInitialLoad(false);
@@ -170,6 +178,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen">
+      {showLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       <Navigation show={showNavbar} />
       <Hero isInitialLoad={isInitialLoad} onAnimationComplete={handleHeroAnimationComplete} />
 
@@ -243,7 +252,7 @@ export default function Page() {
                 </p>
 
                 <Link href="/miracles">
-                  <Button className="gradient-divine text-primary-foreground glow-divine">
+                  <Button variant="glass">
                     {t("home.readFullStory")}
                   </Button>
                 </Link>
@@ -323,9 +332,8 @@ export default function Page() {
           <div ref={newsButtonRef} className="text-center mt-12">
             <Link href="/news">
               <Button
-                variant="outline"
+                variant="glass"
                 size="lg"
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               >
                 {t("news.viewAll")}
               </Button>
@@ -351,7 +359,7 @@ export default function Page() {
                 {t("home.visitDescription")}
               </p>
               <Link href="/contact">
-                <Button className="gradient-divine text-primary-foreground glow-divine">
+                <Button variant="glass">
                   {t("home.planVisit")}
                 </Button>
               </Link>

@@ -88,7 +88,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Mar Mikhael of Sereel. {t("footer.rights")}.
+            © {currentYear} Mar Mikhael of Sereel. {t("footer.rights")}
           </p>
         </div>
       </div>

@@ -25,6 +25,7 @@ export default {
             miracleHeading: "Miraculous Healing Through Prayer",
             miracleDescription: "A faithful pilgrim experienced complete recovery from a severe illness after praying at the shrine of Mar Mikhael. The doctors confirmed the healing was medically unexplainable, attributing it to divine intervention through the saint's intercession.",
             readFullStory: "Read Full Story",
+            showLess: "Show Less",
             visitSaint: "Visit the Saint",
             visitDescription: "The shrine of Mar Mikhael in Sereel has been a sanctuary of faith for generations. Experience the sacred atmosphere, witness centuries of devotion, and connect with the divine presence of our beloved saint.",
             planVisit: "Plan Your Visit",

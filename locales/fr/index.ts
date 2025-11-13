@@ -24,6 +24,7 @@ export default {
             miracleHeading: "Guérison Miraculeuse par la Prière",
             miracleDescription: "Un pèlerin fidèle a connu une guérison complète d'une maladie grave après avoir prié au sanctuaire de Mar Mikhael. Les médecins ont confirmé que la guérison était médicalement inexplicable, l'attribuant à une intervention divine par l'intercession du saint.",
             readFullStory: "Lire l'Histoire Complète",
+            showLess: "Afficher Moins",
             visitSaint: "Visiter le Saint",
             visitDescription: "Le sanctuaire de Mar Mikhael à Sereel est un refuge de foi depuis des générations. Vivez l'atmosphère sacrée, témoignez de siècles de dévotion et connectez-vous à la présence divine de notre saint bien-aimé.",
             planVisit: "Planifier Votre Visite",

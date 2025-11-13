@@ -259,10 +259,10 @@ const News = () => {
                       {item.content}
                     </p>
                     <Button
-                      variant="ghost"
+                      variant="glass"
                       size="sm"
                       onClick={() => openLightbox(item)}
-                      className="w-full text-primary hover:text-primary"
+                      className="w-full"
                     >
                       {t("news.readMore")}
                     </Button>

@@ -31,6 +31,8 @@ const Story = () => {
   const timelineElementRef = useRef<HTMLDivElement>(null);
   const storySectionsRef = useRef<(HTMLDivElement | null)[]>([]);
   const quoteRef = useRef<HTMLDivElement>(null);
+  const portraitImageRef = useRef<HTMLImageElement>(null);
+  const storyContainerRef = useRef<HTMLDivElement>(null);
 
   // Get story sections from translations - memoized to update when language changes
   const storySections = useMemo(() => [
@@ -81,29 +83,121 @@ const Story = () => {
     }
   }, [timelineInView]);
 
-  // Animate story sections
+  // Parallax effect for portrait image
   useEffect(() => {
-    storySectionsRef.current.forEach((ref, index) => {
-      if (ref) {
-        ScrollTrigger.create({
-          trigger: ref,
-          start: "top 85%",
-          animation: gsap.fromTo(
-            ref,
-            { opacity: 0, y: 40 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              delay: index * 0.2,
-              ease: "power2.out",
-            }
-          ),
-          once: true,
+    if (portraitImageRef.current) {
+      ScrollTrigger.create({
+        trigger: portraitImageRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+        animation: gsap.to(portraitImageRef.current, {
+          y: -100,
+          ease: "none",
+        }),
+      });
+    }
+  }, []);
+
+  // Sequential stacking animation for story sections
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    const triggers: ScrollTrigger[] = [];
+
+    // Wait for next tick to ensure refs are set
+    timer = setTimeout(() => {
+      if (!storyContainerRef.current) return;
+
+      const sections = storySectionsRef.current.filter(Boolean) as HTMLElement[];
+      if (sections.length === 0) return;
+
+      const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
+      // Set initial states for all sections
+      sections.forEach((ref, index) => {
+        gsap.set(ref, {
+          opacity: 0,
+          y: isMobile ? 100 : 200,
+          scale: isMobile ? 0.95 : 0.9,
+          zIndex: storySections.length - index,
         });
-      }
-    });
-  }, [sectionsInView, storySections]);
+      });
+
+      // Create sequential animations - each section appears after the previous one finishes
+      sections.forEach((ref, index) => {
+        const prevSection = index > 0 ? sections[index - 1] : null;
+        
+        // Calculate start position - adjust for mobile
+        let startPosition: string;
+        if (index === 0) {
+          startPosition = isMobile ? "top 90%" : "top 85%";
+        } else {
+          startPosition = isMobile ? "top 70%" : "top 50%";
+        }
+
+        // Main reveal animation - sequential appearance
+        const revealTrigger = ScrollTrigger.create({
+          trigger: ref,
+          start: startPosition,
+          end: isMobile ? "top 40%" : "top 30%",
+          scrub: isMobile ? 0.5 : 1,
+          animation: gsap.to(ref, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            ease: "power2.out",
+          }),
+          onEnter: () => {
+            // Ensure previous sections stay visible and in place
+            if (prevSection) {
+              gsap.set(prevSection, { 
+                opacity: 1, 
+                y: 0, 
+                scale: 1,
+              });
+            }
+          },
+        });
+        triggers.push(revealTrigger);
+
+        // Subtle parallax effect - disabled on mobile for better performance
+        if (index > 0 && !isMobile) {
+          const parallaxTrigger = ScrollTrigger.create({
+            trigger: ref,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.5,
+            animation: gsap.to(ref, {
+              y: -15 * index,
+              ease: "none",
+            }),
+          });
+          triggers.push(parallaxTrigger);
+        }
+      });
+
+      // Refresh ScrollTrigger to ensure it recalculates
+      ScrollTrigger.refresh();
+    }, 100);
+
+    // Cleanup function
+    return () => {
+      if (timer) clearTimeout(timer);
+      // Kill all triggers created for story sections
+      triggers.forEach(trigger => {
+        if (trigger) {
+          trigger.kill();
+        }
+      });
+      // Also kill any remaining triggers for story sections
+      ScrollTrigger.getAll().forEach(trigger => {
+        const triggerElement = trigger.vars.trigger as HTMLElement | undefined;
+        if (triggerElement && storySectionsRef.current.includes(triggerElement as HTMLDivElement)) {
+          trigger.kill();
+        }
+      });
+    };
+  }, [storySections, i18n.language]);
 
   // Animate quote section
   useEffect(() => {
@@ -130,7 +224,7 @@ const Story = () => {
         <div className="container mx-auto px-4">
           <div
             ref={(el) => {
-              headerRef.current = el;
+              headerRef(el);
               headerElementRef.current = el;
             }}
             className="text-center max-w-3xl mx-auto"
@@ -150,13 +244,14 @@ const Story = () => {
         </div>
       </section>
 
-      {/* Saint Portrait */}
-      <section className="py-16 bg-background">
+      {/* Saint Portrait with Parallax */}
+      <section className="py-16 bg-background relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             <div className="relative">
               <div className="absolute -inset-6 gradient-divine opacity-20 blur-3xl rounded-full" />
               <img
+                ref={portraitImageRef}
                 src="/assets/saint-icon.jpg"
                 alt="Mar Mikhael Icon"
                 className="relative w-full rounded-2xl shadow-sacred glow-divine"
@@ -166,19 +261,25 @@ const Story = () => {
         </div>
       </section>
 
-      {/* Story Sections */}
-      <section ref={sectionsRef} className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+      {/* Story Sections with Sequential Stacking Effect */}
+      <section ref={sectionsRef} className="relative bg-background overflow-hidden">
+        <div ref={storyContainerRef} className="container mx-auto px-4 py-12 md:py-20">
+          <div className="max-w-4xl mx-auto relative">
             {storySections.map((section, index) => (
               <div
                 key={section.id}
                 ref={(el) => {
                   storySectionsRef.current[index] = el;
                 }}
-                className="mb-16 last:mb-0"
+                className="sticky mb-8 md:mb-16"
+                style={{
+                  top: typeof window !== 'undefined' && window.innerWidth < 768 
+                    ? `${80 + index * 5}px` 
+                    : `${100 + index * 10}px`,
+                  zIndex: storySections.length - index,
+                } as React.CSSProperties}
               >
-                <Card className="p-8 md:p-10 hover:shadow-sacred transition-sacred bg-card border-border">
+                <Card className="p-8 md:p-10 hover:shadow-sacred transition-sacred bg-card/95 backdrop-blur-sm border-border shadow-xl">
                   <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6 text-foreground">
                     {section.title}
                   </h2>
@@ -190,19 +291,18 @@ const Story = () => {
                 </Card>
               </div>
             ))}
+            {/* Spacer to ensure all sections can scroll and animate */}
+            <div className="h-[150vh] md:h-[200vh]" />
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section ref={timelineRef} className="py-20 bg-background">
+      <section ref={timelineRef} className="pt-4 pb-8 md:pt-8 md:pb-12 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div ref={timelineElementRef}>
               <Card className="p-8 md:p-10 hover:shadow-sacred transition-sacred bg-card border-border">
-                <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                  {aboutSection.title}
-                </h2>
                 <div className="prose prose-lg max-w-none space-y-6">
                   {aboutSection.paragraphs.map((paragraph, index) => (
                     <p

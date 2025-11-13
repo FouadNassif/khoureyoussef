@@ -141,7 +141,7 @@ const Miracles = () => {
                 }}
               >
                 <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border">
-                  <div className="p-6">
+                  <div className="p-4">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center shrink-0 glow-divine">
                         <Heart className="w-6 h-6 text-primary-foreground" />
@@ -187,15 +187,14 @@ const Miracles = () => {
 
                         {miracle.content.length > 200 && (
                           <Button
-                            variant="ghost"
+                            variant="glass"
                             size="sm"
                             onClick={() => toggleMiracle(index)}
-                            className="text-primary hover:text-primary"
                           >
                             {expandedMiracle === index ? (
                               <>
                                 <ChevronUp className="w-4 h-4 mr-2" />
-                                Show Less
+                                {t("home.showLess")}
                               </>
                             ) : (
                               <>

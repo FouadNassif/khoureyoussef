@@ -2,7 +2,6 @@
 
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
@@ -13,19 +12,24 @@ interface HeroProps {
 }
 
 const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [zoomLevel, setZoomLevel] = useState(1);
   const [showContent, setShowContent] = useState(!isInitialLoad);
+  const [mounted, setMounted] = useState(false);
   const bgImageRef = useRef<HTMLImageElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const decorativeRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
-  const scrollIconRef = useRef<HTMLDivElement>(null);
+  const particlesRef = useRef<HTMLDivElement>(null);
+
+  // Handle hydration - ensure client-side rendering matches server
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!isInitialLoad) {
@@ -67,7 +71,7 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
     };
   }, [isInitialLoad, onAnimationComplete]);
 
-  // Animate background image zoom
+  // Animate background image zoom with parallax effect
   useEffect(() => {
     if (bgImageRef.current) {
       gsap.to(bgImageRef.current, {
@@ -79,19 +83,64 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
     }
   }, [zoomLevel]);
 
+  // Parallax effect on scroll
+  useEffect(() => {
+    if (!bgImageRef.current) return;
+
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const parallaxSpeed = 0.5;
+      gsap.to(bgImageRef.current, {
+        y: scrolled * parallaxSpeed,
+        duration: 0.3,
+        ease: "power1.out",
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Animate floating particles
+  useEffect(() => {
+    if (particlesRef.current) {
+      const particles = particlesRef.current.children;
+      Array.from(particles).forEach((particle, index) => {
+        gsap.to(particle, {
+          y: -20,
+          x: Math.sin(index) * 15,
+          duration: 3 + index * 0.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: index * 0.2,
+        });
+      });
+    }
+  }, []);
+
   // Animate content when showContent changes
   useEffect(() => {
     if (!showContent || !contentRef.current) return;
 
     const delay = isInitialLoad ? 2.5 : 0;
+    
+    // Fade in overlay with reduced opacity
+    if (overlayRef.current) {
+      gsap.fromTo(
+        overlayRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 1, delay: delay, ease: "power2.out" }
+      );
+    }
+
     const elements = [
       { ref: contentRef, y: 40, delay: delay },
-      { ref: decorativeRef, scale: 0, delay: delay + 0.2 },
-      { ref: titleRef, y: 20, delay: delay + 0.3 },
-      { ref: subtitleRef, y: 20, delay: delay + 0.4 },
-      { ref: descriptionRef, y: 20, delay: delay + 0.5 },
-      { ref: badgeRef, scale: 0.9, delay: delay + 0.6 },
-      { ref: ctaRef, y: 20, delay: delay + 0.7 },
+      { ref: titleRef, y: 20, delay: delay + 0.2 },
+      { ref: subtitleRef, y: 20, delay: delay + 0.3 },
+      { ref: descriptionRef, y: 20, delay: delay + 0.4 },
+      { ref: badgeRef, scale: 0.9, delay: delay + 0.5 },
+      { ref: ctaRef, y: 20, delay: delay + 0.6 },
     ];
 
     elements.forEach(({ ref, y, scale, delay: elementDelay }) => {
@@ -124,31 +173,11 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
       }
     });
 
-    // Animate scroll indicator
-    if (scrollIndicatorRef.current) {
-      gsap.fromTo(
-        scrollIndicatorRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 1, delay: delay + 1, ease: "power2.out" }
-      );
-    }
-
-    // Animate scroll icon bounce
-    if (scrollIconRef.current) {
-      gsap.to(scrollIconRef.current, {
-        y: 10,
-        duration: 1,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut",
-        delay: delay + 1,
-      });
-    }
   }, [showContent, isInitialLoad]);
 
   return (
     <section className={`relative ${isInitialLoad ? 'fixed inset-0 z-50' : ''} min-h-screen flex items-center justify-center overflow-hidden`}>
-      {/* Background Image with Overlay */}
+      {/* Background Image with Reduced Overlay */}
       <div className="absolute inset-0">
         <img
           ref={bgImageRef}
@@ -157,76 +186,85 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
           className="w-full h-full object-cover"
           style={{ transformOrigin: "center center" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/30 to-background/50" />
+        {/* Reduced transparency overlay - much lighter for clearer image */}
+        <div 
+          ref={overlayRef}
+          className="absolute inset-0 bg-gradient-to-b from-background/15 via-background/10 to-background/25"
+        />
+        {/* Golden yellow accent overlay for warmth */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10" />
+      </div>
+
+      {/* Floating Particles */}
+      <div ref={particlesRef} className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 rounded-full bg-primary/30 blur-sm"
+            style={{
+              left: `${15 + i * 15}%`,
+              top: `${20 + i * 12}%`,
+            }}
+          />
+        ))}
       </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 pt-32 pb-16 text-center">
         <div ref={contentRef} className="max-w-4xl mx-auto">
-          {/* Decorative Element */}
-          <div
-            ref={decorativeRef}
-            className="w-16 h-16 mx-auto mb-6 rounded-full gradient-divine flex items-center justify-center glow-divine"
-          >
-            <span className="text-3xl">✦</span>
-          </div>
-
-          {/* Title */}
+          {/* Title with text shadow for better readability */}
           <h1
             ref={titleRef}
-            className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-4 text-foreground"
+            className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-4 text-white drop-shadow-2xl"
+            style={{ textShadow: '0 4px 30px rgba(0,0,0,0.8), 0 2px 10px rgba(0,0,0,0.6)' }}
+            suppressHydrationWarning
           >
-            {t("hero.title")}
+            {mounted ? t("hero.title") : "Mar Mikhael of Sereel"}
           </h1>
 
-          {/* Subtitle */}
+          {/* Subtitle with enhanced styling */}
           <p
             ref={subtitleRef}
-            className="text-xl md:text-2xl text-primary font-serif mb-6"
+            className="text-xl md:text-2xl text-white font-serif mb-6 font-semibold drop-shadow-xl"
+            style={{ textShadow: '0 3px 15px rgba(0,0,0,0.7), 0 1px 5px rgba(0,0,0,0.5)' }}
+            suppressHydrationWarning
           >
-            {t("hero.subtitle")}
+            {mounted ? t("hero.subtitle") : "The Miracle Worker"}
           </p>
 
           {/* Description */}
           <p
             ref={descriptionRef}
-            className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-white mb-8 max-w-2xl mx-auto font-medium drop-shadow-lg"
+            style={{ textShadow: '0 2px 15px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.6)' }}
+            suppressHydrationWarning
           >
-            {t("hero.description")}
+            {mounted ? t("hero.description") : "Discover the life and miracles of Mar Mikhael"}
           </p>
 
-          {/* Feast Day Badge */}
+          {/* Feast Day Badge with enhanced styling */}
           <div ref={badgeRef} className="inline-block mb-10">
-            <div className="px-6 py-3 rounded-full bg-secondary border-2 border-primary/20 backdrop-blur-sm">
-              <p className="text-sm font-medium text-primary">
-                {t("hero.feastDay")}
+            <div className="px-6 py-3 rounded-full bg-secondary/90 backdrop-blur-md border-2 border-primary/30 shadow-lg">
+              <p className="text-sm font-medium text-primary" suppressHydrationWarning>
+                {mounted ? t("hero.feastDay") : "Feast Day: November 8"}
               </p>
             </div>
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Button with hover animations */}
           <div ref={ctaRef}>
             <Link href="/story">
               <Button
                 size="lg"
-                className="gradient-divine text-primary-foreground text-lg px-8 py-6 glow-divine hover:scale-105 transition-sacred"
+                variant="glass"
+                className="text-lg px-8 py-6 hover:scale-110 transition-sacred relative overflow-hidden group"
               >
-                {t("hero.readMore")}
+                <span className="relative z-10" suppressHydrationWarning>
+                  {mounted ? t("hero.readMore") : "Read Full Story"}
+                </span>
+                <div className="absolute inset-0 bg-primary/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
               </Button>
             </Link>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div
-          ref={scrollIndicatorRef}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <div
-            ref={scrollIconRef}
-            className="flex flex-col items-center gap-2 text-muted-foreground"
-          >
-            <ChevronDown className="w-6 h-6" />
           </div>
         </div>
       </div>

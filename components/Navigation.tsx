@@ -152,7 +152,7 @@ const Navigation = ({ show = true }: NavigationProps) => {
       className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md shadow-sacred"
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Desktop Navigation - Centered */}
           <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
@@ -239,10 +239,6 @@ const Navigation = ({ show = true }: NavigationProps) => {
               ))}
             </div>
 
-            {/* Theme Toggle in Mobile Menu */}
-            <div className="flex justify-center pt-2 border-t border-border">
-              <ThemeToggle />
-            </div>
           </div>
         </div>
       )}
