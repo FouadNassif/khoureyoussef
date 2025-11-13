@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  setTheme("light");
   const [mounted, setMounted] = useState(false);
 
   // Prevent hydration mismatch
@@ -40,4 +41,3 @@ export function ThemeToggle() {
     </Button>
   );
 }
-

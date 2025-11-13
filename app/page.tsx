@@ -9,11 +9,11 @@ import { Card } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
-import { Sparkles, Heart, Book } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Sparkles, Heart, Book, Calendar, Play } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
 
 export default function Page() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [showNavbar, setShowNavbar] = useState(false);
 
@@ -41,6 +41,49 @@ export default function Page() {
     setIsInitialLoad(false);
     setShowNavbar(true);
   };
+
+  // Get news items from the news page data
+  const latestNews = useMemo(() => {
+    const newsItems = [
+      {
+        id: 1,
+        title: " اللجنة عن سويف يوسف المطران",
+        content: "سيّدنا المطران يوسف سويف يتكلّم عن اللّجنة المؤلّفة لدراسة ملفّ الخوري يوسف أبي مارون معتوق. المقرّ الصيّفي للمطرانية كرمسدّة في ١-١-٢٠٢٣",
+        date: "2023-01-01",
+        video: "/assets/videos/news/Video1.mp4",
+        type: "video"
+      },
+      {
+        id: 2,
+        title: "عظة سيادة المطران يوسف سويف",
+        content: "من عظة سيادة المطران يوسف سويف عن الخوري يوسف أبي مارون معتوق في عيد مار ميخائيل في ٨-١١-٢.٢٢ في كنيسة مار ميخائيل سرعل",
+        date: "2022-11-08",
+        video: "/assets/videos/news/Video2.mp4",
+        type: "video"
+      },
+      {
+        id: 3,
+        title: "فيروز في كنيسة مار ميخائيل سرعل",
+        content: "",
+        date: "2010-01-01",
+        video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",
+        type: "video"
+      },
+      {
+        id: 4,
+        title: "ترتيلة",
+        content: "",
+        date: "2024-08-28",
+        type: "video",
+        video: "/assets/videos/news/Video3.mp4",
+      },
+    ];
+
+    // Sort by date (newest first) and get top 2
+    return newsItems
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 2);
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -73,26 +116,22 @@ export default function Page() {
               >
                 <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
                   <span className="text-primary font-medium text-sm">
-                    Sacred Legacy
+                    {t("home.aboutBadge")}
                   </span>
                 </div>
                 <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
-                  A Life of Divine Grace
+                  {t("home.aboutTitle")}
                 </h2>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Saint Mar Mikhael of Sereel stands as a beacon of faith and
-                  devotion. His life exemplifies the power of prayer, the
-                  strength of conviction, and the boundless love of the divine.
+                  {t("home.aboutDescription1")}
                 </p>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  Through centuries, his intercession has brought healing, hope,
-                  and miracles to countless faithful. His legacy continues to
-                  inspire generations in our beloved village of Sereel.
+                  {t("home.aboutDescription2")}
                 </p>
                 <Link href="/story">
                   <Button className="gradient-divine text-primary-foreground glow-divine">
                     <Book className="w-4 h-4 mr-2" />
-                    Discover His Story
+                    {t("home.discoverStory")}
                   </Button>
                 </Link>
               </motion.div>
@@ -148,7 +187,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Miracles Preview */}
+      {/* Latest News Section */}
       <section ref={miraclesRef} className="py-20 gradient-heavenly">
         <div className="container mx-auto px-4">
           <motion.div
@@ -159,49 +198,62 @@ export default function Page() {
           >
             <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
               <span className="text-primary font-medium text-sm">
-                Divine Interventions
+                {t("news.title")}
               </span>
             </div>
             <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-foreground">
-              {t("miracles.title")}
+              {t("news.title")}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t("miracles.subtitle")}
+              {t("news.subtitle")}
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                icon: Sparkles,
-                title: t("miracles.healing"),
-                description: t("miracles.healingDesc"),
-              },
-              {
-                icon: Heart,
-                title: t("miracles.prayers"),
-                description: t("miracles.prayersDesc"),
-              },
-              {
-                icon: Book,
-                title: t("miracles.records"),
-                description: t("miracles.recordsDesc"),
-              },
-            ].map((item, index) => (
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {latestNews.map((item, index) => (
               <motion.div
-                key={index}
+                key={item.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={miraclesInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
               >
-                <Card className="p-6 text-center hover:shadow-sacred transition-sacred bg-card border-border">
-                  <div className="w-14 h-14 rounded-full gradient-divine flex items-center justify-center mx-auto mb-4 glow-divine">
-                    <item.icon className="w-7 h-7 text-primary-foreground" />
+                <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border">
+                  {item.type === "video" && item.video && (
+                    <div className="relative aspect-video overflow-hidden bg-muted">
+                      <video
+                        src={item.video}
+                        className="w-full h-full object-cover"
+                        muted
+                        loop
+                        playsInline
+                      />
+                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                          <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Calendar className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-xs text-muted-foreground">
+                        {new Date(item.date).toLocaleDateString(i18n.language === "ar" ? "ar-LB" : i18n.language === "fr" ? "fr-FR" : "en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric"
+                        })}
+                      </span>
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-foreground mb-2 line-clamp-2">
+                      {item.title}
+                    </h3>
+                    {item.content && (
+                      <p className="text-muted-foreground text-sm line-clamp-3">
+                        {item.content}
+                      </p>
+                    )}
                   </div>
-                  <h3 className="font-serif text-xl font-semibold mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground">{item.description}</p>
                 </Card>
               </motion.div>
             ))}
@@ -213,13 +265,13 @@ export default function Page() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-center mt-12"
           >
-            <Link href="/miracles">
+            <Link href="/news">
               <Button
                 variant="outline"
                 size="lg"
                 className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               >
-                {t("miracles.viewAll")}
+                {t("news.viewAll")}
               </Button>
             </Link>
           </motion.div>
@@ -233,7 +285,7 @@ export default function Page() {
             <div>
               <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
                 <span className="text-primary font-medium text-sm">
-                  Sacred Place
+                  {t("home.churchBadge")}
                 </span>
               </div>
               <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">

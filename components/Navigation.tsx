@@ -48,20 +48,8 @@ const Navigation = ({ show = true }: NavigationProps) => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full gradient-divine flex items-center justify-center glow-divine">
-              <span className="text-primary-foreground font-serif text-xl font-bold">
-                M
-              </span>
-            </div>
-            <span className="font-serif text-2xl font-bold text-foreground hidden sm:block">
-              Mar Mikhael
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -85,7 +73,7 @@ const Navigation = ({ show = true }: NavigationProps) => {
           </div>
 
           {/* Language Selector + Theme Toggle + Mobile Toggle */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 ml-auto">
             <div className="hidden sm:flex items-center gap-1 bg-secondary rounded-lg p-1">
               {languages.map((lang) => (
                 <motion.button
@@ -105,7 +93,11 @@ const Navigation = ({ show = true }: NavigationProps) => {
                       layoutId="activeLanguage"
                       className="absolute inset-0 rounded-md bg-primary/20 blur-sm -z-10"
                       initial={false}
-                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30,
+                      }}
                     />
                   )}
                 </motion.button>
@@ -113,7 +105,7 @@ const Navigation = ({ show = true }: NavigationProps) => {
             </div>
 
             {/* Theme Toggle */}
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
 
             {/* Mobile Menu Toggle */}
             <Button
@@ -173,13 +165,17 @@ const Navigation = ({ show = true }: NavigationProps) => {
                         layoutId="activeLanguageMobile"
                         className="absolute inset-0 rounded-md bg-primary/20 blur-sm -z-10"
                         initial={false}
-                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 30,
+                        }}
                       />
                     )}
                   </motion.button>
                 ))}
               </div>
-              
+
               {/* Theme Toggle in Mobile Menu */}
               <div className="flex justify-center pt-2 border-t border-border">
                 <ThemeToggle />

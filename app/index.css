@@ -6,51 +6,51 @@ All colors MUST be HSL.
 
 @layer base {
     :root {
-        /* Sacred color palette - Light mode */
-        --background: 42 28% 95%;
-        --foreground: 225 15% 20%;
+        /* White and Yellow color palette - Light mode */
+        --background: 45 20% 96%;
+        --foreground: 30 15% 20%;
 
-        --card: 42 25% 98%;
-        --card-foreground: 225 15% 20%;
+        --card: 45 15% 98%;
+        --card-foreground: 30 15% 20%;
 
-        --popover: 42 25% 98%;
-        --popover-foreground: 225 15% 20%;
+        --popover: 45 15% 98%;
+        --popover-foreground: 30 15% 20%;
 
-        /* Sacred blue - main sacred color (easily change HSL values to customize: hue saturation lightness) */
-        --primary: 220 70% 50%;
+        /* Muted yellow - main color (not bright) */
+        --primary: 45 60% 55%;
         --primary-foreground: 0 0% 100%;
-        --primary-glow: 220 80% 65%;
+        --primary-glow: 45 65% 60%;
 
-        /* Heavenly cream */
-        --secondary: 42 32% 92%;
-        --secondary-foreground: 225 15% 20%;
+        /* Off-white (not snow or bright white) */
+        --secondary: 45 25% 94%;
+        --secondary-foreground: 30 15% 20%;
 
         /* Soft muted tones */
-        --muted: 42 25% 94%;
-        --muted-foreground: 225 10% 45%;
+        --muted: 45 20% 95%;
+        --muted-foreground: 30 10% 45%;
 
-        /* Sacred blue accent */
-        --accent: 210 45% 88%;
-        --accent-foreground: 210 45% 25%;
-        --accent-deep: 210 50% 35%;
+        /* Yellow accent */
+        --accent: 45 50% 90%;
+        --accent-foreground: 30 20% 25%;
+        --accent-deep: 45 55% 50%;
 
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 210 40% 98%;
 
-        --border: 42 20% 88%;
-        --input: 42 20% 92%;
-        --ring: 43 74% 49%;
+        --border: 45 25% 90%;
+        --input: 45 25% 94%;
+        --ring: 45 65% 55%;
 
         --radius: 0.75rem;
 
-        /* Spiritual gradients */
-        --gradient-divine: linear-gradient(135deg, hsl(220 70% 50%), hsl(220 80% 65%));
-        --gradient-heavenly: linear-gradient(180deg, hsl(42 35% 97%), hsl(42 25% 94%));
-        --gradient-sacred: linear-gradient(135deg, hsl(210 45% 88%), hsl(42 32% 92%));
+        /* White and Yellow gradients */
+        --gradient-divine: linear-gradient(135deg, hsl(45 60% 55%), hsl(45 65% 60%));
+        --gradient-heavenly: linear-gradient(180deg, hsl(45 20% 96%), hsl(45 15% 94%));
+        --gradient-sacred: linear-gradient(135deg, hsl(45 50% 90%), hsl(45 25% 94%));
 
-        /* Sacred effects */
-        --glow-divine: 0 8px 32px hsla(220, 70%, 50%, 0.25);
-        --shadow-soft: 0 4px 24px hsla(225, 15%, 20%, 0.08);
+        /* Yellow effects */
+        --glow-divine: 0 8px 32px hsla(45, 60%, 55%, 0.25);
+        --shadow-soft: 0 4px 24px hsla(30, 15%, 20%, 0.08);
         --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
         --sidebar-background: 0 0% 98%;
@@ -72,41 +72,41 @@ All colors MUST be HSL.
 
     html.dark,
     .dark {
-        --background: 225 20% 12%;
-        --foreground: 42 35% 95%;
+        --background: 30 20% 12%;
+        --foreground: 45 25% 95%;
 
-        --card: 225 18% 15%;
-        --card-foreground: 42 35% 95%;
+        --card: 30 18% 15%;
+        --card-foreground: 45 25% 95%;
 
-        --popover: 225 18% 15%;
-        --popover-foreground: 42 35% 95%;
+        --popover: 30 18% 15%;
+        --popover-foreground: 45 25% 95%;
 
-        --primary: 220 70% 50%;
+        --primary: 45 60% 55%;
         --primary-foreground: 0 0% 100%;
-        --primary-glow: 220 80% 65%;
+        --primary-glow: 45 65% 60%;
 
-        --secondary: 225 15% 22%;
-        --secondary-foreground: 42 35% 95%;
+        --secondary: 30 15% 22%;
+        --secondary-foreground: 45 25% 95%;
 
-        --muted: 225 15% 20%;
-        --muted-foreground: 225 10% 65%;
+        --muted: 30 15% 20%;
+        --muted-foreground: 30 10% 65%;
 
-        --accent: 210 45% 28%;
-        --accent-foreground: 42 35% 95%;
-        --accent-deep: 210 50% 35%;
+        --accent: 45 50% 28%;
+        --accent-foreground: 45 25% 95%;
+        --accent-deep: 45 55% 35%;
 
         --destructive: 0 62.8% 30.6%;
         --destructive-foreground: 210 40% 98%;
 
-        --border: 225 15% 25%;
-        --input: 225 15% 22%;
-        --ring: 43 74% 49%;
+        --border: 30 15% 25%;
+        --input: 30 15% 22%;
+        --ring: 45 65% 55%;
 
-        --gradient-divine: linear-gradient(135deg, hsl(220 70% 50%), hsl(220 80% 65%));
-        --gradient-heavenly: linear-gradient(180deg, hsl(225 20% 12%), hsl(225 15% 20%));
-        --gradient-sacred: linear-gradient(135deg, hsl(210 45% 28%), hsl(225 15% 22%));
+        --gradient-divine: linear-gradient(135deg, hsl(45 60% 55%), hsl(45 65% 60%));
+        --gradient-heavenly: linear-gradient(180deg, hsl(30 20% 12%), hsl(30 15% 20%));
+        --gradient-sacred: linear-gradient(135deg, hsl(45 50% 28%), hsl(30 15% 22%));
 
-        --glow-divine: 0 8px 32px hsla(220, 70%, 50%, 0.35);
+        --glow-divine: 0 8px 32px hsla(45, 60%, 55%, 0.35);
         --shadow-soft: 0 4px 24px hsla(0, 0%, 0%, 0.3);
         --sidebar-background: 240 5.9% 10%;
         --sidebar-foreground: 240 4.8% 95.9%;

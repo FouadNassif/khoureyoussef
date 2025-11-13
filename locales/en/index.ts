@@ -27,7 +27,14 @@ export default {
             readFullStory: "Read Full Story",
             visitSaint: "Visit the Saint",
             visitDescription: "The shrine of Mar Mikhael in Sereel has been a sanctuary of faith for generations. Experience the sacred atmosphere, witness centuries of devotion, and connect with the divine presence of our beloved saint.",
-            planVisit: "Plan Your Visit"
+            planVisit: "Plan Your Visit",
+            aboutBadge: "Sacred Legacy",
+            aboutTitle: "A Life of Divine Grace",
+            aboutDescription1: "Saint Mar Mikhael of Sereel stands as a beacon of faith and devotion. His life exemplifies the power of prayer, the strength of conviction, and the boundless love of the divine.",
+            aboutDescription2: "Through centuries, his intercession has brought healing, hope, and miracles to countless faithful. His legacy continues to inspire generations in our beloved village of Sereel.",
+            discoverStory: "Discover His Story",
+            miraclesBadge: "Divine Interventions",
+            churchBadge: "Sacred Place"
         },
         ...storyTranslations.story,
         ...miraclesTranslations,

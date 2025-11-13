@@ -18,22 +18,40 @@ const Miracles = () => {
   const [expandedMiracle, setExpandedMiracle] = useState<number | null>(null);
 
   // Get all miracles from translations - memoized to update when language changes
+  // Sort by date (latest first)
   const miracles = useMemo(() => {
     const miraclesList = [];
     for (let i = 1; i <= 9; i++) {
       const title = t(`miracle${i}.title`, { defaultValue: '' });
       if (title && title !== `miracle${i}.title`) {
+        const dateStr = t(`miracle${i}.date`);
+        // Parse date string (format: "27 1 2005" or similar)
+        let dateObj = new Date(0); // Default to epoch if parsing fails
+        try {
+          const parts = dateStr.split(/\s+/);
+          if (parts.length >= 3) {
+            const day = parseInt(parts[0]);
+            const month = parseInt(parts[1]) - 1; // Month is 0-indexed
+            const year = parseInt(parts[2]);
+            dateObj = new Date(year, month, day);
+          }
+        } catch (e) {
+          // If parsing fails, use epoch date
+        }
+
         miraclesList.push({
           key: `miracle${i}`,
           title: t(`miracle${i}.title`),
-          date: t(`miracle${i}.date`),
+          date: dateStr,
+          dateObj: dateObj,
           type: t(`miracle${i}.type`),
           location: t(`miracle${i}.location`),
           content: t(`miracle${i}.content`),
         });
       }
     }
-    return miraclesList;
+    // Sort by date (newest first)
+    return miraclesList.sort((a, b) => b.dateObj.getTime() - a.dateObj.getTime());
   }, [t, i18n.language]);
 
   const toggleMiracle = (index: number) => {
