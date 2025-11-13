@@ -1,54 +1,74 @@
 "use client";
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
-import { useState, useMemo } from "react";
+import { useEffect, useRef } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
   MapPin,
   Phone,
   Clock,
   Facebook,
   Instagram,
-  MessageCircle,
-  Heart,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const Contact = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [headerRef, headerInView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
-  const [expandedMiracle, setExpandedMiracle] = useState<number | null>(null);
 
-  // Get all miracles from translations - memoized to update when language changes
-  const miracles = useMemo(() => {
-    const miraclesList = [];
-    for (let i = 1; i <= 9; i++) {
-      const title = t(`miracle${i}.title`, { defaultValue: '' });
-      if (title && title !== `miracle${i}.title`) {
-        miraclesList.push({
-          key: `miracle${i}`,
-          title: t(`miracle${i}.title`),
-          date: t(`miracle${i}.date`),
-          type: t(`miracle${i}.type`),
-          location: t(`miracle${i}.location`),
-          content: t(`miracle${i}.content`),
-        });
-      }
+  const headerElementRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+
+  // Animate header
+  useEffect(() => {
+    if (headerInView && headerElementRef.current) {
+      gsap.fromTo(
+        headerElementRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      );
     }
-    return miraclesList;
-  }, [t, i18n.language]);
+  }, [headerInView]);
 
-  const toggleMiracle = (index: number) => {
-    setExpandedMiracle(expandedMiracle === index ? null : index);
-  };
+  // Animate map and info sections
+  useEffect(() => {
+    if (mapRef.current) {
+      ScrollTrigger.create({
+        trigger: mapRef.current,
+        start: "top 80%",
+        animation: gsap.fromTo(
+          mapRef.current,
+          { opacity: 0, x: -40 },
+          { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }
+        ),
+        once: true,
+      });
+    }
+
+    if (infoRef.current) {
+      ScrollTrigger.create({
+        trigger: infoRef.current,
+        start: "top 80%",
+        animation: gsap.fromTo(
+          infoRef.current,
+          { opacity: 0, x: 40 },
+          { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }
+        ),
+        once: true,
+      });
+    }
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -57,16 +77,16 @@ const Contact = () => {
       {/* Hero Header */}
       <section className="pt-32 pb-20 gradient-heavenly">
         <div className="container mx-auto px-4">
-          <motion.div
-            ref={headerRef}
-            initial={{ opacity: 0, y: 40 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
+          <div
+            ref={(el) => {
+              headerRef.current = el;
+              headerElementRef.current = el;
+            }}
             className="text-center max-w-3xl mx-auto"
           >
             <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-6">
               <span className="text-primary font-medium text-sm">
-                Get in Touch
+                {t("contact.title")}
               </span>
             </div>
             <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-foreground">
@@ -75,7 +95,7 @@ const Contact = () => {
             <p className="text-xl text-muted-foreground">
               {t("contact.subtitle")}
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -84,12 +104,7 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Map Location */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
+            <div ref={mapRef}>
               <Card className="p-8 bg-card border-border shadow-sacred h-full flex flex-col">
                 <h2 className="font-serif text-3xl font-bold mb-6 text-foreground">
                   {t("contact.mapTitle")}
@@ -131,15 +146,10 @@ const Contact = () => {
                   </div>
                 </div>
               </Card>
-            </motion.div>
+            </div>
 
             {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
+            <div ref={infoRef}>
               <div className="h-full flex flex-col">
                 <h2 className="font-serif text-3xl font-bold mb-6 text-foreground">
                   {t("contact.location")}
@@ -152,14 +162,14 @@ const Contact = () => {
                       </div>
                       <div className="flex-1">
                         <h3 className="font-semibold mb-2 text-foreground">
-                          Address
+                          {t("contact.address")}
                         </h3>
                         <p className="text-muted-foreground">
-                          Church of Mar Mikhael
+                          {t("contact.addressLine1")}
                           <br />
-                          Sereel Village - Zgharta
+                          {t("contact.addressLine2")}
                           <br />
-                          Lebanon
+                          {t("contact.addressLine3")}
                         </p>
                       </div>
                     </div>
@@ -172,14 +182,14 @@ const Contact = () => {
                       </div>
                       <div className="flex-1">
                         <h3 className="font-semibold mb-2 text-foreground">
-                          Service Times
+                          {t("contact.serviceTimes")}
                         </h3>
                         <p className="text-muted-foreground">
-                          Sunday: 10:00 AM
+                          {t("contact.serviceSunday")}
                           <br />
-                          Weekdays: 6:00 PM
+                          {t("contact.serviceWeekdays")}
                           <br />
-                          Feast Day: Special Services
+                          {t("contact.serviceFeast")}
                         </p>
                       </div>
                     </div>
@@ -195,19 +205,19 @@ const Contact = () => {
                       </div>
                       <div className="flex-1">
                         <h3 className="font-semibold mb-2 text-foreground group-hover:text-primary transition-sacred">
-                          Contact
+                          {t("contact.contactLabel")}
                         </h3>
                         <p className="text-muted-foreground group-hover:text-foreground transition-sacred">
-                          Maria Sassine
+                          {t("contact.contactName")}
                           <br />
-                          <span className="text-primary font-semibold">+961 71 797 514</span>
+                          <span className="text-primary font-semibold">{t("contact.contactPhone")}</span>
                         </p>
                       </div>
                     </a>
                   </Card>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

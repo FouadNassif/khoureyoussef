@@ -1,13 +1,18 @@
 "use client";
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, ChevronDown, ChevronUp } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const Miracles = () => {
   const { t, i18n } = useTranslation();
@@ -16,6 +21,8 @@ const Miracles = () => {
     threshold: 0.2,
   });
   const [expandedMiracle, setExpandedMiracle] = useState<number | null>(null);
+  const headerElementRef = useRef<HTMLDivElement>(null);
+  const miracleItemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   // Get all miracles from translations - memoized to update when language changes
   // Sort by date (latest first)
@@ -58,6 +65,41 @@ const Miracles = () => {
     setExpandedMiracle(expandedMiracle === index ? null : index);
   };
 
+  // Animate header
+  useEffect(() => {
+    if (headerInView && headerElementRef.current) {
+      gsap.fromTo(
+        headerElementRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      );
+    }
+  }, [headerInView]);
+
+  // Animate miracle items
+  useEffect(() => {
+    miracleItemsRef.current.forEach((ref, index) => {
+      if (ref) {
+        ScrollTrigger.create({
+          trigger: ref,
+          start: "top 85%",
+          animation: gsap.fromTo(
+            ref,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              delay: index * 0.1,
+              ease: "power2.out",
+            }
+          ),
+          once: true,
+        });
+      }
+    });
+  }, [miracles]);
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -65,11 +107,11 @@ const Miracles = () => {
       {/* Hero Header */}
       <section className="pt-32 pb-20 gradient-heavenly">
         <div className="container mx-auto px-4">
-          <motion.div
-            ref={headerRef}
-            initial={{ opacity: 0, y: 40 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
+          <div
+            ref={(el) => {
+              headerRef.current = el;
+              headerElementRef.current = el;
+            }}
             className="text-center max-w-3xl mx-auto"
           >
             <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-6">
@@ -83,7 +125,7 @@ const Miracles = () => {
             <p className="text-xl text-muted-foreground">
               {t("miracles.subtitle")}
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -92,12 +134,11 @@ const Miracles = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-6">
             {miracles.map((miracle, index) => (
-              <motion.div
+              <div
                 key={miracle.key}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                ref={(el) => {
+                  miracleItemsRef.current[index] = el;
+                }}
               >
                 <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border">
                   <div className="p-6">
@@ -168,7 +209,7 @@ const Miracles = () => {
                     </div>
                   </div>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

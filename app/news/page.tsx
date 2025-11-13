@@ -1,13 +1,18 @@
 "use client";
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, Play, Image as ImageIcon, X } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface NewsItem {
   id: number;
@@ -28,13 +33,18 @@ const News = () => {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
+  const headerElementRef = useRef<HTMLDivElement>(null);
+  const newsItemsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const lightboxRef = useRef<HTMLDivElement>(null);
+  const lightboxContentRef = useRef<HTMLDivElement>(null);
+
   // Sample news data - in a real app, this would come from an API or CMS
   const newsItems: NewsItem[] = useMemo(() => [
     {
       id: 1,
       title: " اللجنة عن سويف يوسف المطران",
       content: "سيّدنا المطران يوسف سويف يتكلّم عن اللّجنة المؤلّفة لدراسة ملفّ الخوري يوسف أبي مارون معتوق. المقرّ الصيّفي للمطرانية كرمسدّة في ١-١-٢٠٢٣",
-      date: "١-١-٢٠٢٣",
+      date: "2023-01-01",
       video: "/assets/videos/news/Video1.mp4",
       type: "video"
     },
@@ -42,7 +52,7 @@ const News = () => {
       id: 2,
       title: "عظة سيادة المطران يوسف سويف",
       content: "من عظة سيادة المطران يوسف سويف عن الخوري يوسف أبي مارون معتوق في عيد مار ميخائيل في ٨-١١-٢.٢٢ في كنيسة مار ميخائيل سرعل",
-      date: " ٨-١١-٢.٢٢",
+      date: "2022-11-08",
       video: "/assets/videos/news/Video2.mp4",
       type: "video"
     },
@@ -50,7 +60,7 @@ const News = () => {
       id: 3,
       title: "فيروز في كنيسة مار ميخائيل سرعل",
       content: "",
-      date: "2010",
+      date: "2010-01-01",
       video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",
       type: "video"
     },
@@ -65,12 +75,16 @@ const News = () => {
   ], []);
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString(i18n.language === "ar" ? "ar-LB" : "en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    });
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString(i18n.language === "ar" ? "ar-LB" : i18n.language === "fr" ? "fr-FR" : "en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+    } catch {
+      return dateString;
+    }
   };
 
   const openLightbox = (item: NewsItem) => {
@@ -79,9 +93,68 @@ const News = () => {
   };
 
   const closeLightbox = () => {
-    setLightboxOpen(false);
-    setSelectedNews(null);
+    if (lightboxContentRef.current) {
+      gsap.to(lightboxContentRef.current, {
+        opacity: 0,
+        scale: 0.9,
+        duration: 0.3,
+        ease: "power2.in",
+        onComplete: () => {
+          setLightboxOpen(false);
+          setSelectedNews(null);
+        },
+      });
+    } else {
+      setLightboxOpen(false);
+      setSelectedNews(null);
+    }
   };
+
+  // Animate header
+  useEffect(() => {
+    if (headerInView && headerElementRef.current) {
+      gsap.fromTo(
+        headerElementRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      );
+    }
+  }, [headerInView]);
+
+  // Animate news items
+  useEffect(() => {
+    newsItemsRef.current.forEach((ref, index) => {
+      if (ref) {
+        ScrollTrigger.create({
+          trigger: ref,
+          start: "top 85%",
+          animation: gsap.fromTo(
+            ref,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              delay: index * 0.1,
+              ease: "power2.out",
+            }
+          ),
+          once: true,
+        });
+      }
+    });
+  }, [newsItems]);
+
+  // Animate lightbox
+  useEffect(() => {
+    if (lightboxOpen && lightboxContentRef.current) {
+      gsap.fromTo(
+        lightboxContentRef.current,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" }
+      );
+    }
+  }, [lightboxOpen]);
 
   return (
     <div className="min-h-screen">
@@ -90,16 +163,16 @@ const News = () => {
       {/* Hero Header */}
       <section className="pt-32 pb-20 gradient-heavenly">
         <div className="container mx-auto px-4">
-          <motion.div
-            ref={headerRef}
-            initial={{ opacity: 0, y: 40 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
+          <div
+            ref={(el) => {
+              headerRef.current = el;
+              headerElementRef.current = el;
+            }}
             className="text-center max-w-3xl mx-auto"
           >
             <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-6">
               <span className="text-primary font-medium text-sm">
-                {t("news.title")}
+                {t("news.badge", t("news.title"))}
               </span>
             </div>
             <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-foreground">
@@ -108,7 +181,7 @@ const News = () => {
             <p className="text-xl text-muted-foreground">
               {t("news.subtitle")}
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -117,12 +190,11 @@ const News = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {newsItems.map((item, index) => (
-              <motion.div
+              <div
                 key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                ref={(el) => {
+                  newsItemsRef.current[index] = el;
+                }}
                 className="group"
               >
                 <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border cursor-pointer h-full flex flex-col">
@@ -196,7 +268,7 @@ const News = () => {
                     </Button>
                   </div>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -205,13 +277,12 @@ const News = () => {
       {/* Lightbox Modal */}
       {lightboxOpen && selectedNews && (
         <div
+          ref={lightboxRef}
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
           onClick={closeLightbox}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
+          <div
+            ref={lightboxContentRef}
             className="max-w-4xl w-full max-h-[90vh] overflow-auto bg-card rounded-lg shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
@@ -260,7 +331,7 @@ const News = () => {
                 {selectedNews.content}
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       )}
 
@@ -270,4 +341,3 @@ const News = () => {
 };
 
 export default News;
-

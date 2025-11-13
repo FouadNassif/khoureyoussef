@@ -36,7 +36,7 @@ export default {
             miraclesBadge: "تدخلات إلهية",
             churchBadge: "مكان مقدس"
         },
-        ...storyTranslations.story,
+        story: storyTranslations.story,
         ...miraclesTranslations,
         miracles: {
             title: "المعجزات الإلهية",
@@ -58,13 +58,25 @@ export default {
             subtitle: "قم بزيارة المزار وتابع رحلتنا",
             mapTitle: "خريطة الموقع",
             followUs: "تابعنا",
-            location: "موقع الكنيسة"
+            location: "موقع الكنيسة",
+            address: "العنوان",
+            addressLine1: "كنيسة مار ميخائيل",
+            addressLine2: "قرية السريل - زغرتا",
+            addressLine3: "لبنان",
+            serviceTimes: "أوقات الخدمة",
+            serviceSunday: "الأحد: 10:00 صباحاً",
+            serviceWeekdays: "أيام الأسبوع: 6:00 مساءً",
+            serviceFeast: "يوم العيد: خدمات خاصة",
+            contactLabel: "اتصل بنا",
+            contactName: "ماريا ساسين",
+            contactPhone: "+961 71 797 514"
         },
         news: {
             title: "أحدث الأخبار",
             subtitle: "ابق على اطلاع بفعاليات المجتمع وإعلاناتنا",
             readMore: "اقرأ المزيد",
-            viewAll: "عرض جميع الأخبار"
+            viewAll: "عرض جميع الأخبار",
+            badge: "أحدث التحديثات"
         },
         footer: {
             about: "عن مار ميخائيل",

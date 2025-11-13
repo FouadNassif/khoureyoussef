@@ -35,7 +35,7 @@ export default {
             miraclesBadge: "Interventions Divines",
             churchBadge: "Lieu Sacré"
         },
-        ...storyTranslations.story,
+        story: storyTranslations.story,
         miracles: {
             title: "Miracles Divins",
             subtitle: "Témoignages de Foi et de Grâce",
@@ -56,13 +56,25 @@ export default {
             subtitle: "Visitez le sanctuaire et suivez notre parcours",
             mapTitle: "Carte de Localisation",
             followUs: "Suivez-Nous",
-            location: "Lieu de l'Église"
+            location: "Lieu de l'Église",
+            address: "Adresse",
+            addressLine1: "Église de Mar Mikhael",
+            addressLine2: "Village de Sereel - Zgharta",
+            addressLine3: "Liban",
+            serviceTimes: "Heures de Service",
+            serviceSunday: "Dimanche: 10h00",
+            serviceWeekdays: "Jours de semaine: 18h00",
+            serviceFeast: "Jour de Fête: Services Spéciaux",
+            contactLabel: "Contact",
+            contactName: "Maria Sassine",
+            contactPhone: "+961 71 797 514"
         },
         news: {
             title: "Dernières Nouvelles",
             subtitle: "Restez informé des événements de notre communauté et de nos annonces",
             readMore: "Lire Plus",
-            viewAll: "Voir Toutes les Nouvelles"
+            viewAll: "Voir Toutes les Nouvelles",
+            badge: "Dernières Mises à Jour"
         },
         footer: {
             about: "À Propos de Mar Mikhael",

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
@@ -9,8 +8,14 @@ import { Card } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
-import { Sparkles, Heart, Book, Calendar, Play } from "lucide-react";
-import { useState, useEffect, useMemo } from "react";
+import { Sparkles, Book, Calendar, Play } from "lucide-react";
+import { useState, useEffect, useMemo, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function Page() {
   const { t, i18n } = useTranslation();
@@ -25,6 +30,13 @@ export default function Page() {
     triggerOnce: true,
     threshold: 0.2,
   });
+
+  const aboutSectionRef = useRef<HTMLDivElement>(null);
+  const aboutTextRef = useRef<HTMLDivElement>(null);
+  const miracleSectionRef = useRef<HTMLDivElement>(null);
+  const newsHeaderRef = useRef<HTMLDivElement>(null);
+  const newsItemsRef = useRef<HTMLDivElement[]>([]);
+  const newsButtonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Check if this is the first visit (not a navigation)
@@ -85,6 +97,77 @@ export default function Page() {
       .slice(0, 2);
   }, []);
 
+  // Animate about section
+  useEffect(() => {
+    if (aboutInView && aboutSectionRef.current) {
+      gsap.fromTo(
+        aboutSectionRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      );
+    }
+    if (aboutInView && aboutTextRef.current) {
+      gsap.fromTo(
+        aboutTextRef.current,
+        { opacity: 0, x: -20 },
+        { opacity: 1, x: 0, duration: 0.8, delay: 0.2, ease: "power2.out" }
+      );
+    }
+  }, [aboutInView]);
+
+  // Animate miracle section
+  useEffect(() => {
+    if (miracleSectionRef.current) {
+      ScrollTrigger.create({
+        trigger: miracleSectionRef.current,
+        start: "top 80%",
+        animation: gsap.fromTo(
+          miracleSectionRef.current,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+        ),
+        once: true,
+      });
+    }
+  }, []);
+
+  // Animate news section
+  useEffect(() => {
+    if (miraclesInView) {
+      if (newsHeaderRef.current) {
+        gsap.fromTo(
+          newsHeaderRef.current,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+        );
+      }
+
+      newsItemsRef.current.forEach((ref, index) => {
+        if (ref) {
+          gsap.fromTo(
+            ref,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              delay: 0.2 + index * 0.1,
+              ease: "power2.out",
+            }
+          );
+        }
+      });
+
+      if (newsButtonRef.current) {
+        gsap.fromTo(
+          newsButtonRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.8, delay: 0.6, ease: "power2.out" }
+        );
+      }
+    }
+  }, [miraclesInView]);
+
   return (
     <div className="min-h-screen">
       <Navigation show={showNavbar} />
@@ -93,12 +176,7 @@ export default function Page() {
       {/* About Section */}
       <section ref={aboutRef} className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={aboutInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="grid md:grid-cols-2 gap-12 items-center"
-          >
+          <div ref={aboutSectionRef} className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative">
               <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
               <img
@@ -108,48 +186,36 @@ export default function Page() {
               />
             </div>
 
-            <div>
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={aboutInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-                  <span className="text-primary font-medium text-sm">
-                    {t("home.aboutBadge")}
-                  </span>
-                </div>
-                <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
-                  {t("home.aboutTitle")}
-                </h2>
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  {t("home.aboutDescription1")}
-                </p>
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  {t("home.aboutDescription2")}
-                </p>
-                <Link href="/story">
-                  <Button className="gradient-divine text-primary-foreground glow-divine">
-                    <Book className="w-4 h-4 mr-2" />
-                    {t("home.discoverStory")}
-                  </Button>
-                </Link>
-              </motion.div>
+            <div ref={aboutTextRef}>
+              <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
+                <span className="text-primary font-medium text-sm">
+                  {t("home.aboutBadge")}
+                </span>
+              </div>
+              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
+                {t("home.aboutTitle")}
+              </h2>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                {t("home.aboutDescription1")}
+              </p>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                {t("home.aboutDescription2")}
+              </p>
+              <Link href="/story">
+                <Button className="gradient-divine text-primary-foreground glow-divine">
+                  <Book className="w-4 h-4 mr-2" />
+                  {t("home.discoverStory")}
+                </Button>
+              </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Featured Latest Miracle */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
+          <div ref={miracleSectionRef} className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
                 <span className="text-primary font-medium text-sm">
@@ -183,19 +249,14 @@ export default function Page() {
                 </Link>
               </div>
             </Card>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Latest News Section */}
       <section ref={miraclesRef} className="py-20 gradient-heavenly">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={miraclesInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
+          <div ref={newsHeaderRef} className="text-center mb-12">
             <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
               <span className="text-primary font-medium text-sm">
                 {t("news.title")}
@@ -207,15 +268,15 @@ export default function Page() {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               {t("news.subtitle")}
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {latestNews.map((item, index) => (
-              <motion.div
+              <div
                 key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={miraclesInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+                ref={(el) => {
+                  if (el) newsItemsRef.current[index] = el;
+                }}
               >
                 <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border">
                   {item.type === "video" && item.video && (
@@ -255,16 +316,11 @@ export default function Page() {
                     )}
                   </div>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={miraclesInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-center mt-12"
-          >
+          <div ref={newsButtonRef} className="text-center mt-12">
             <Link href="/news">
               <Button
                 variant="outline"
@@ -274,7 +330,7 @@ export default function Page() {
                 {t("news.viewAll")}
               </Button>
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
 

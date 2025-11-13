@@ -36,7 +36,7 @@ export default {
             miraclesBadge: "Divine Interventions",
             churchBadge: "Sacred Place"
         },
-        ...storyTranslations.story,
+        story: storyTranslations.story,
         ...miraclesTranslations,
         miracles: {
             title: "Divine Miracles",
@@ -58,13 +58,25 @@ export default {
             subtitle: "Visit the shrine and follow our journey",
             mapTitle: "Location Map",
             followUs: "Follow Us",
-            location: "Church Location"
+            location: "Church Location",
+            address: "Address",
+            addressLine1: "Church of Mar Mikhael",
+            addressLine2: "Sereel Village - Zgharta",
+            addressLine3: "Lebanon",
+            serviceTimes: "Service Times",
+            serviceSunday: "Sunday: 10:00 AM",
+            serviceWeekdays: "Weekdays: 6:00 PM",
+            serviceFeast: "Feast Day: Special Services",
+            contactLabel: "Contact",
+            contactName: "Maria Sassine",
+            contactPhone: "+961 71 797 514"
         },
         news: {
             title: "Latest News",
             subtitle: "Stay updated with our community events and announcements",
             readMore: "Read More",
-            viewAll: "View All News"
+            viewAll: "View All News",
+            badge: "Latest Updates"
         },
         footer: {
             about: "About Mar Mikhael",
