@@ -291,8 +291,6 @@ const Story = () => {
                 </Card>
               </div>
             ))}
-            {/* Spacer to ensure all sections can scroll and animate */}
-            <div className="h-[150vh] md:h-[200vh]" />
           </div>
         </div>
       </section>

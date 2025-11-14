@@ -141,11 +141,8 @@ const Miracles = () => {
                 }}
               >
                 <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border">
-                  <div className="p-6">
+                  <div className="px-6 py-4">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center shrink-0 glow-divine">
-                        <Heart className="w-6 h-6 text-primary-foreground" />
-                      </div>
 
                       <div className="flex-1 w-full">
                         <div className="flex items-start justify-between gap-4 mb-3">
@@ -153,7 +150,7 @@ const Miracles = () => {
                             <h3 className="font-serif text-2xl font-bold text-foreground mb-2 text-left">
                               {miracle.title}
                             </h3>
-                            <div className="flex flex-wrap items-center gap-3 text-sm">
+                            <div className="flex flex-wrap items-center gap-3 text-sm w-full">
                               <span className="px-3 py-1 bg-primary/10 rounded-full text-primary font-medium">
                                 {miracle.type}
                               </span>

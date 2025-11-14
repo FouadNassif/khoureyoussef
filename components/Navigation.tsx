@@ -14,7 +14,7 @@ interface NavigationProps {
 }
 
 interface LanguageButtonProps {
-  lang: { code: string; name: string };
+  lang: { code: string; name: string; fullName?: string };
   currentLang: string;
   onChange: (code: string) => void;
   scale?: number;
@@ -76,7 +76,7 @@ const LanguageButton = ({ lang, currentLang, onChange, scale = 1.05, className =
           : "text-foreground hover:bg-background"
       }`}
     >
-      {lang.name}
+      {lang.fullName || lang.name}
       {isActive && (
         <div
           ref={glowRef}
@@ -91,13 +91,15 @@ const Navigation = ({ show = true }: NavigationProps) => {
   const { t, i18n } = useTranslation();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isTapping, setIsTapping] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const languageButtonRef = useRef<HTMLButtonElement>(null);
 
   const languages = [
-    { code: "ar", name: "العربية" },
-    { code: "en", name: "English" },
-    { code: "fr", name: "Français" },
+    { code: "ar", name: "AR", fullName: "العربية" },
+    { code: "en", name: "EN", fullName: "English" },
+    { code: "fr", name: "FR", fullName: "Français" },
   ];
 
   const navLinks = [
@@ -112,6 +114,43 @@ const Navigation = ({ show = true }: NavigationProps) => {
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
+
+  // Cycle through languages on click with tap effect
+  const cycleLanguage = () => {
+    // Add tap effect
+    setIsTapping(true);
+    if (languageButtonRef.current) {
+      gsap.to(languageButtonRef.current, {
+        scale: 0.9,
+        duration: 0.1,
+        ease: "power2.out",
+        onComplete: () => {
+          gsap.to(languageButtonRef.current, {
+            scale: 1,
+            duration: 0.2,
+            ease: "back.out(1.7)",
+          });
+        },
+      });
+    }
+
+    // Change language after a brief delay for better UX
+    setTimeout(() => {
+      const currentIndex = languages.findIndex((lang) => lang.code === i18n.language);
+      const nextIndex = (currentIndex + 1) % languages.length;
+      changeLanguage(languages[nextIndex].code);
+      setIsTapping(false);
+    }, 150);
+  };
+
+  // Get current language display
+  const getCurrentLanguageDisplay = () => {
+    const current = languages.find((lang) => lang.code === i18n.language);
+    return current ? current.name : "EN";
+  };
+
+  // Determine if RTL (Arabic)
+  const isRTL = i18n.language === "ar";
 
   // Animate nav on mount
   useEffect(() => {
@@ -144,6 +183,7 @@ const Navigation = ({ show = true }: NavigationProps) => {
     }
   }, [mobileMenuOpen]);
 
+
   if (!show) return null;
 
   return (
@@ -173,8 +213,30 @@ const Navigation = ({ show = true }: NavigationProps) => {
             ))}
           </div>
 
-          {/* Language Selector + Theme Toggle + Mobile Toggle */}
+          {/* Mobile Language Switcher - Left side for RTL (AR) */}
+          {isRTL && (
+            <div className="sm:hidden">
+              <button
+                ref={languageButtonRef}
+                onClick={cycleLanguage}
+                className={`flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-lg hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-200 ${
+                  isTapping ? 'scale-90' : 'scale-100'
+                }`}
+                style={{
+                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                }}
+              >
+                <Globe className="w-4 h-4 text-foreground" />
+                <span className="text-sm font-semibold text-foreground">
+                  {getCurrentLanguageDisplay()}
+                </span>
+              </button>
+            </div>
+          )}
+
+          {/* Language Selector + Mobile Menu Toggle */}
           <div className="flex items-center gap-2 ml-auto">
+            {/* Desktop Language Selector */}
             <div className="hidden sm:flex items-center gap-1 bg-secondary rounded-lg p-1">
               {languages.map((lang) => (
                 <LanguageButton
@@ -186,6 +248,27 @@ const Navigation = ({ show = true }: NavigationProps) => {
                 />
               ))}
             </div>
+
+            {/* Mobile Language Switcher - Right side for LTR (EN/FR) */}
+            {!isRTL && (
+              <div className="sm:hidden">
+                <button
+                  ref={languageButtonRef}
+                  onClick={cycleLanguage}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-lg hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-200 ${
+                    isTapping ? 'scale-90' : 'scale-100'
+                  }`}
+                  style={{
+                    boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  <Globe className="w-4 h-4 text-foreground" />
+                  <span className="text-sm font-semibold text-foreground">
+                    {getCurrentLanguageDisplay()}
+                  </span>
+                </button>
+              </div>
+            )}
 
             {/* Theme Toggle */}
             {/* <ThemeToggle /> */}
