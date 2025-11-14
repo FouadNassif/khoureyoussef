@@ -34,40 +34,65 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
   useEffect(() => {
     if (!isInitialLoad) {
       setShowContent(true);
+      setZoomLevel(1);
       return;
     }
 
-    // Gradual zoom in - increment every 0.1s
-    let currentZoom = 1;
-    const zoomInInterval = setInterval(() => {
-      currentZoom += 0.05; // Increment by 5% each time
-      setZoomLevel(currentZoom);
-      
-      if (currentZoom >= 1.3) {
-        clearInterval(zoomInInterval);
+    // Wait for image to load before starting animation
+    if (!bgImageRef.current) return;
+
+    let zoomInInterval: NodeJS.Timeout | null = null;
+    let zoomOutInterval: NodeJS.Timeout | null = null;
+
+    // Reset zoom level
+    setZoomLevel(1);
+    setShowContent(false);
+
+    // Start zoom in animation after a brief delay
+    const startDelay = setTimeout(() => {
+      let currentZoom = 1;
+      zoomInInterval = setInterval(() => {
+        currentZoom += 0.04; // Increment by 4% each time
+        setZoomLevel(currentZoom);
         
-        // Show content during zoom pause
-        setShowContent(true);
-        
-        // After zoom in completes, wait 1.5 seconds then zoom out
-        setTimeout(() => {
-          let zoomOutLevel = 1.3;
-          const zoomOutInterval = setInterval(() => {
-            zoomOutLevel -= 0.03; // Decrement by 3% each time
-            setZoomLevel(zoomOutLevel);
-            
-            if (zoomOutLevel <= 1) {
-              clearInterval(zoomOutInterval);
-              setZoomLevel(1);
-              onAnimationComplete?.();
-            }
-          }, 100);
-        }, 1500);
-      }
-    }, 100);
+        if (currentZoom >= 1.3) {
+          if (zoomInInterval) {
+            clearInterval(zoomInInterval);
+            zoomInInterval = null;
+          }
+          
+          // Show content during zoom pause
+          setShowContent(true);
+          
+          // After zoom in completes, wait 1.5 seconds then zoom out
+          setTimeout(() => {
+            let zoomOutLevel = 1.3;
+            zoomOutInterval = setInterval(() => {
+              zoomOutLevel -= 0.03; // Decrement by 3% each time
+              setZoomLevel(zoomOutLevel);
+              
+              if (zoomOutLevel <= 1) {
+                if (zoomOutInterval) {
+                  clearInterval(zoomOutInterval);
+                  zoomOutInterval = null;
+                }
+                setZoomLevel(1);
+                onAnimationComplete?.();
+              }
+            }, 100);
+          }, 1500);
+        }
+      }, 100);
+    }, 200);
 
     return () => {
-      clearInterval(zoomInInterval);
+      clearTimeout(startDelay);
+      if (zoomInInterval) {
+        clearInterval(zoomInInterval);
+      }
+      if (zoomOutInterval) {
+        clearInterval(zoomOutInterval);
+      }
     };
   }, [isInitialLoad, onAnimationComplete]);
 
