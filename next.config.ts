@@ -12,17 +12,6 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60,
   },
 
-  // Enable video support
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-      };
-    }
-    return config;
-  },
-
   // Headers for SEO and security
   async headers() {
     return [
