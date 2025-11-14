@@ -124,7 +124,7 @@ const Gallery = () => {
         <div className="container mx-auto px-4">
           <div
             ref={(el) => {
-              headerRef.current = el;
+              headerRef(el);
               headerElementRef.current = el;
             }}
             className="text-center max-w-3xl mx-auto"
