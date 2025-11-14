@@ -11,9 +11,9 @@ export default {
             contact: "Contact"
         },
         hero: {
-            title: "Mar Mikhael de Sereel",
+            title: "Khoury Youssef de Sereel",
             subtitle: "Saint Gardien de Notre Village",
-            description: "Découvrez la vie sacrée, les miracles et l'héritage éternel de Saint Mar Mikhael",
+            description: "Découvrez la vie sacrée, les miracles et l'héritage éternel de Saint Khoury Youssef",
             readMore: "Lire Son Histoire",
             feastDay: "Fête: 29 Septembre"
         },
@@ -22,15 +22,15 @@ export default {
             featuredMiracleTitle: "Un Témoignage de Foi",
             miracleDate: "Décembre 2024",
             miracleHeading: "Guérison Miraculeuse par la Prière",
-            miracleDescription: "Un pèlerin fidèle a connu une guérison complète d'une maladie grave après avoir prié au sanctuaire de Mar Mikhael. Les médecins ont confirmé que la guérison était médicalement inexplicable, l'attribuant à une intervention divine par l'intercession du saint.",
+            miracleDescription: "Un pèlerin fidèle a connu une guérison complète d'une maladie grave après avoir prié au sanctuaire de Khoury Youssef. Les médecins ont confirmé que la guérison était médicalement inexplicable, l'attribuant à une intervention divine par l'intercession du saint.",
             readFullStory: "Lire l'Histoire Complète",
             showLess: "Afficher Moins",
             visitSaint: "Visiter le Saint",
-            visitDescription: "Le sanctuaire de Mar Mikhael à Sereel est un refuge de foi depuis des générations. Vivez l'atmosphère sacrée, témoignez de siècles de dévotion et connectez-vous à la présence divine de notre saint bien-aimé.",
+            visitDescription: "Le sanctuaire de Khoury Youssef à Sereel est un refuge de foi depuis des générations. Vivez l'atmosphère sacrée, témoignez de siècles de dévotion et connectez-vous à la présence divine de notre saint bien-aimé.",
             planVisit: "Planifier Votre Visite",
             aboutBadge: "Héritage Sacré",
             aboutTitle: "Une Vie de Grâce Divine",
-            aboutDescription1: "Saint Mar Mikhael de Sereel se dresse comme un phare de foi et de dévotion. Sa vie exemplifie le pouvoir de la prière, la force de la conviction et l'amour infini du divin.",
+            aboutDescription1: "Saint Khoury Youssef de Sereel se dresse comme un phare de foi et de dévotion. Sa vie exemplifie le pouvoir de la prière, la force de la conviction et l'amour infini du divin.",
             aboutDescription2: "À travers les siècles, son intercession a apporté guérison, espoir et miracles à d'innombrables fidèles. Son héritage continue d'inspirer les générations dans notre village bien-aimé de Sereel.",
             discoverStory: "Découvrir Son Histoire",
             miraclesBadge: "Interventions Divines",
@@ -43,7 +43,7 @@ export default {
             healing: "Miracles de Guérison",
             healingDesc: "D'innombrables témoignages de guérison physique et spirituelle par l'intercession du saint.",
             prayers: "Prières Exaucées",
-            prayersDesc: "Des fidèles de toute la région partagent des histoires de prières exaucées grâce à Mar Mikhael.",
+            prayersDesc: "Des fidèles de toute la région partagent des histoires de prières exaucées grâce à Khoury Youssef.",
             records: "Archives Historiques",
             recordsDesc: "Des miracles documentés sur des siècles, conservés dans les archives de l'église et les témoignages.",
             viewAll: "Voir Tous les Miracles"
@@ -59,7 +59,7 @@ export default {
             followUs: "Suivez-Nous",
             location: "Lieu de l'Église",
             address: "Adresse",
-            addressLine1: "Église de Mar Mikhael",
+            addressLine1: "Église de Khoury Youssef",
             addressLine2: "Village de Sereel - Zgharta",
             addressLine3: "Liban",
             serviceTimes: "Heures de Service",
@@ -83,10 +83,10 @@ export default {
                 },
                 item2: {
                     title: "Sermon de l'Évêque Youssef Suwaif",
-                    content: "Du sermon de Son Éminence l'Évêque Youssef Suwaif sur Khoury Youssef Abi Maroun Maatouk lors de la fête de Mar Mikhael le 8-11-2022 à l'église Mar Mikhael à Sereel"
+                    content: "Du sermon de Son Éminence l'Évêque Youssef Suwaif sur Khoury Youssef Abi Maroun Maatouk lors de la fête de Khoury Youssef le 8-11-2022 à l'église Khoury Youssef à Sereel"
                 },
                 item3: {
-                    title: "Fairuz à l'église Mar Mikhael à Sereel",
+                    title: "Fairuz à l'église Khoury Youssef à Sereel",
                     content: ""
                 },
                 item4: {
@@ -96,7 +96,7 @@ export default {
             }
         },
         footer: {
-            about: "À Propos de Mar Mikhael",
+            about: "À Propos de Khoury Youssef",
             village: "Village de Sereel",
             rights: "Tous droits réservés"
         }

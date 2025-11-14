@@ -2,9 +2,10 @@ import { Metadata } from "next";
 import { generateMetadata as generateSEOMetadata, siteConfig } from "@/lib/seo";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Latest News & Updates - Mar Mikhael of Sereel",
-  description: "Stay updated with the latest news, events, and announcements from Mar Mikhael Church in Sereel Village. Watch videos, read updates, and follow our community journey.",
+  title: "Latest News & Updates - Khoury Youssef of Sereel",
+  description: "Stay updated with the latest news, events, and announcements from Khoury Youssef Church in Sereel Village. Watch videos, read updates, and follow our community journey.",
   keywords: [
+    "Khoury Youssef news",
     "Mar Mikhael news",
     "church updates",
     "Sereel events",

@@ -2,9 +2,10 @@ import { Metadata } from "next";
 import { generateMetadata as generateSEOMetadata, siteConfig } from "@/lib/seo";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Miracles of Mar Mikhael of Sereel - Divine Interventions",
-  description: "Explore documented miracles and testimonies of divine healing through the intercession of Saint Mar Mikhael of Sereel. Read stories of answered prayers and miraculous healings.",
+  title: "Miracles of Khoury Youssef of Sereel - Divine Interventions",
+  description: "Explore documented miracles and testimonies of divine healing through the intercession of Saint Khoury Youssef of Sereel. Read stories of answered prayers and miraculous healings.",
   keywords: [
+    "Khoury Youssef miracles",
     "Mar Mikhael miracles",
     "divine healing",
     "answered prayers",

@@ -200,7 +200,7 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
         <img
           ref={bgImageRef}
           src="/assets/hero-church.jpg"
-          alt="Mar Mikhael Church"
+          alt="Khoury Youssef Church"
           className="w-full h-full object-cover"
           style={{ transformOrigin: "center center" }}
         />
@@ -237,7 +237,7 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
             style={{ textShadow: '0 4px 30px rgba(0,0,0,0.8), 0 2px 10px rgba(0,0,0,0.6)' }}
             suppressHydrationWarning
           >
-            {mounted ? t("hero.title") : "Mar Mikhael of Sereel"}
+            {mounted ? t("hero.title") : "Khoury Youssef of Sereel"}
           </h1>
 
           {/* Subtitle with enhanced styling */}
@@ -257,7 +257,7 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
             style={{ textShadow: '0 2px 15px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.6)' }}
             suppressHydrationWarning
           >
-            {mounted ? t("hero.description") : "Discover the life and miracles of Mar Mikhael"}
+            {mounted ? t("hero.description") : "Discover the life and miracles of Khoury Youssef"}
           </p>
 
           {/* Feast Day Badge with enhanced styling */}

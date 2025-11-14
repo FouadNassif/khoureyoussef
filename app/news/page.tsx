@@ -51,14 +51,14 @@ const News = () => {
     {
       id: 2,
       title: t("news.items.item2.title", "عظة سيادة المطران يوسف سويف"),
-      content: t("news.items.item2.content", "من عظة سيادة المطران يوسف سويف عن الخوري يوسف أبي مارون معتوق في عيد مار ميخائيل في ٨-١١-٢.٢٢ في كنيسة مار ميخائيل سرعل"),
+      content: t("news.items.item2.content", "من عظة سيادة المطران يوسف سويف عن الخوري يوسف أبي مارون معتوق في عيد الخوري يوسف في ٨-١١-٢.٢٢ في كنيسة الخوري يوسف سرعل"),
       date: "2022-11-08",
       video: "/assets/videos/news/Video2.mp4",
       type: "video"
     },
     {
       id: 3,
-      title: t("news.items.item3.title", "فيروز في كنيسة مار ميخائيل سرعل"),
+      title: t("news.items.item3.title", "فيروز في كنيسة الخوري يوسف سرعل"),
       content: t("news.items.item3.content", ""),
       date: "2010-01-01",
       video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",

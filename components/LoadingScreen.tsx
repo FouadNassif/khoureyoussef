@@ -102,7 +102,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
           <div className="relative w-full h-full rounded-2xl bg-white/5 dark:bg-black/10 backdrop-blur-md border border-white/10 dark:border-white/5 flex items-center justify-center shadow-2xl">
             <img
               src="/assets/saint-icon.jpg"
-              alt="Mar Mikhael"
+              alt="Khoury Youssef"
               className="w-full h-full object-cover rounded-2xl opacity-90"
             />
           </div>
@@ -116,7 +116,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
             textShadow: '0 2px 20px rgba(0, 0, 0, 0.1)',
           }}
         >
-          {i18n.language === 'ar' ? 'مار ميخائيل' : 'Mar Mikhael'}
+          {i18n.language === 'ar' ? 'الخوري يوسف' : 'Khoury Youssef'}
         </h1>
 
         {/* Subtitle */}

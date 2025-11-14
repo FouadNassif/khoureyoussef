@@ -31,13 +31,22 @@ export default function StructuredData() {
       },
     });
 
-    // Person Schema (Saint Mar Mikhael)
+    // Person Schema (Saint Khoury Youssef)
     const personSchema = generateStructuredData({
       type: "Person",
       data: {
-        name: "Mar Mikhael of Sereel",
-        alternateName: ["Saint Michael of Sereel", "Khoury Youssef", "Mar Mikhael"],
-        description: "Saint Mar Mikhael of Sereel, also known as Khoury Youssef, is a revered saint in the Lebanese Orthodox tradition. Known for his miracles and divine intercession, he is the patron saint of Sereel Village.",
+        name: "Khoury Youssef of Sereel",
+        alternateName: [
+          "Khoury Youssef",
+          "khoure youssef",
+          "Saint Khoury Youssef",
+          "Khoury Youssef Abi Maroun Maatouk",
+          "khoure youssef abi maroun",
+          "الخوري يوسف",
+          "Mar Mikhael",
+          "Saint Michael of Sereel"
+        ],
+        description: "Khoury Youssef (khoure youssef) of Sereel, also known as Mar Mikhael, is a revered saint in the Lebanese Orthodox tradition. Known as Khoury Youssef Abi Maroun Maatouk, he is celebrated for his miracles and divine intercession, and is the patron saint of Sereel Village, Lebanon.",
         jobTitle: "Saint",
         knowsAbout: ["Christianity", "Orthodox Faith", "Miracles", "Divine Healing"],
         affiliation: {

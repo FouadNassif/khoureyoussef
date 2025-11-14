@@ -76,14 +76,14 @@ export default function Page() {
       {
         id: 2,
         title: "عظة سيادة المطران يوسف سويف",
-        content: "من عظة سيادة المطران يوسف سويف عن الخوري يوسف أبي مارون معتوق في عيد مار ميخائيل في ٨-١١-٢.٢٢ في كنيسة مار ميخائيل سرعل",
+        content: "من عظة سيادة المطران يوسف سويف عن الخوري يوسف أبي مارون معتوق في عيد الخوري يوسف في ٨-١١-٢.٢٢ في كنيسة الخوري يوسف سرعل",
         date: "2022-11-08",
         video: "/assets/videos/news/Video2.mp4",
         type: "video"
       },
       {
         id: 3,
-        title: "فيروز في كنيسة مار ميخائيل سرعل",
+        title: "فيروز في كنيسة الخوري يوسف سرعل",
         content: "",
         date: "2010-01-01",
         video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",
@@ -191,7 +191,7 @@ export default function Page() {
                 <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
                 <img
                   src="/assets/saint-icon.jpg"
-                  alt={t("home.aboutTitle") || "Saint Mar Mikhael of Sereel - A Life of Divine Grace"}
+                  alt={t("home.aboutTitle") || "Saint Khoury Youssef of Sereel - A Life of Divine Grace"}
                   className="relative w-full rounded-2xl shadow-sacred glow-divine"
                 />
               </div>
@@ -371,7 +371,7 @@ export default function Page() {
                 <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
                 <img
                   src="/assets/church-interior.jpg"
-                  alt={t("home.visitSaint") || "Mar Mikhael Church Interior - Sereel Village, Lebanon"}
+                  alt={t("home.visitSaint") || "Khoury Youssef Church Interior - Sereel Village, Lebanon"}
                   className="relative w-full rounded-2xl shadow-sacred"
                 />
               </div>

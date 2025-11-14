@@ -253,7 +253,7 @@ const Story = () => {
               <img
                 ref={portraitImageRef}
                 src="/assets/saint-icon.jpg"
-                alt="Mar Mikhael Icon"
+                alt="Khoury Youssef Icon"
                 className="relative w-full rounded-2xl shadow-sacred glow-divine"
               />
             </div>

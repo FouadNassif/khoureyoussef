@@ -70,9 +70,17 @@ const tajawal = Tajawal({
 });
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Mar Mikhael of Sereel - Saint's Life, Miracles & Legacy",
-  description: "Discover the life, miracles, and spiritual legacy of Saint Mar Mikhael of Sereel. A sacred journey through faith, tradition, and divine grace. Visit the shrine in Sereel Village, Lebanon.",
+  title: "Khoury Youssef (khoure youssef) - Saint's Life, Miracles & Legacy | Sereel",
+  description: "Khoury Youssef (khoure youssef) - Discover the life, miracles, and spiritual legacy of Saint Khoury Youssef of Sereel. Learn about Khoury Youssef Abi Maroun Maatouk, his divine intercession, and visit his shrine in Sereel Village, Lebanon.",
   keywords: [
+    "Khoury Youssef",
+    "khoure youssef",
+    "Khoury Youssef of Sereel",
+    "khoure youssef sereel",
+    "Khoury Youssef Abi Maroun Maatouk",
+    "khoure youssef abi maroun",
+    "Saint Khoury Youssef",
+    "الخوري يوسف",
     "Mar Mikhael",
     "Saint Michael",
     "Sereel",
@@ -80,8 +88,7 @@ export const metadata: Metadata = generateSEOMetadata({
     "Orthodox Saints",
     "Miracles",
     "Spiritual Heritage",
-    "Khoury Youssef",
-    "Mar Mikhael Church",
+    "Khoury Youssef Church",
     "Sereel Village",
     "Lebanon",
     "Christian Saints",
@@ -113,6 +120,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#D4A574" />
         <meta name="msapplication-TileColor" content="#D4A574" />
+        <meta name="google-site-verification" content="1UK1bedaJ8qTEvJT7_cxNoYpiZjmtJZ7pugbFyG6Dhk" />
       </head>
       <body
         className={`

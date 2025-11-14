@@ -28,7 +28,7 @@ const Gallery = () => {
   const galleryImages = [
     {
       src: "/assets/hero-church.jpg",
-      alt: "Mar Mikhael Church at Sunset",
+      alt: "Khoury Youssef Church at Sunset",
       category: "Church",
     },
     { src: "/assets/saint-icon.jpg", alt: "Saint Icon", category: "Icon" },

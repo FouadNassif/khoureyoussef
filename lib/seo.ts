@@ -1,9 +1,17 @@
 import { Metadata } from "next";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://marmikhael-sereel.com";
-const siteName = "Mar Mikhael of Sereel";
-const defaultDescription = "Discover the life, miracles, and spiritual legacy of Saint Mar Mikhael of Sereel. A sacred journey through faith, tradition, and divine grace.";
+const siteName = "Khoury Youssef of Sereel";
+const defaultDescription = "Khoury Youssef (khoure youssef) - Discover the life, miracles, and spiritual legacy of Saint Khoury Youssef of Sereel. Learn about Khoury Youssef Abi Maroun Maatouk, his divine intercession, and visit his shrine in Sereel Village, Lebanon.";
 const defaultKeywords = [
+  "Khoury Youssef",
+  "khoure youssef",
+  "Khoury Youssef of Sereel",
+  "khoure youssef sereel",
+  "Khoury Youssef Abi Maroun Maatouk",
+  "khoure youssef abi maroun",
+  "Saint Khoury Youssef",
+  "الخوري يوسف",
   "Mar Mikhael",
   "Saint Michael",
   "Sereel",
@@ -11,14 +19,15 @@ const defaultKeywords = [
   "Orthodox Saints",
   "Miracles",
   "Spiritual Heritage",
-  "Khoury Youssef",
-  "Mar Mikhael Church",
+  "Khoury Youssef Church",
   "Sereel Village",
   "Lebanon",
   "Christian Saints",
   "Divine Healing",
   "Answered Prayers",
-  "Religious Heritage"
+  "Religious Heritage",
+  "Zgharta",
+  "Lebanese Orthodox Church"
 ];
 
 interface SEOConfig {
@@ -151,7 +160,7 @@ export const siteConfig = {
   contact: {
     phone: "+961 71 797 514",
     address: {
-      street: "Church of Mar Mikhael",
+      street: "Church of Khoury Youssef",
       city: "Sereel Village - Zgharta",
       country: "Lebanon",
     },
