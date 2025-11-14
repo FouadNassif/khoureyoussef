@@ -38,18 +38,23 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
       return;
     }
 
-    // Wait for image to load before starting animation
-    if (!bgImageRef.current) return;
-
     let zoomInInterval: NodeJS.Timeout | null = null;
     let zoomOutInterval: NodeJS.Timeout | null = null;
+    let retryTimeout: NodeJS.Timeout | null = null;
 
-    // Reset zoom level
+    // Reset zoom level and hide content
     setZoomLevel(1);
     setShowContent(false);
 
-    // Start zoom in animation after a brief delay
-    const startDelay = setTimeout(() => {
+    // Wait for image to be available and start animation
+    const checkAndStart = () => {
+      if (!bgImageRef.current) {
+        // Retry after a short delay if image not ready
+        retryTimeout = setTimeout(checkAndStart, 50);
+        return;
+      }
+
+      // Start zoom in animation
       let currentZoom = 1;
       zoomInInterval = setInterval(() => {
         currentZoom += 0.04; // Increment by 4% each time
@@ -83,10 +88,16 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
           }, 1500);
         }
       }, 100);
-    }, 200);
+    };
+
+    // Start checking after a brief delay to ensure component is mounted
+    const startDelay = setTimeout(checkAndStart, 300);
 
     return () => {
       clearTimeout(startDelay);
+      if (retryTimeout) {
+        clearTimeout(retryTimeout);
+      }
       if (zoomInInterval) {
         clearInterval(zoomInInterval);
       }
