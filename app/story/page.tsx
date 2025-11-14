@@ -300,6 +300,11 @@ const Story = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div ref={timelineElementRef}>
+              <div className="text-center mb-8">
+                <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
+                  {t("story.sections.about.title")}
+                </h2>
+              </div>
               <Card className="p-8 md:p-10 hover:shadow-sacred transition-sacred bg-card border-border">
                 <div className="prose prose-lg max-w-none space-y-6">
                   {aboutSection.paragraphs.map((paragraph, index) => (
@@ -313,22 +318,6 @@ const Story = () => {
                 </div>
               </Card>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quote Section */}
-      <section className="py-20 gradient-sacred">
-        <div className="container mx-auto px-4">
-          <div
-            ref={quoteRef}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <div className="text-6xl text-primary mb-6">"</div>
-            <p className="font-serif text-2xl md:text-3xl text-foreground mb-6 leading-relaxed">
-              {storySections[0]?.content ? storySections[0].content.substring(0, 150) + "..." : t("story.sections.whoIsKhourYoussef.content", "").substring(0, 150) + "..."}
-            </p>
-            <div className="w-16 h-1 bg-primary mx-auto" />
           </div>
         </div>
       </section>
