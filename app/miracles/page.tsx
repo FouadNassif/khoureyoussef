@@ -141,16 +141,16 @@ const Miracles = () => {
                 }}
               >
                 <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border">
-                  <div className="p-4">
+                  <div className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center shrink-0 glow-divine">
                         <Heart className="w-6 h-6 text-primary-foreground" />
                       </div>
 
-                      <div className="flex-1">
+                      <div className="flex-1 w-full">
                         <div className="flex items-start justify-between gap-4 mb-3">
-                          <div>
-                            <h3 className="font-serif text-2xl font-bold text-foreground mb-2">
+                          <div className="w-full">
+                            <h3 className="font-serif text-2xl font-bold text-foreground mb-2 text-left">
                               {miracle.title}
                             </h3>
                             <div className="flex flex-wrap items-center gap-3 text-sm">
@@ -169,15 +169,15 @@ const Miracles = () => {
                           </div>
                         </div>
 
-                        <div className="text-muted-foreground mb-4 leading-relaxed">
+                        <div className="text-muted-foreground mb-4 leading-relaxed w-full text-left">
                           {expandedMiracle === index ? (
-                            <div>
-                              <p className="whitespace-pre-line text-foreground">
+                            <div className="w-full">
+                              <p className="whitespace-pre-line text-foreground w-full text-left">
                                 {miracle.content}
                               </p>
                             </div>
                           ) : (
-                            <p className="line-clamp-3">
+                            <p className="line-clamp-3 w-full">
                               {miracle.content.length > 200
                                 ? `${miracle.content.substring(0, 200)}...`
                                 : miracle.content}

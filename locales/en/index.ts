@@ -70,14 +70,32 @@ export default {
             serviceFeast: "Feast Day: Special Services",
             contactLabel: "Contact",
             contactName: "Maria Sassine",
-            contactPhone: "+961 71 797 514"
+            contactPhone: "+961 71 797 415"
         },
         news: {
             title: "Latest News",
             subtitle: "Stay updated with our community events and announcements",
             readMore: "Read More",
             viewAll: "View All News",
-            badge: "Latest Updates"
+            badge: "Latest Updates",
+            items: {
+                item1: {
+                    title: "Bishop Youssef Suwaif on the Committee",
+                    content: "His Eminence Bishop Youssef Suwaif speaks about the committee formed to study the file of Khoury Youssef Abi Maroun Maatouk. Summer headquarters of the Archdiocese in Karm Saddeh on 1-1-2023"
+                },
+                item2: {
+                    title: "Sermon by Bishop Youssef Suwaif",
+                    content: "From the sermon of His Eminence Bishop Youssef Suwaif about Khoury Youssef Abi Maroun Maatouk on the feast of Mar Mikhael on 8-11-2022 at Mar Mikhael Church in Sereel"
+                },
+                item3: {
+                    title: "Fairuz at Mar Mikhael Church in Sereel",
+                    content: ""
+                },
+                item4: {
+                    title: "Hymn",
+                    content: ""
+                }
+            }
         },
         footer: {
             about: "About Mar Mikhael",

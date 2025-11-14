@@ -297,6 +297,7 @@ export default function Page() {
                           muted
                           loop
                           playsInline
+                          preload="metadata"
                         />
                         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                           <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">

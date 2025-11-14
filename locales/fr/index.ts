@@ -68,14 +68,32 @@ export default {
             serviceFeast: "Jour de Fête: Services Spéciaux",
             contactLabel: "Contact",
             contactName: "Maria Sassine",
-            contactPhone: "+961 71 797 514"
+            contactPhone: "+961 71 797 415"
         },
         news: {
             title: "Dernières Nouvelles",
             subtitle: "Restez informé des événements de notre communauté et de nos annonces",
             readMore: "Lire Plus",
             viewAll: "Voir Toutes les Nouvelles",
-            badge: "Dernières Mises à Jour"
+            badge: "Dernières Mises à Jour",
+            items: {
+                item1: {
+                    title: "L'Évêque Youssef Suwaif sur le Comité",
+                    content: "Son Éminence l'Évêque Youssef Suwaif parle du comité formé pour étudier le dossier de Khoury Youssef Abi Maroun Maatouk. Siège d'été de l'Archidiocèse à Karm Saddeh le 1-1-2023"
+                },
+                item2: {
+                    title: "Sermon de l'Évêque Youssef Suwaif",
+                    content: "Du sermon de Son Éminence l'Évêque Youssef Suwaif sur Khoury Youssef Abi Maroun Maatouk lors de la fête de Mar Mikhael le 8-11-2022 à l'église Mar Mikhael à Sereel"
+                },
+                item3: {
+                    title: "Fairuz à l'église Mar Mikhael à Sereel",
+                    content: ""
+                },
+                item4: {
+                    title: "Hymne",
+                    content: ""
+                }
+            }
         },
         footer: {
             about: "À Propos de Mar Mikhael",

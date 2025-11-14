@@ -71,50 +71,17 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
     };
   }, [isInitialLoad, onAnimationComplete]);
 
-  // Track parallax offset for combining with zoom
-  const parallaxOffsetRef = useRef(0);
-
-  // Animate background image zoom with parallax effect
+  // Animate background image zoom only (parallax completely disabled for performance)
   useEffect(() => {
     if (bgImageRef.current) {
       gsap.to(bgImageRef.current, {
         scale: zoomLevel,
-        y: parallaxOffsetRef.current,
         duration: 0.1,
         ease: "power2.out",
         transformOrigin: "center center",
       });
     }
   }, [zoomLevel]);
-
-  // Parallax effect on scroll - optimized with requestAnimationFrame
-  useEffect(() => {
-    if (!bgImageRef.current) return;
-
-    let ticking = false;
-    const parallaxSpeed = 0.5;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrolled = window.scrollY;
-          parallaxOffsetRef.current = scrolled * parallaxSpeed;
-          if (bgImageRef.current) {
-            // Update both scale and translateY using GSAP for smooth animation
-            gsap.set(bgImageRef.current, {
-              y: parallaxOffsetRef.current,
-              transformOrigin: "center center",
-            });
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Animate floating particles
   useEffect(() => {
