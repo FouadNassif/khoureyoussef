@@ -71,11 +71,15 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
     };
   }, [isInitialLoad, onAnimationComplete]);
 
+  // Track parallax offset for combining with zoom
+  const parallaxOffsetRef = useRef(0);
+
   // Animate background image zoom with parallax effect
   useEffect(() => {
     if (bgImageRef.current) {
       gsap.to(bgImageRef.current, {
         scale: zoomLevel,
+        y: parallaxOffsetRef.current,
         duration: 0.1,
         ease: "power2.out",
         transformOrigin: "center center",
@@ -83,21 +87,32 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
     }
   }, [zoomLevel]);
 
-  // Parallax effect on scroll
+  // Parallax effect on scroll - optimized with requestAnimationFrame
   useEffect(() => {
     if (!bgImageRef.current) return;
 
+    let ticking = false;
+    const parallaxSpeed = 0.5;
+
     const handleScroll = () => {
-      const scrolled = window.scrollY;
-      const parallaxSpeed = 0.5;
-      gsap.to(bgImageRef.current, {
-        y: scrolled * parallaxSpeed,
-        duration: 0.3,
-        ease: "power1.out",
-      });
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.scrollY;
+          parallaxOffsetRef.current = scrolled * parallaxSpeed;
+          if (bgImageRef.current) {
+            // Update both scale and translateY using GSAP for smooth animation
+            gsap.set(bgImageRef.current, {
+              y: parallaxOffsetRef.current,
+              transformOrigin: "center center",
+            });
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 

@@ -177,207 +177,209 @@ export default function Page() {
   }, [miraclesInView]);
 
   return (
-    <div className="min-h-screen">
-      {showLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
-      <Navigation show={showNavbar} />
-      <Hero isInitialLoad={isInitialLoad} onAnimationComplete={handleHeroAnimationComplete} />
+    <>
+      <div className="min-h-screen">
+        {showLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
+        <Navigation show={showNavbar} />
+        <Hero isInitialLoad={isInitialLoad} onAnimationComplete={handleHeroAnimationComplete} />
 
-      {/* About Section */}
-      <section ref={aboutRef} className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div ref={aboutSectionRef} className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative">
-              <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
-              <img
-                src="/assets/saint-icon.jpg"
-                alt="Saint Icon"
-                className="relative w-full rounded-2xl shadow-sacred glow-divine"
-              />
-            </div>
-
-            <div ref={aboutTextRef}>
-              <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-                <span className="text-primary font-medium text-sm">
-                  {t("home.aboutBadge")}
-                </span>
+        {/* About Section */}
+        <section ref={aboutRef} className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div ref={aboutSectionRef} className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="relative">
+                <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
+                <img
+                  src="/assets/saint-icon.jpg"
+                  alt={t("home.aboutTitle") || "Saint Mar Mikhael of Sereel - A Life of Divine Grace"}
+                  className="relative w-full rounded-2xl shadow-sacred glow-divine"
+                />
               </div>
-              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
-                {t("home.aboutTitle")}
-              </h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                {t("home.aboutDescription1")}
-              </p>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                {t("home.aboutDescription2")}
-              </p>
-              <Link href="/story">
-                <Button className="gradient-divine text-primary-foreground glow-divine">
-                  <Book className="w-4 h-4 mr-2" />
-                  {t("home.discoverStory")}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Featured Latest Miracle */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div ref={miracleSectionRef} className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-                <span className="text-primary font-medium text-sm">
-                  {t("home.latestMiracle")}
-                </span>
-              </div>
-              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-foreground">
-                {t("home.featuredMiracleTitle")}
-              </h2>
-            </div>
-
-            <Card className="p-8 md:p-12 bg-card border-border shadow-sacred hover:shadow-sacred transition-sacred">
-              <div className="space-y-6">
-                <div className="flex items-center gap-3 text-muted-foreground text-sm">
-                  <Sparkles className="w-5 h-5 text-primary" />
-                  <span>{t("home.miracleDate")}</span>
+              <div ref={aboutTextRef}>
+                <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
+                  <span className="text-primary font-medium text-sm">
+                    {t("home.aboutBadge")}
+                  </span>
                 </div>
-
-                <h3 className="font-serif text-3xl font-bold text-foreground">
-                  {t("home.miracleHeading")}
-                </h3>
-
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  {t("home.miracleDescription")}
+                <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
+                  {t("home.aboutTitle")}
+                </h2>
+                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                  {t("home.aboutDescription1")}
                 </p>
-
-                <Link href="/miracles">
-                  <Button variant="glass">
-                    {t("home.readFullStory")}
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                  {t("home.aboutDescription2")}
+                </p>
+                <Link href="/story">
+                  <Button className="gradient-divine text-primary-foreground glow-divine">
+                    <Book className="w-4 h-4 mr-2" />
+                    {t("home.discoverStory")}
                   </Button>
                 </Link>
               </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Latest News Section */}
-      <section ref={miraclesRef} className="py-20 gradient-heavenly">
-        <div className="container mx-auto px-4">
-          <div ref={newsHeaderRef} className="text-center mb-12">
-            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-              <span className="text-primary font-medium text-sm">
-                {t("news.title")}
-              </span>
             </div>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-foreground">
-              {t("news.title")}
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t("news.subtitle")}
-            </p>
           </div>
+        </section>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {latestNews.map((item, index) => (
-              <div
-                key={item.id}
-                ref={(el) => {
-                  if (el) newsItemsRef.current[index] = el;
-                }}
-              >
-                <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border">
-                  {item.type === "video" && item.video && (
-                    <div className="relative aspect-video overflow-hidden bg-muted">
-                      <video
-                        src={item.video}
-                        className="w-full h-full object-cover"
-                        muted
-                        loop
-                        playsInline
-                      />
-                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                        <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                          <Play className="w-8 h-8 text-white ml-1" fill="white" />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Calendar className="w-4 h-4 text-muted-foreground" />
-                      <span className="text-xs text-muted-foreground">
-                        {new Date(item.date).toLocaleDateString(i18n.language === "ar" ? "ar-LB" : i18n.language === "fr" ? "fr-FR" : "en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric"
-                        })}
-                      </span>
-                    </div>
-                    <h3 className="font-serif text-xl font-bold text-foreground mb-2 line-clamp-2">
-                      {item.title}
-                    </h3>
-                    {item.content && (
-                      <p className="text-muted-foreground text-sm line-clamp-3">
-                        {item.content}
-                      </p>
-                    )}
-                  </div>
-                </Card>
+        {/* Featured Latest Miracle */}
+        <section className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div ref={miracleSectionRef} className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
+                  <span className="text-primary font-medium text-sm">
+                    {t("home.latestMiracle")}
+                  </span>
+                </div>
+                <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-foreground">
+                  {t("home.featuredMiracleTitle")}
+                </h2>
               </div>
-            ))}
-          </div>
 
-          <div ref={newsButtonRef} className="text-center mt-12">
-            <Link href="/news">
-              <Button
-                variant="glass"
-                size="lg"
-              >
-                {t("news.viewAll")}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+              <Card className="p-8 md:p-12 bg-card border-border shadow-sacred hover:shadow-sacred transition-sacred">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3 text-muted-foreground text-sm">
+                    <Sparkles className="w-5 h-5 text-primary" />
+                    <span>{t("home.miracleDate")}</span>
+                  </div>
 
-      {/* Church Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+                  <h3 className="font-serif text-3xl font-bold text-foreground">
+                    {t("home.miracleHeading")}
+                  </h3>
+
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {t("home.miracleDescription")}
+                  </p>
+
+                  <Link href="/miracles">
+                    <Button variant="glass">
+                      {t("home.readFullStory")}
+                    </Button>
+                  </Link>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Latest News Section */}
+        <section ref={miraclesRef} className="py-20 gradient-heavenly">
+          <div className="container mx-auto px-4">
+            <div ref={newsHeaderRef} className="text-center mb-12">
               <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
                 <span className="text-primary font-medium text-sm">
-                  {t("home.churchBadge")}
+                  {t("news.title")}
                 </span>
               </div>
-              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
-                {t("home.visitSaint")}
+              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-foreground">
+                {t("news.title")}
               </h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                {t("home.visitDescription")}
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                {t("news.subtitle")}
               </p>
-              <Link href="/contact">
-                <Button variant="glass">
-                  {t("home.planVisit")}
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {latestNews.map((item, index) => (
+                <div
+                  key={item.id}
+                  ref={(el) => {
+                    if (el) newsItemsRef.current[index] = el;
+                  }}
+                >
+                  <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border">
+                    {item.type === "video" && item.video && (
+                      <div className="relative aspect-video overflow-hidden bg-muted">
+                        <video
+                          src={item.video}
+                          className="w-full h-full object-cover"
+                          muted
+                          loop
+                          playsInline
+                        />
+                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                          <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                            <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    <div className="p-6">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Calendar className="w-4 h-4 text-muted-foreground" />
+                        <span className="text-xs text-muted-foreground">
+                          {new Date(item.date).toLocaleDateString(i18n.language === "ar" ? "ar-LB" : i18n.language === "fr" ? "fr-FR" : "en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric"
+                          })}
+                        </span>
+                      </div>
+                      <h3 className="font-serif text-xl font-bold text-foreground mb-2 line-clamp-2">
+                        {item.title}
+                      </h3>
+                      {item.content && (
+                        <p className="text-muted-foreground text-sm line-clamp-3">
+                          {item.content}
+                        </p>
+                      )}
+                    </div>
+                  </Card>
+                </div>
+              ))}
+            </div>
+
+            <div ref={newsButtonRef} className="text-center mt-12">
+              <Link href="/news">
+                <Button
+                  variant="glass"
+                  size="lg"
+                >
+                  {t("news.viewAll")}
                 </Button>
               </Link>
             </div>
+          </div>
+        </section>
 
-            <div className="relative">
-              <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
-              <img
-                src="/assets/church-interior.jpg"
-                alt="Church Interior"
-                className="relative w-full rounded-2xl shadow-sacred"
-              />
+        {/* Church Section */}
+        <section className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
+                  <span className="text-primary font-medium text-sm">
+                    {t("home.churchBadge")}
+                  </span>
+                </div>
+                <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
+                  {t("home.visitSaint")}
+                </h2>
+                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                  {t("home.visitDescription")}
+                </p>
+                <Link href="/contact">
+                  <Button variant="glass">
+                    {t("home.planVisit")}
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
+                <img
+                  src="/assets/church-interior.jpg"
+                  alt={t("home.visitSaint") || "Mar Mikhael Church Interior - Sereel Village, Lebanon"}
+                  className="relative w-full rounded-2xl shadow-sacred"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }

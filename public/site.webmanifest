@@ -1,0 +1,31 @@
+{
+  "name": "Mar Mikhael of Sereel",
+  "short_name": "Mar Mikhael",
+  "description": "Discover the life, miracles, and spiritual legacy of Saint Mar Mikhael of Sereel",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F0E8",
+  "theme_color": "#D4A574",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["religion", "lifestyle", "education"],
+  "lang": "en",
+  "dir": "ltr"
+}
+
