@@ -259,11 +259,9 @@ const News = () => {
                     <p className="text-muted-foreground text-sm line-clamp-3 mb-4 flex-1">
                       {item.content}
                     </p>
-                    <Button
-                      variant="glass"
+                    <Button className="gradient-divine text-primary-foreground glow-divine"
                       size="sm"
                       onClick={() => openLightbox(item)}
-                      className="w-full"
                     >
                       {t("news.readMore")}
                     </Button>

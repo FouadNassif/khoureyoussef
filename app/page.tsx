@@ -9,6 +9,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import LoadingScreen from "@/components/LoadingScreen";
+import VideoCard from "@/components/VideoCard"; // Import the new component
 import { Sparkles, Book, Calendar, Play } from "lucide-react";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { gsap } from "gsap";
@@ -71,6 +72,7 @@ export default function Page() {
         content: "سيّدنا المطران يوسف سويف يتكلّم عن اللّجنة المؤلّفة لدراسة ملفّ الخوري يوسف أبي مارون معتوق. المقرّ الصيّفي للمطرانية كرمسدّة في ١-١-٢٠٢٣",
         date: "2023-01-01",
         video: "/assets/videos/news/Video1.mp4",
+        thumbnail: "/assets/thumbnails/Video1.jpg", // Add your thumbnail path
         type: "video"
       },
       {
@@ -79,6 +81,7 @@ export default function Page() {
         content: "من عظة سيادة المطران يوسف سويف عن الخوري يوسف أبي مارون معتوق في عيد الخوري يوسف في ٨-١١-٢.٢٢ في كنيسة الخوري يوسف سرعل",
         date: "2022-11-08",
         video: "/assets/videos/news/Video2.mp4",
+        thumbnail: "/assets/thumbnails/Video2.jpg", // Add your thumbnail path
         type: "video"
       },
       {
@@ -87,6 +90,7 @@ export default function Page() {
         content: "",
         date: "2010-01-01",
         video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",
+        thumbnail: "/assets/thumbnails/Video3.jpg", // Add your thumbnail path
         type: "video"
       },
       {
@@ -96,6 +100,7 @@ export default function Page() {
         date: "2024-08-28",
         type: "video",
         video: "/assets/videos/news/Video3.mp4",
+        thumbnail: "/assets/thumbnails/Video4.jpg", // Add your thumbnail path
       },
     ];
 
@@ -196,7 +201,7 @@ export default function Page() {
                 />
               </div>
 
-              <div ref={aboutTextRef}>
+              <div ref={aboutTextRef} className="shadow-sacred p-8 md:p-12">
                 <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
                   <span className="text-primary font-medium text-sm">
                     {t("home.aboutBadge")}
@@ -253,7 +258,7 @@ export default function Page() {
                   </p>
 
                   <Link href="/miracles">
-                    <Button variant="glass">
+                    <Button className="gradient-divine text-primary-foreground glow-divine">
                       {t("home.readFullStory")}
                     </Button>
                   </Link>
@@ -263,7 +268,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* Latest News Section */}
+        {/* Latest News Section - NOW USING VideoCard Component */}
         <section ref={miraclesRef} className="py-20 gradient-heavenly">
           <div className="container mx-auto px-4">
             <div ref={newsHeaderRef} className="text-center mb-12">
@@ -282,61 +287,20 @@ export default function Page() {
 
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {latestNews.map((item, index) => (
-                <div
+                <VideoCard
                   key={item.id}
-                  ref={(el) => {
+                  item={item}
+                  i18n={i18n}
+                  cardRef={(el) => {
                     if (el) newsItemsRef.current[index] = el;
                   }}
-                >
-                  <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border">
-                    {item.type === "video" && item.video && (
-                      <div className="relative aspect-video overflow-hidden bg-muted">
-                        <video
-                          src={item.video}
-                          className="w-full h-full object-cover"
-                          muted
-                          loop
-                          playsInline
-                          preload="metadata"
-                        />
-                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                          <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                            <Play className="w-8 h-8 text-white ml-1" fill="white" />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Calendar className="w-4 h-4 text-muted-foreground" />
-                        <span className="text-xs text-muted-foreground">
-                          {new Date(item.date).toLocaleDateString(i18n.language === "ar" ? "ar-LB" : i18n.language === "fr" ? "fr-FR" : "en-US", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric"
-                          })}
-                        </span>
-                      </div>
-                      <h3 className="font-serif text-xl font-bold text-foreground mb-2 line-clamp-2">
-                        {item.title}
-                      </h3>
-                      {item.content && (
-                        <p className="text-muted-foreground text-sm line-clamp-3">
-                          {item.content}
-                        </p>
-                      )}
-                    </div>
-                  </Card>
-                </div>
+                />
               ))}
             </div>
 
             <div ref={newsButtonRef} className="text-center mt-12">
               <Link href="/news">
-                <Button
-                  variant="glass"
-                  size="lg"
-                >
+                <Button className="gradient-divine text-primary-foreground glow-divine">
                   {t("news.viewAll")}
                 </Button>
               </Link>
@@ -361,7 +325,7 @@ export default function Page() {
                   {t("home.visitDescription")}
                 </p>
                 <Link href="/contact">
-                  <Button variant="glass">
+                  <Button className="gradient-divine text-primary-foreground glow-divine">
                     {t("home.planVisit")}
                   </Button>
                 </Link>

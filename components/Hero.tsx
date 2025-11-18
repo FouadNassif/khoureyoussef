@@ -38,6 +38,17 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
       return;
     }
 
+    // Check if mobile device (screen width < 768px)
+    const isMobile = window.innerWidth < 768;
+    
+    // On mobile, skip animation and show content immediately
+    if (isMobile) {
+      setShowContent(true);
+      setZoomLevel(1);
+      onAnimationComplete?.();
+      return;
+    }
+
     let zoomInInterval: NodeJS.Timeout | null = null;
     let zoomOutInterval: NodeJS.Timeout | null = null;
     let retryTimeout: NodeJS.Timeout | null = null;
@@ -199,7 +210,7 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
       <div className="absolute inset-0">
         <img
           ref={bgImageRef}
-          src="/assets/hero-church.jpg"
+          src="/assets/hero.jpg"
           alt="Khoury Youssef Church"
           className="w-full h-full object-cover"
           style={{ transformOrigin: "center center" }}

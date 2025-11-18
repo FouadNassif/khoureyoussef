@@ -183,8 +183,7 @@ const Miracles = () => {
                         </div>
 
                         {miracle.content.length > 200 && (
-                          <Button
-                            variant="glass"
+                         <Button className="gradient-divine text-primary-foreground glow-divine"
                             size="sm"
                             onClick={() => toggleMiracle(index)}
                           >
