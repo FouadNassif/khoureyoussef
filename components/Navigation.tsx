@@ -305,23 +305,6 @@ const Navigation = ({ show = true }: NavigationProps) => {
                 {link.label}
               </Link>
             ))}
-
-            <div className="flex gap-2 pt-2 border-t border-border">
-              {languages.map((lang) => (
-                <LanguageButton
-                  key={lang.code}
-                  lang={lang}
-                  currentLang={i18n.language}
-                  onChange={(code) => {
-                    changeLanguage(code);
-                    setMobileMenuOpen(false);
-                  }}
-                  scale={1.02}
-                  className="px-4 py-2 rounded-md text-sm font-medium transition-sacred flex-1"
-                />
-              ))}
-            </div>
-
           </div>
         </div>
       )}

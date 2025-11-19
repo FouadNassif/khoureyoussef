@@ -14,6 +14,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { I18nProvider } from "@/components/I18nProvider";
 import { generateMetadata as generateSEOMetadata, siteConfig } from "@/lib/seo";
 import StructuredData from "@/components/StructuredData";
+import { Analytics } from "@vercel/analytics/next"
 
 // Geist Sans (UI)
 const geistSans = Geist({

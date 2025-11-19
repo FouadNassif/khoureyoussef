@@ -189,7 +189,7 @@ export default function Page() {
         <Hero isInitialLoad={isInitialLoad} onAnimationComplete={handleHeroAnimationComplete} />
 
         {/* About Section */}
-        <section ref={aboutRef} className="py-20 bg-background">
+        <section ref={aboutRef} className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div ref={aboutSectionRef} className="grid md:grid-cols-2 gap-12 items-center">
               <div className="relative">
@@ -228,7 +228,7 @@ export default function Page() {
         </section>
 
         {/* Featured Latest Miracle */}
-        <section className="py-20 bg-background">
+        <section className="py-7 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div ref={miracleSectionRef} className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
@@ -242,7 +242,7 @@ export default function Page() {
                 </h2>
               </div>
 
-              <Card className="p-8 md:p-12 bg-card border-border shadow-sacred hover:shadow-sacred transition-sacred">
+              <Card className="p-8 md:p-12 bg-card shadow-sacred hover:shadow-sacred transition-sacred">
                 <div className="space-y-6">
                   <div className="flex items-center gap-3 text-muted-foreground text-sm">
                     <Sparkles className="w-5 h-5 text-primary" />
@@ -269,7 +269,7 @@ export default function Page() {
         </section>
 
         {/* Latest News Section - NOW USING VideoCard Component */}
-        <section ref={miraclesRef} className="py-20 gradient-heavenly">
+        <section ref={miraclesRef} className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div ref={newsHeaderRef} className="text-center mb-12">
               <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
@@ -309,10 +309,11 @@ export default function Page() {
         </section>
 
         {/* Church Section */}
-        <section className="py-20 bg-background">
+        <section className="py-5 md:py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
+            <div className="grid md:grid-cols-2 gap-12 items-center ">
+              
+              <div className="shadow-sacred p-5 md:p-12  rounded-2xl">
                 <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
                   <span className="text-primary font-medium text-sm">
                     {t("home.churchBadge")}
@@ -321,6 +322,14 @@ export default function Page() {
                 <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
                   {t("home.visitSaint")}
                 </h2>
+                <div className="relative">
+                <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
+                <img
+                  src="/assets/church-interior.jpg"
+                  alt={t("home.visitSaint") || "Khoury Youssef Church Interior - Sereel Village, Lebanon"}
+                  className="relative w-full rounded-2xl shadow-sacred"
+                />
+              </div>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                   {t("home.visitDescription")}
                 </p>
@@ -329,15 +338,6 @@ export default function Page() {
                     {t("home.planVisit")}
                   </Button>
                 </Link>
-              </div>
-
-              <div className="relative">
-                <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
-                <img
-                  src="/assets/church-interior.jpg"
-                  alt={t("home.visitSaint") || "Khoury Youssef Church Interior - Sereel Village, Lebanon"}
-                  className="relative w-full rounded-2xl shadow-sacred"
-                />
               </div>
             </div>
           </div>

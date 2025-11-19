@@ -21,8 +21,76 @@ interface NewsItem {
   date: string;
   image?: string;
   video?: string;
+  thumbnail?: string;
   type: "text" | "image" | "video";
 }
+
+// Optimized Video Card Component for News Grid
+const VideoCardNews = ({ item, onClick }: { item: NewsItem; onClick: () => void }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (item.type === "video" && item.video && !item.thumbnail && videoRef.current) {
+      const video = videoRef.current;
+      
+      const handleLoadedMetadata = () => {
+        setIsLoaded(true);
+        video.currentTime = 1;
+      };
+
+      video.addEventListener('loadedmetadata', handleLoadedMetadata);
+      
+      return () => {
+        video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      };
+    }
+  }, [item.type, item.video, item.thumbnail]);
+
+  return (
+    <div 
+      className="relative aspect-square overflow-hidden bg-muted cursor-pointer"
+      onClick={onClick}
+    >
+      {/* Thumbnail Image - shows before video loads */}
+      {item.thumbnail && (
+        <img
+          src={item.thumbnail}
+          alt={item.title}
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+        />
+      )}
+      
+      {/* Video Element */}
+      <video
+        ref={videoRef}
+        src={item.video}
+        className={`w-full h-full object-cover ${item.thumbnail ? 'opacity-0' : 'opacity-100'}`}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster={item.thumbnail}
+        onLoadedData={() => setIsLoaded(true)}
+      />
+      
+      {/* Play Overlay */}
+      <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors">
+        <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+          <Play className="w-8 h-8 text-white ml-1" fill="white" />
+        </div>
+      </div>
+      
+      {/* Loading indicator */}
+      {!isLoaded && !item.thumbnail && (
+        <div className="absolute inset-0 flex items-center justify-center bg-muted">
+          <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+        </div>
+      )}
+    </div>
+  );
+};
 
 const News = () => {
   const { t, i18n } = useTranslation();
@@ -38,7 +106,7 @@ const News = () => {
   const lightboxRef = useRef<HTMLDivElement>(null);
   const lightboxContentRef = useRef<HTMLDivElement>(null);
 
-  // Sample news data - in a real app, this would come from an API or CMS
+  // Sample news data with thumbnails
   const newsItems: NewsItem[] = useMemo(() => [
     {
       id: 1,
@@ -46,6 +114,7 @@ const News = () => {
       content: t("news.items.item1.content", "سيّدنا المطران يوسف سويف يتكلّم عن اللّجنة المؤلّفة لدراسة ملفّ الخوري يوسف أبي مارون معتوق. المقرّ الصيّفي للمطرانية كرمسدّة في ١-١-٢٠٢٣"),
       date: "2023-01-01",
       video: "/assets/videos/news/Video1.mp4",
+      thumbnail: "/assets/thumbnails/Video1.jpg", // Add thumbnail
       type: "video"
     },
     {
@@ -54,6 +123,7 @@ const News = () => {
       content: t("news.items.item2.content", "من عظة سيادة المطران يوسف سويف عن الخوري يوسف أبي مارون معتوق في عيد الخوري يوسف في ٨-١١-٢.٢٢ في كنيسة الخوري يوسف سرعل"),
       date: "2022-11-08",
       video: "/assets/videos/news/Video2.mp4",
+      thumbnail: "/assets/thumbnails/Video2.jpg", // Add thumbnail
       type: "video"
     },
     {
@@ -62,6 +132,7 @@ const News = () => {
       content: t("news.items.item3.content", ""),
       date: "2010-01-01",
       video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",
+      thumbnail: "/assets/thumbnails/Video3.jpg", // Add thumbnail
       type: "video"
     },
     {
@@ -71,6 +142,7 @@ const News = () => {
       date: "2024-08-28",
       type: "video",
       video: "/assets/videos/news/Video3.mp4",
+      thumbnail: "/assets/thumbnails/Video4.jpg", // Add thumbnail
     },
   ], [t]);
 
@@ -185,7 +257,7 @@ const News = () => {
         </div>
       </section>
 
-      {/* News Grid - Instagram Style */}
+      {/* News Grid - Instagram Style with Optimized Video Cards */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
@@ -198,7 +270,7 @@ const News = () => {
                 className="group"
               >
                 <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border cursor-pointer h-full flex flex-col">
-                  {/* Image/Video Section */}
+                  {/* Image Section */}
                   {item.type === "image" && item.image && (
                     <div 
                       className="relative aspect-square overflow-hidden bg-muted"
@@ -208,6 +280,7 @@ const News = () => {
                         src={item.image}
                         alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        loading="lazy"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
                         <ImageIcon className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -215,27 +288,12 @@ const News = () => {
                     </div>
                   )}
 
+                  {/* Optimized Video Section */}
                   {item.type === "video" && item.video && (
-                    <div 
-                      className="relative aspect-square overflow-hidden bg-muted"
-                      onClick={() => openLightbox(item)}
-                    >
-                      <video
-                        src={item.video}
-                        className="w-full h-full object-cover"
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                      />
-                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                        <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <Play className="w-8 h-8 text-white ml-1" fill="white" />
-                        </div>
-                      </div>
-                    </div>
+                    <VideoCardNews item={item} onClick={() => openLightbox(item)} />
                   )}
 
+                  {/* Text Section */}
                   {item.type === "text" && (
                     <div className="aspect-square bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-8">
                       <div className="text-center">
@@ -259,11 +317,12 @@ const News = () => {
                     <p className="text-muted-foreground text-sm line-clamp-3 mb-4 flex-1">
                       {item.content}
                     </p>
-                    <Button className="gradient-divine text-primary-foreground glow-divine"
+                    <Button 
+                      className="gradient-divine text-primary-foreground glow-divine"
                       size="sm"
                       onClick={() => openLightbox(item)}
                     >
-                      {t("news.readMore")}
+                      {t("news.readMore", "Read More")}
                     </Button>
                   </div>
                 </Card>
@@ -282,7 +341,7 @@ const News = () => {
         >
           <div
             ref={lightboxContentRef}
-            className="max-w-4xl w-full max-h-[90vh] overflow-auto bg-card rounded-lg shadow-2xl"
+            className="max-w-4xl w-full max-h-[90vh] overflow-auto bg-card rounded-lg shadow-2xl relative"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -293,7 +352,7 @@ const News = () => {
               <X className="w-6 h-6" />
             </button>
 
-            {/* Image/Video */}
+            {/* Image */}
             {selectedNews.type === "image" && selectedNews.image && (
               <div className="relative w-full aspect-video overflow-hidden bg-muted">
                 <img
@@ -304,6 +363,7 @@ const News = () => {
               </div>
             )}
 
+            {/* Video with better controls */}
             {selectedNews.type === "video" && selectedNews.video && (
               <div className="relative w-full aspect-video overflow-hidden bg-black">
                 <video
@@ -312,6 +372,7 @@ const News = () => {
                   controls
                   autoPlay
                   preload="auto"
+                  poster={selectedNews.thumbnail}
                 />
               </div>
             )}
@@ -327,9 +388,11 @@ const News = () => {
               <h2 className="font-serif text-3xl font-bold text-foreground mb-4">
                 {selectedNews.title}
               </h2>
-              <p className="text-foreground leading-relaxed whitespace-pre-line">
-                {selectedNews.content}
-              </p>
+              {selectedNews.content && (
+                <p className="text-foreground leading-relaxed whitespace-pre-line">
+                  {selectedNews.content}
+                </p>
+              )}
             </div>
           </div>
         </div>

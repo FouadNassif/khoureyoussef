@@ -210,7 +210,7 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
       <div className="absolute inset-0">
         <img
           ref={bgImageRef}
-          src="/assets/hero.jpg"
+          src="/assets/Hero.jpg"
           alt="Khoury Youssef Church"
           className="w-full h-full object-cover"
           style={{ transformOrigin: "center center" }}
@@ -270,15 +270,6 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
           >
             {mounted ? t("hero.description") : "Discover the life and miracles of Khoury Youssef"}
           </p>
-
-          {/* Feast Day Badge with enhanced styling */}
-          <div ref={badgeRef} className="inline-block mb-10">
-            <div className="px-6 py-3 rounded-full bg-secondary/90 backdrop-blur-md border-2 border-primary/30 shadow-lg">
-              <p className="text-sm font-medium text-primary" suppressHydrationWarning>
-                {mounted ? t("hero.feastDay") : "Feast Day: November 8"}
-              </p>
-            </div>
-          </div>
 
           {/* CTA Button with hover animations */}
           <div ref={ctaRef}>

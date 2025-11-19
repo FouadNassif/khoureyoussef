@@ -66,9 +66,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-serif text-lg font-semibold mb-4">
-              Contact
-            </h3>
+            <h3 className="font-serif text-lg font-semibold mb-4">Contact</h3>
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary flex-shrink-0" />
