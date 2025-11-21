@@ -1,12 +1,13 @@
 "use client";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { X } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { galleryImages, getCategories } from "@/lib/galleryData";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -19,22 +20,26 @@ const Gallery = () => {
     threshold: 0.2,
   });
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   const headerElementRef = useRef<HTMLDivElement>(null);
   const galleryItemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const lightboxRef = useRef<HTMLDivElement>(null);
   const lightboxImageRef = useRef<HTMLImageElement>(null);
+  const categoryNavRef = useRef<HTMLDivElement>(null);
 
-  const galleryImages = [
-    {
-      src: "/assets/hero-church.jpg",
-      alt: "Khoury Youssef Church at Sunset",
-      category: "Church",
-    },
-    { src: "/assets/saint-icon.jpg", alt: "Saint Icon", category: "Icon" },
-    { src: "/assets/church-interior.jpg", alt: "Church Interior", category: "Church" },
-    { src: "/assets/village-sereel.jpg", alt: "Village of Sereel", category: "Village" },
-  ];
+  // Get unique categories and add "All" option
+  const categories = useMemo(() => {
+    return ["All", ...getCategories()];
+  }, []);
+
+  // Filter images based on selected category
+  const filteredImages = useMemo(() => {
+    if (selectedCategory === "All") {
+      return galleryImages;
+    }
+    return galleryImages.filter((img) => img.category === selectedCategory);
+  }, [selectedCategory]);
 
   // Animate header
   useEffect(() => {
@@ -47,7 +52,25 @@ const Gallery = () => {
     }
   }, [headerInView]);
 
-  // Animate gallery items
+  // Animate category navbar
+  useEffect(() => {
+    if (categoryNavRef.current) {
+      gsap.fromTo(
+        categoryNavRef.current.children,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.05,
+          ease: "power2.out",
+          delay: 0.3
+        }
+      );
+    }
+  }, []);
+
+  // Animate gallery items when they appear or when filter changes
   useEffect(() => {
     galleryItemsRef.current.forEach((ref, index) => {
       if (ref) {
@@ -69,7 +92,26 @@ const Gallery = () => {
         });
       }
     });
-  }, [galleryImages]);
+  }, [filteredImages]);
+
+  // Animate category change
+  useEffect(() => {
+    galleryItemsRef.current.forEach((ref, index) => {
+      if (ref) {
+        gsap.fromTo(
+          ref,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            delay: index * 0.05,
+            ease: "power2.out",
+          }
+        );
+      }
+    });
+  }, [selectedCategory]);
 
   // Animate lightbox
   useEffect(() => {
@@ -120,7 +162,7 @@ const Gallery = () => {
       <Navigation />
 
       {/* Hero Header */}
-      <section className="pt-32 pb-20 gradient-heavenly">
+      <section className="pt-32 pb-12 gradient-heavenly">
         <div className="container mx-auto px-4">
           <div
             ref={(el) => {
@@ -137,9 +179,32 @@ const Gallery = () => {
             <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-foreground">
               {t("gallery.title")}
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground mb-8">
               {t("gallery.subtitle")}
             </p>
+
+            {/* Category Navigation */}
+            <div
+              ref={categoryNavRef}
+              className="flex flex-wrap justify-center gap-3 mt-8"
+            >
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`
+                    px-6 py-2.5 rounded-full font-medium text-sm
+                    transition-all duration-300 ease-out
+                    ${selectedCategory === category
+                      ? "bg-primary text-primary-foreground shadow-lg scale-105"
+                      : "bg-card/50 text-foreground hover:bg-card hover:shadow-md hover:scale-105 border border-border/50"
+                    }
+                  `}
+                >
+                  {t(`gallery.categories.${category.toLowerCase()}`, category)}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -148,7 +213,7 @@ const Gallery = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {galleryImages.map((image, index) => (
+            {filteredImages.map((image, index) => (
               <div
                 key={index}
                 ref={(el) => {

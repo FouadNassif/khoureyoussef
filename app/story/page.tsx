@@ -126,7 +126,7 @@ const Story = () => {
       // Create sequential animations - each section appears after the previous one finishes
       sections.forEach((ref, index) => {
         const prevSection = index > 0 ? sections[index - 1] : null;
-        
+
         // Calculate start position - adjust for mobile
         let startPosition: string;
         if (index === 0) {
@@ -150,9 +150,9 @@ const Story = () => {
           onEnter: () => {
             // Ensure previous sections stay visible and in place
             if (prevSection) {
-              gsap.set(prevSection, { 
-                opacity: 1, 
-                y: 0, 
+              gsap.set(prevSection, {
+                opacity: 1,
+                y: 0,
                 scale: 1,
               });
             }
@@ -273,18 +273,18 @@ const Story = () => {
                 }}
                 className="sticky mb-8 md:mb-16"
                 style={{
-                  top: typeof window !== 'undefined' && window.innerWidth < 768 
-                    ? `${80 + index * 5}px` 
+                  top: typeof window !== 'undefined' && window.innerWidth < 768
+                    ? `${80 + index * 5}px`
                     : `${100 + index * 10}px`,
                   zIndex: storySections.length - index,
                 } as React.CSSProperties}
               >
-                <Card className="p-8 md:p-10 hover:shadow-sacred transition-sacred bg-card/95 backdrop-blur-sm border-border shadow-xl">
-                  <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6 text-foreground">
+                <Card className="p-6 md:p-8 lg:p-10 hover:shadow-sacred transition-sacred bg-card/95 backdrop-blur-sm border-border shadow-xl">
+                  <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-foreground">
                     {section.title}
                   </h2>
-                  <div className="prose prose-lg max-w-none">
-                    <p className="text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
+                  <div className="prose prose-base md:prose-lg max-w-none">
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
                       {section.content}
                     </p>
                   </div>
@@ -300,18 +300,17 @@ const Story = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div ref={timelineElementRef}>
-              <div className="text-center mb-8">
-                <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              <div className="text-center mb-6 md:mb-8">
+                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-foreground">
                   {t("story.sections.about.title")}
                 </h2>
               </div>
-              <Card className="p-8 md:p-10 hover:shadow-sacred transition-sacred bg-card border-border">
-                <div className="prose prose-lg max-w-none space-y-6">
+              <Card className="p-6 md:p-8 lg:p-10 hover:shadow-sacred transition-sacred bg-card border-border">
+                <div className="prose prose-base md:prose-lg max-w-none space-y-4 md:space-y-6">
                   {aboutSection.paragraphs.map((paragraph, index) => (
                     <p
                       key={index}
-                      className="text-lg text-muted-foreground leading-relaxed"
-                    >
+                      className="text-base md:text-lg text-muted-foreground leading-relaxed">
                       {paragraph}
                     </p>
                   ))}

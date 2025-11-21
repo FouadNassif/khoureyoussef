@@ -141,16 +141,16 @@ const Miracles = () => {
                 }}
               >
                 <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border">
-                  <div className="px-6 py-4">
+                  <div className="px-6 py-4" dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
                     <div className="flex items-start gap-4">
 
                       <div className="flex-1 w-full">
                         <div className="flex items-start justify-between gap-4 mb-3">
                           <div className="w-full">
-                            <h3 className="font-serif text-2xl font-bold text-foreground mb-2 text-left">
+                            <h3 className={`font-serif text-2xl font-bold text-foreground mb-2 ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
                               {miracle.title}
                             </h3>
-                            <div className="flex flex-wrap items-center gap-3 text-sm w-full">
+                            <div className={`flex flex-wrap items-center gap-3 text-sm w-full ${i18n.language === 'ar' ? 'justify-end' : 'justify-start'}`}>
                               <span className="px-3 py-1 bg-primary/10 rounded-full text-primary font-medium">
                                 {miracle.type}
                               </span>
@@ -166,10 +166,10 @@ const Miracles = () => {
                           </div>
                         </div>
 
-                        <div className="text-muted-foreground mb-4 leading-relaxed w-full text-left">
+                        <div className={`text-muted-foreground mb-4 leading-relaxed w-full ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
                           {expandedMiracle === index ? (
                             <div className="w-full">
-                              <p className="whitespace-pre-line text-foreground w-full text-left">
+                              <p className={`whitespace-pre-line text-foreground w-full ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
                                 {miracle.content}
                               </p>
                             </div>
@@ -183,7 +183,7 @@ const Miracles = () => {
                         </div>
 
                         {miracle.content.length > 200 && (
-                         <Button className="gradient-divine text-primary-foreground glow-divine"
+                          <Button className="gradient-divine text-primary-foreground glow-divine"
                             size="sm"
                             onClick={() => toggleMiracle(index)}
                           >

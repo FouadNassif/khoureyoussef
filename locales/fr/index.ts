@@ -50,7 +50,14 @@ export default {
         },
         gallery: {
             title: "Galerie Sacrée",
-            subtitle: "Icônes, Église et Village"
+            subtitle: "Icônes, Église et Village",
+            categories: {
+                all: "Tout",
+                bishop: "Évêque",
+                sereel: "Sereel",
+                church: "Église",
+                icon: "Icônes"
+            }
         },
         contact: {
             title: "Contactez-Nous",

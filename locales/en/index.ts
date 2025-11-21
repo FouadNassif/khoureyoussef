@@ -52,7 +52,14 @@ export default {
         },
         gallery: {
             title: "Sacred Gallery",
-            subtitle: "Icons, Church, and Village"
+            subtitle: "Icons, Church, and Village",
+            categories: {
+                all: "All",
+                bishop: "Bishop",
+                sereel: "Sereel",
+                church: "Church",
+                icon: "Icons"
+            }
         },
         contact: {
             title: "Connect With Us",

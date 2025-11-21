@@ -52,7 +52,14 @@ export default {
         },
         gallery: {
             title: "المعرض المقدس",
-            subtitle: "الأيقونات والكنيسة والقرية"
+            subtitle: "الأيقونات والكنيسة والقرية",
+            categories: {
+                all: "الكل",
+                bishop: "المطران",
+                sereel: "السريل",
+                church: "الكنيسة",
+                icon: "الأيقونات"
+            }
         },
         contact: {
             title: "تواصل معنا",
