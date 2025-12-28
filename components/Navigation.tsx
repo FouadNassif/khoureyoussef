@@ -70,11 +70,10 @@ const LanguageButton = ({ lang, currentLang, onChange, scale = 1.05, className =
     <button
       ref={buttonRef}
       onClick={() => onChange(lang.code)}
-      className={`${className} relative ${
-        isActive
+      className={`${className} relative ${isActive
           ? "bg-primary text-primary-foreground glow-divine"
           : "text-foreground hover:bg-background"
-      }`}
+        }`}
     >
       {lang.fullName || lang.name}
       {isActive && (
@@ -193,49 +192,8 @@ const Navigation = ({ show = true }: NavigationProps) => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Desktop Navigation - Centered */}
-          <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                href={link.path}
-                className={`font-medium transition-sacred relative ${
-                  pathname === link.path
-                    ? "text-primary"
-                    : "text-foreground hover:text-primary"
-                }`}
-              >
-                {link.label}
-                {pathname === link.path && (
-                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary" />
-                )}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Language Switcher - Left side for RTL (AR) */}
-          {isRTL && (
-            <div className="sm:hidden">
-              <button
-                ref={languageButtonRef}
-                onClick={cycleLanguage}
-                className={`flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-lg hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-200 ${
-                  isTapping ? 'scale-90' : 'scale-100'
-                }`}
-                style={{
-                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-                }}
-              >
-                <Globe className="w-4 h-4 text-foreground" />
-                <span className="text-sm font-semibold text-foreground">
-                  {getCurrentLanguageDisplay()}
-                </span>
-              </button>
-            </div>
-          )}
-
-          {/* Language Selector + Mobile Menu Toggle */}
-          <div className="flex items-center gap-2 ml-auto">
+          {/* Language Selector - Fixed on LEFT side */}
+          <div className="flex items-center gap-2">
             {/* Desktop Language Selector */}
             <div className="hidden sm:flex items-center gap-1 bg-secondary rounded-lg p-1">
               {languages.map((lang) => (
@@ -249,27 +207,46 @@ const Navigation = ({ show = true }: NavigationProps) => {
               ))}
             </div>
 
-            {/* Mobile Language Switcher - Right side for LTR (EN/FR) */}
-            {!isRTL && (
-              <div className="sm:hidden">
-                <button
-                  ref={languageButtonRef}
-                  onClick={cycleLanguage}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-lg hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-200 ${
-                    isTapping ? 'scale-90' : 'scale-100'
+            {/* Mobile Language Switcher */}
+            <div className="sm:hidden">
+              <button
+                ref={languageButtonRef}
+                onClick={cycleLanguage}
+                className={`flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-lg hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-200 ${isTapping ? 'scale-90' : 'scale-100'
                   }`}
-                  style={{
-                    boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-                  }}
-                >
-                  <Globe className="w-4 h-4 text-foreground" />
-                  <span className="text-sm font-semibold text-foreground">
-                    {getCurrentLanguageDisplay()}
-                  </span>
-                </button>
-              </div>
-            )}
+                style={{
+                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                }}
+              >
+                <Globe className="w-4 h-4 text-foreground" />
+                <span className="text-sm font-semibold text-foreground">
+                  {getCurrentLanguageDisplay()}
+                </span>
+              </button>
+            </div>
+          </div>
 
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                href={link.path}
+                className={`font-medium transition-sacred relative ${pathname === link.path
+                    ? "text-primary"
+                    : "text-foreground hover:text-primary"
+                  }`}
+              >
+                {link.label}
+                {pathname === link.path && (
+                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary" />
+                )}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile Menu Toggle - Right side */}
+          <div className="flex items-center gap-2">
             {/* Theme Toggle */}
             {/* <ThemeToggle /> */}
 
@@ -298,9 +275,8 @@ const Navigation = ({ show = true }: NavigationProps) => {
                 key={link.path}
                 href={link.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`font-medium py-2 transition-sacred ${
-                  pathname === link.path ? "text-primary" : "text-foreground"
-                }`}
+                className={`font-medium py-2 transition-sacred ${pathname === link.path ? "text-primary" : "text-foreground"
+                  }`}
               >
                 {link.label}
               </Link>

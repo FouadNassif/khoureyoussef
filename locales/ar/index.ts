@@ -1,22 +1,17 @@
+import navTranslations from './nav.json';
+import footerTranslations from './footer.json';
 import storyTranslations from './story';
 import miraclesTranslations from './miracles';
+import newsTranslations from './news';
 
 export default {
     translation: {
-        nav: {
-            home: "الرئيسية",
-            story: "القصة",
-            miracles: "المعجزات",
-            gallery: "المعرض",
-            news: "الأخبار",
-            contact: "اتصل بنا"
-        },
+        ...navTranslations,
         hero: {
-            title: "الخوري يوسف السريلي",
-            subtitle: "شفيع قريتنا",
-            description: "اكتشف الحياة المقدسة والمعجزات والإرث الأبدي للقديس الخوري يوسف",
+            title: "الخوري يوسف أبي مارون",
+            subtitle: "المعروف بالقديس يوسف",
+            description: "اكتشف حياة الخوري يوسف أبي مارون، المعروف بالقديس يوسف، وإيمانه العميق، والمعجزات المرتبطة بشفاعته، والإرث الروحي الذي ما زال حيًّا حتى اليوم.",
             readMore: "اقرأ قصته",
-            feastDay: "عيده: 29 أيلول"
         },
         home: {
             latestMiracle: "أحدث معجزة",
@@ -27,18 +22,18 @@ export default {
             readFullStory: "اقرأ القصة الكاملة",
             showLess: "إظهار أقل",
             visitSaint: "زيارة القديس",
-            visitDescription: "مزار الخوري يوسف في السريل كان ملاذاً للإيمان عبر الأجيال. اختبر الأجواء المقدسة، واشهد قروناً من التفاني، واتصل بالحضور الإلهي لقديسنا الحبيب.",
+            visitDescription: "مزار الخوري يوسف أبي مارون، في سرعل كان ملاذًا للإيمان عبر الأجيال. اختبر الأجواء الروحية، واشهد مظاهر التفاني، وتقرّب بالصلاة من الله بشفاعة هذا الكاهن المبارك.",
             planVisit: "خطط لزيارتك",
             aboutBadge: "إرث مقدس",
             aboutTitle: "حياة من النعمة الإلهية",
-            aboutDescription1: "القديس الخوري يوسف السريلي يقف كمنارة للإيمان والتفاني. حياته تجسد قوة الصلاة وقوة الاقتناع والحب اللامحدود للإلهي.",
-            aboutDescription2: "عبر القرون، جلبت شفاعته الشفاء والأمل والمعجزات لعدد لا يحصى من المؤمنين. إرثه يستمر في إلهام الأجيال في قريتنا الحبيبة السريل.",
+            aboutDescription1: "الخوري يوسف أبي مارون، المعروف بالقديس يوسف، عاش حياة تميّزت بالتقوى والصبر والمثابرة على الصلاة، تاركًا أثرًا روحيًا عميقًا في قريته وأبنائها.",
             discoverStory: "اكتشف قصته",
             miraclesBadge: "تدخلات إلهية",
             churchBadge: "مكان مقدس"
         },
         story: storyTranslations.story,
         ...miraclesTranslations,
+        ...newsTranslations,
         miracles: {
             title: "المعجزات الإلهية",
             subtitle: "شهادات الإيمان والنعمة",
@@ -56,7 +51,7 @@ export default {
             categories: {
                 all: "الكل",
                 bishop: "المطران",
-                sereel: "السريل",
+                sereel: "سرعل",
                 church: "الكنيسة",
                 icon: "الأيقونات"
             }
@@ -69,7 +64,7 @@ export default {
             location: "موقع الكنيسة",
             address: "العنوان",
             addressLine1: "كنيسة الخوري يوسف",
-            addressLine2: "قرية السريل - زغرتا",
+            addressLine2: "قرية سرعل - زغرتا",
             addressLine3: "لبنان",
             serviceTimes: "أوقات الخدمة",
             serviceSunday: "الأحد: 10:00 صباحاً",
@@ -104,11 +99,7 @@ export default {
                 }
             }
         },
-        footer: {
-            about: "عن الخوري يوسف",
-            village: "قرية السريل",
-            rights: "جميع الحقوق محفوظة"
-        }
+        ...footerTranslations
     }
 };
 

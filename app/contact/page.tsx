@@ -8,7 +8,6 @@ import { Card } from "@/components/ui/card";
 import {
   MapPin,
   Phone,
-  Clock,
   Facebook,
   Instagram,
 } from "lucide-react";
@@ -20,7 +19,7 @@ if (typeof window !== "undefined") {
 }
 
 const Contact = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [headerRef, headerInView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -151,10 +150,10 @@ const Contact = () => {
             {/* Contact Info */}
             <div ref={infoRef}>
               <div className="h-full flex flex-col">
-                <h2 className="font-serif text-3xl font-bold mb-6 text-foreground">
+                <h2 className="font-serif text-3xl font-bold mb-6 text-foreground" dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
                   {t("contact.location")}
                 </h2>
-                <div className="grid grid-cols-1 gap-6 flex-1" style={{ gridTemplateRows: 'repeat(3, 1fr)' }}>
+                <div className="grid grid-cols-1 gap-6 flex-1">
                   <Card className="p-6 bg-card border-border hover:shadow-sacred transition-sacred">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center shrink-0">
@@ -175,29 +174,11 @@ const Contact = () => {
                     </div>
                   </Card>
 
-                  <Card className="p-6 bg-card border-border hover:shadow-sacred transition-sacred">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center shrink-0">
-                        <Clock className="w-6 h-6 text-primary-foreground" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold mb-2 text-foreground">
-                          {t("contact.serviceTimes")}
-                        </h3>
-                        <p className="text-muted-foreground">
-                          {t("contact.serviceSunday")}
-                          <br />
-                          {t("contact.serviceWeekdays")}
-                          <br />
-                          {t("contact.serviceFeast")}
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
+
 
                   <Card className="p-6 bg-card border-border hover:shadow-sacred transition-sacred cursor-pointer group">
-                    <a 
-                      href="tel:+96171797415" 
+                    <a
+                      href="tel:+96171797415"
                       className="flex items-start gap-4 no-underline"
                       dir="ltr"
                     >

@@ -1,0 +1,28 @@
+{
+    "hero": {
+        "title": "Khoury Youssef of Sereel",
+        "subtitle": "Guardian Saint of Our Village",
+        "description": "Discover the sacred life, miracles, and eternal legacy of Saint Khoury Youssef",
+        "readMore": "Read His Story",
+        "feastDay": "Feast Day: September 29"
+    },
+    "home": {
+        "latestMiracle": "Latest Miracle",
+        "featuredMiracleTitle": "A Testament of Faith",
+        "miracleDate": "December 2024",
+        "miracleHeading": "Miraculous Healing Through Prayer",
+        "miracleDescription": "A faithful pilgrim experienced complete recovery from a severe illness after praying at the shrine of Khoury Youssef.",
+        "readFullStory": "Read Full Story",
+        "showLess": "Show Less",
+        "visitSaint": "Visit the Saint",
+        "visitDescription": "The shrine of Khoury Youssef in Sereel has been a sanctuary of faith for generations.",
+        "planVisit": "Plan Your Visit",
+        "aboutBadge": "Sacred Legacy",
+        "aboutTitle": "A Life of Divine Grace",
+        "aboutDescription1": "Saint Khoury Youssef of Sereel stands as a beacon of faith and devotion.",
+        "aboutDescription2": "Through centuries, his intercession has brought healing, hope, and miracles to countless faithful.",
+        "discoverStory": "Discover His Story",
+        "miraclesBadge": "Divine Interventions",
+        "churchBadge": "Sacred Place"
+    }
+}

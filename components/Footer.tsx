@@ -34,7 +34,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h3 className="font-serif text-lg font-semibold mb-4">
-              Quick Links
+              {t("footer.quickLinks")}
             </h3>
             <div className="flex flex-col gap-2">
               <Link
@@ -66,11 +66,11 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-serif text-lg font-semibold mb-4">Contact</h3>
+            <h3 className="font-serif text-lg font-semibold mb-4">{t("footer.contact")}</h3>
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary flex-shrink-0" />
-                <span>Sereel Village, Lebanon</span>
+                <span>{t("footer.location")}: {t("contact.addressLine2")}, {t("contact.addressLine3")}</span>
               </div>
               <Link
                 href="/contact"

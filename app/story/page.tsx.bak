@@ -355,35 +355,35 @@ const Story = () => {
                   <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-foreground">
                     {section.title}
                   </h2>
-                  <div className="prose prose-base md:prose-lg max-w-none">
-                    {/* Wikipedia-style Small Inline Image */}
-                    {sectionImages[section.id as keyof typeof sectionImages] && (
+                  {/* Small Clickable Story Image */}
+                  {sectionImages[section.id as keyof typeof sectionImages] && (
+                    <div className="mb-4 md:mb-6">
                       <div
-                        className="float-right ml-4 mb-4 w-32 sm:w-40 md:w-48 cursor-pointer group"
+                        className="relative rounded-lg overflow-hidden shadow-sacred cursor-pointer group max-w-xs hover:shadow-2xl transition-shadow duration-300"
                         onClick={() => {
                           const img = sectionImages[section.id as keyof typeof sectionImages];
                           openLightbox(img.src, img.alt, img.caption);
                         }}
                       >
-                        <div className="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 bg-card border border-border">
-                          <img
-                            src={sectionImages[section.id as keyof typeof sectionImages].src}
-                            alt={sectionImages[section.id as keyof typeof sectionImages].alt}
-                            className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                            <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs bg-black/60 px-2 py-0.5 rounded">
-                              🔍
-                            </span>
-                          </div>
+                        <img
+                          src={sectionImages[section.id as keyof typeof sectionImages].src}
+                          alt={sectionImages[section.id as keyof typeof sectionImages].alt}
+                          className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                          <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm bg-black/50 px-3 py-1 rounded-full">
+                            Click to enlarge
+                          </span>
                         </div>
-                        <p className="text-xs text-muted-foreground mt-1 italic leading-tight">
-                          {sectionImages[section.id as keyof typeof sectionImages].caption}
-                        </p>
                       </div>
-                    )}
-                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed whitespace-pre-line clear-right">
+                      <p className="text-xs md:text-sm text-muted-foreground mt-2 italic">
+                        {sectionImages[section.id as keyof typeof sectionImages].caption}
+                      </p>
+                    </div>
+                  )}
+                  <div className="prose prose-base md:prose-lg max-w-none">
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
                       {section.content}
                     </p>
                   </div>
@@ -450,6 +450,367 @@ const Story = () => {
       <Footer />
     </div>
   );
+};
+
+export default Story;
+
+const { t, i18n } = useTranslation();
+const [headerRef, headerInView] = useInView({
+  triggerOnce: true,
+  threshold: 0.2,
+});
+const [timelineRef, timelineInView] = useInView({
+  triggerOnce: true,
+  threshold: 0.1,
+});
+const [sectionsRef, sectionsInView] = useInView({
+  triggerOnce: true,
+  threshold: 0.1,
+});
+
+const headerElementRef = useRef<HTMLDivElement>(null);
+const timelineElementRef = useRef<HTMLDivElement>(null);
+const storySectionsRef = useRef<(HTMLDivElement | null)[]>([]);
+const quoteRef = useRef<HTMLDivElement>(null);
+const portraitImageRef = useRef<HTMLImageElement>(null);
+const storyContainerRef = useRef<HTMLDivElement>(null);
+
+// Get story sections from translations - memoized to update when language changes
+const storySections = useMemo(() => [
+  {
+    id: "whoIsKhourYoussef",
+    title: t("story.sections.whoIsKhourYoussef.title", "Who is Khoury Youssef?"),
+    content: t("story.sections.whoIsKhourYoussef.content", ""),
+  },
+  {
+    id: "hisLife",
+    title: t("story.sections.hisLife.title", "His Life and Calling"),
+    content: t("story.sections.hisLife.content", ""),
+  },
+  {
+    id: "hisDeath",
+    title: t("story.sections.hisDeath.title", "His Death"),
+    content: t("story.sections.hisDeath.content", ""),
+  },
+], [t, i18n.language]);
+
+const aboutSection = useMemo(() => ({
+  title: t("story.sections.about.title", "From the writings of Khoury Youssef Abi Maroun Maatooq:"),
+  paragraphs: [
+    t("story.sections.about.content.paragraph1", ""),
+    t("story.sections.about.content.paragraph2", ""),
+  ],
+}), [t, i18n.language]);
+
+// Animate header
+useEffect(() => {
+  if (headerInView && headerElementRef.current) {
+    gsap.fromTo(
+      headerElementRef.current,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+    );
+  }
+}, [headerInView]);
+
+// Animate timeline section
+useEffect(() => {
+  if (timelineInView && timelineElementRef.current) {
+    gsap.fromTo(
+      timelineElementRef.current,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+    );
+  }
+}, [timelineInView]);
+
+// Parallax effect for portrait image
+useEffect(() => {
+  if (portraitImageRef.current) {
+    ScrollTrigger.create({
+      trigger: portraitImageRef.current,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+      animation: gsap.to(portraitImageRef.current, {
+        y: -100,
+        ease: "none",
+      }),
+    });
+  }
+}, []);
+
+// Sequential stacking animation for story sections
+useEffect(() => {
+  let timer: NodeJS.Timeout;
+  const triggers: ScrollTrigger[] = [];
+
+  // Wait for next tick to ensure refs are set
+  timer = setTimeout(() => {
+    if (!storyContainerRef.current) return;
+
+    const sections = storySectionsRef.current.filter(Boolean) as HTMLElement[];
+    if (sections.length === 0) return;
+
+    const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
+    // Set initial states for all sections
+    sections.forEach((ref, index) => {
+      gsap.set(ref, {
+        opacity: 0,
+        y: isMobile ? 100 : 200,
+        scale: isMobile ? 0.95 : 0.9,
+        zIndex: storySections.length - index,
+      });
+    });
+
+    // Create sequential animations - each section appears after the previous one finishes
+    sections.forEach((ref, index) => {
+      const prevSection = index > 0 ? sections[index - 1] : null;
+
+      // Calculate start position - adjust for mobile
+      let startPosition: string;
+      if (index === 0) {
+        startPosition = isMobile ? "top 90%" : "top 85%";
+      } else {
+        startPosition = isMobile ? "top 70%" : "top 50%";
+      }
+
+      // Main reveal animation - sequential appearance
+      const revealTrigger = ScrollTrigger.create({
+        trigger: ref,
+        start: startPosition,
+        end: isMobile ? "top 40%" : "top 30%",
+        scrub: isMobile ? 0.5 : 1,
+        animation: gsap.to(ref, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: "power2.out",
+        }),
+        onEnter: () => {
+          // Ensure previous sections stay visible and in place
+          if (prevSection) {
+            gsap.set(prevSection, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            });
+          }
+        },
+      });
+      triggers.push(revealTrigger);
+
+      // Subtle parallax effect - disabled on mobile for better performance
+      if (index > 0 && !isMobile) {
+        const parallaxTrigger = ScrollTrigger.create({
+          trigger: ref,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.5,
+          animation: gsap.to(ref, {
+            y: -15 * index,
+            ease: "none",
+          }),
+        });
+        triggers.push(parallaxTrigger);
+      }
+    });
+
+    // Refresh ScrollTrigger to ensure it recalculates
+    ScrollTrigger.refresh();
+  }, 100);
+
+  // Cleanup function
+  return () => {
+    if (timer) clearTimeout(timer);
+    // Kill all triggers created for story sections
+    triggers.forEach(trigger => {
+      if (trigger) {
+        trigger.kill();
+      }
+    });
+    // Also kill any remaining triggers for story sections
+    ScrollTrigger.getAll().forEach(trigger => {
+      const triggerElement = trigger.vars.trigger as HTMLElement | undefined;
+      if (triggerElement && storySectionsRef.current.includes(triggerElement as HTMLDivElement)) {
+        trigger.kill();
+      }
+    });
+  };
+}, [storySections, i18n.language]);
+
+// Animate quote section
+useEffect(() => {
+  if (quoteRef.current) {
+    ScrollTrigger.create({
+      trigger: quoteRef.current,
+      start: "top 80%",
+      animation: gsap.fromTo(
+        quoteRef.current,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" }
+      ),
+      once: true,
+    });
+  }
+}, []);
+
+return (
+  <div className="min-h-screen">
+    <Navigation />
+
+    {/* Hero Header */}
+    <section className="pt-32 pb-20 gradient-heavenly">
+      <div className="container mx-auto px-4">
+        <div
+          ref={(el) => {
+            headerRef(el);
+            headerElementRef.current = el;
+          }}
+          className="text-center max-w-3xl mx-auto"
+        >
+          <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-6">
+            <span className="text-primary font-medium text-sm">
+              {t("story.title")}
+            </span>
+          </div>
+          <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-foreground">
+            {t("story.title")}
+          </h1>
+          <p className="text-xl text-muted-foreground">
+            {t("story.sections.whoIsKhourYoussef.title")}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* Saint Portrait with Parallax */}
+    <section className="py-16 bg-background relative overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="max-w-2xl mx-auto">
+          <div className="relative">
+            <div className="absolute -inset-6 gradient-divine opacity-20 blur-3xl rounded-full" />
+            <img
+              ref={portraitImageRef}
+              src="/assets/saint-icon.jpg"
+              alt="Khoury Youssef Icon"
+              className="relative w-full rounded-2xl shadow-sacred glow-divine"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Story Sections with Sequential Stacking Effect */}
+    <section ref={sectionsRef} className="relative bg-background overflow-hidden">
+      <div ref={storyContainerRef} className="container mx-auto px-4 py-8 md:py-20">
+        <div className="max-w-4xl mx-auto relative">
+          {storySections.map((section, index) => (
+            <div
+              key={section.id}
+              ref={(el) => {
+                storySectionsRef.current[index] = el;
+              }}
+              className="sticky mb-6 md:mb-16"
+              style={{
+                top: typeof window !== 'undefined' && window.innerWidth < 768
+                  ? `${80 + index * 5}px`
+                  : `${100 + index * 10}px`,
+                zIndex: storySections.length - index,
+              } as React.CSSProperties}
+            >
+              <Card className="p-4 md:p-8 lg:p-10 hover:shadow-sacred transition-sacred bg-card/95 backdrop-blur-sm border-border shadow-xl">
+                <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-foreground">
+                  {section.title}
+                </h2>
+                {/* Story Image */}
+                {section.id === "whoIsKhourYoussef" && (
+                  <div className="mb-4 md:mb-6">
+                    <div className="relative rounded-lg overflow-hidden shadow-sacred">
+                      <img
+                        src="/assets/saint-icon.jpg"
+                        alt="Portrait of Khoury Youssef"
+                        className="w-full h-auto object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <p className="text-sm text-muted-foreground mt-2 italic text-center">
+                      {t("story.images.whoIsKhourYoussef", "An icon depicting Khoury Youssef, the beloved priest of Sereel")}
+                    </p>
+                  </div>
+                )}
+                {section.id === "hisLife" && (
+                  <div className="mb-4 md:mb-6">
+                    <div className="relative rounded-lg overflow-hidden shadow-sacred">
+                      <img
+                        src="/assets/church-interior.jpg"
+                        alt="Church where Khoury Youssef served"
+                        className="w-full h-auto object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <p className="text-sm text-muted-foreground mt-2 italic text-center">
+                      {t("story.images.hisLife", "The sacred church where Khoury Youssef dedicated his life to serving the faithful")}
+                    </p>
+                  </div>
+                )}
+                {section.id === "hisDeath" && (
+                  <div className="mb-4 md:mb-6">
+                    <div className="relative rounded-lg overflow-hidden shadow-sacred">
+                      <img
+                        src="/assets/hero-church.jpg"
+                        alt="Khoury Youssef Church in Sereel"
+                        className="w-full h-auto object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <p className="text-sm text-muted-foreground mt-2 italic text-center">
+                      {t("story.images.hisDeath", "The church stands as a testament to his legacy and eternal presence")}
+                    </p>
+                  </div>
+                )}
+                <div className="prose prose-base md:prose-lg max-w-none">
+                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
+                    {section.content}
+                  </p>
+                </div>
+              </Card>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* About Section */}
+    <section ref={timelineRef} className="pt-2 pb-6 md:pt-8 md:pb-12 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
+          <div ref={timelineElementRef}>
+            <div className="text-center mb-6 md:mb-8">
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-foreground">
+                {t("story.sections.about.title")}
+              </h2>
+            </div>
+            <Card className="p-4 md:p-8 lg:p-10 hover:shadow-sacred transition-sacred bg-card border-border">
+              <div className="prose prose-base md:prose-lg max-w-none space-y-4 md:space-y-6">
+                {aboutSection.paragraphs.map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </div>
+);
 };
 
 export default Story;

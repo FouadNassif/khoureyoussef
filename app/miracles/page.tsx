@@ -130,9 +130,9 @@ const Miracles = () => {
       </section>
 
       {/* Miracles List */}
-      <section className="py-20 bg-background">
+      <section className="py-12 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto space-y-6">
+          <div className="max-w-4xl mx-auto space-y-4 md:space-y-6">
             {miracles.map((miracle, index) => (
               <div
                 key={miracle.key}
@@ -141,7 +141,7 @@ const Miracles = () => {
                 }}
               >
                 <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border">
-                  <div className="px-6 py-4" dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
+                  <div className="px-4 py-3 md:px-6 md:py-4" dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
                     <div className="flex items-start gap-4">
 
                       <div className="flex-1 w-full">

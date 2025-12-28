@@ -63,52 +63,26 @@ export default function Page() {
     setShowNavbar(true);
   };
 
+  // Get data from translations
+  const resources = i18n.getResourceBundle(i18n.language, "translation") || {};
+
+  // Get featured miracle
+  const featuredMiracle = useMemo(() => {
+    const miracles = Object.values(resources).filter(
+      (item: any) => item?.type === "Healing" || item?.type === "شفاء" || item?.type === "Guérison"
+    );
+    return miracles.find((m: any) => m.isFeatured) || miracles[0];
+  }, [resources]);
+
   // Get news items from the news page data
   const latestNews = useMemo(() => {
-    const newsItems = [
-      {
-        id: 1,
-        title: " اللجنة عن سويف يوسف المطران",
-        content: "سيّدنا المطران يوسف سويف يتكلّم عن اللّجنة المؤلّفة لدراسة ملفّ الخوري يوسف أبي مارون معتوق. المقرّ الصيّفي للمطرانية كرمسدّة في ١-١-٢٠٢٣",
-        date: "2023-01-01",
-        video: "/assets/videos/news/Video1.mp4",
-        thumbnail: "/assets/thumbnails/Video1.jpg", // Add your thumbnail path
-        type: "video"
-      },
-      {
-        id: 2,
-        title: "عظة سيادة المطران يوسف سويف",
-        content: "من عظة سيادة المطران يوسف سويف عن الخوري يوسف أبي مارون معتوق في عيد الخوري يوسف في ٨-١١-٢.٢٢ في كنيسة الخوري يوسف سرعل",
-        date: "2022-11-08",
-        video: "/assets/videos/news/Video2.mp4",
-        thumbnail: "/assets/thumbnails/Video2.jpg", // Add your thumbnail path
-        type: "video"
-      },
-      {
-        id: 3,
-        title: "فيروز في كنيسة الخوري يوسف سرعل",
-        content: "",
-        date: "2010-01-01",
-        video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",
-        thumbnail: "/assets/thumbnails/Video3.jpg", // Add your thumbnail path
-        type: "video"
-      },
-      {
-        id: 4,
-        title: "ترتيلة",
-        content: "",
-        date: "2024-08-28",
-        type: "video",
-        video: "/assets/videos/news/Video3.mp4",
-        thumbnail: "/assets/thumbnails/Video4.jpg", // Add your thumbnail path
-      },
-    ];
+    const newsItems: any[] = resources.newsItems || [];
 
     // Sort by date (newest first) and get top 2
     return newsItems
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, 2);
-  }, []);
+  }, [resources]);
 
   // Animate about section
   useEffect(() => {
@@ -202,19 +176,11 @@ export default function Page() {
               </div>
 
               <div ref={aboutTextRef} className="shadow-sacred p-8 md:p-12">
-                <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-                  <span className="text-primary font-medium text-sm">
-                    {t("home.aboutBadge")}
-                  </span>
-                </div>
                 <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
                   {t("home.aboutTitle")}
                 </h2>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                   {t("home.aboutDescription1")}
-                </p>
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  {t("home.aboutDescription2")}
                 </p>
                 <Link href="/story">
                   <Button className="gradient-divine text-primary-foreground glow-divine">
@@ -232,11 +198,6 @@ export default function Page() {
           <div className="container mx-auto px-4">
             <div ref={miracleSectionRef} className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
-                <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-                  <span className="text-primary font-medium text-sm">
-                    {t("home.latestMiracle")}
-                  </span>
-                </div>
                 <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-foreground">
                   {t("home.featuredMiracleTitle")}
                 </h2>
@@ -246,15 +207,15 @@ export default function Page() {
                 <div className="space-y-6">
                   <div className="flex items-center gap-3 text-muted-foreground text-sm">
                     <Sparkles className="w-5 h-5 text-primary" />
-                    <span>{t("home.miracleDate")}</span>
+                    <span>{featuredMiracle?.date || t("home.miracleDate")}</span>
                   </div>
 
                   <h3 className="font-serif text-3xl font-bold text-foreground">
-                    {t("home.miracleHeading")}
+                    {featuredMiracle?.title || t("home.miracleHeading")}
                   </h3>
 
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {t("home.miracleDescription")}
+                  <p className="text-lg text-muted-foreground leading-relaxed line-clamp-4">
+                    {featuredMiracle?.content || t("home.miracleDescription")}
                   </p>
 
                   <Link href="/miracles">
@@ -272,11 +233,6 @@ export default function Page() {
         <section ref={miraclesRef} className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div ref={newsHeaderRef} className="text-center mb-12">
-              <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-                <span className="text-primary font-medium text-sm">
-                  {t("news.title")}
-                </span>
-              </div>
               <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-foreground">
                 {t("news.title")}
               </h2>
@@ -312,24 +268,19 @@ export default function Page() {
         <section className="py-5 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12 items-center ">
-              
+
               <div className="shadow-sacred p-5 md:p-12  rounded-2xl">
-                <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
-                  <span className="text-primary font-medium text-sm">
-                    {t("home.churchBadge")}
-                  </span>
-                </div>
                 <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">
                   {t("home.visitSaint")}
                 </h2>
                 <div className="relative">
-                <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
-                <img
-                  src="/assets/church-interior.jpg"
-                  alt={t("home.visitSaint") || "Khoury Youssef Church Interior - Sereel Village, Lebanon"}
-                  className="relative w-full rounded-2xl shadow-sacred"
-                />
-              </div>
+                  <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
+                  <img
+                    src="/assets/church-interior.jpg"
+                    alt={t("home.visitSaint") || "Khoury Youssef Church Interior - Sereel Village, Lebanon"}
+                    className="relative w-full rounded-2xl shadow-sacred"
+                  />
+                </div>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                   {t("home.visitDescription")}
                 </p>

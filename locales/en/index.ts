@@ -1,51 +1,47 @@
+import navTranslations from './nav.json';
+
+import footerTranslations from './footer.json';
 import storyTranslations from './story';
 import miraclesTranslations from './miracles';
+import newsTranslations from './news';
 
 export default {
     translation: {
-        nav: {
-            home: "Home",
-            story: "Story",
-            miracles: "Miracles",
-            gallery: "Gallery",
-            news: "News",
-            contact: "Contact"
-        },
+        ...navTranslations,
         hero: {
-            title: "Khoury Youssef of Sereel",
-            subtitle: "Guardian Saint of Our Village",
-            description: "Discover the sacred life, miracles, and eternal legacy of Saint Khoury Youssef",
+            title: "Khoury Youssef Abi Maroun",
+            subtitle: "Known as Saint Youssef",
+            description: "Discover the life of Khoury Youssef Abi Maroun, known as Saint Youssef, his deep faith, the miracles associated with his intercession, and the spiritual legacy that lives on today.",
             readMore: "Read His Story",
-            feastDay: "Feast Day: September 29"
         },
         home: {
             latestMiracle: "Latest Miracle",
-            featuredMiracleTitle: "A Testament of Faith",
+            featuredMiracleTitle: "Testimony of Faith",
             miracleDate: "December 2024",
             miracleHeading: "Miraculous Healing Through Prayer",
-            miracleDescription: "A faithful pilgrim experienced complete recovery from a severe illness after praying at the shrine of Khoury Youssef. The doctors confirmed the healing was medically unexplainable, attributing it to divine intervention through the saint's intercession.",
+            miracleDescription: "A faithful pilgrim was completely healed from a serious illness after praying at Khoury Youssef's shrine. Doctors confirmed the recovery was medically unexplainable, attributing it to divine intervention through the saint's intercession.",
             readFullStory: "Read Full Story",
             showLess: "Show Less",
             visitSaint: "Visit the Saint",
-            visitDescription: "The shrine of Khoury Youssef in Sereel has been a sanctuary of faith for generations. Experience the sacred atmosphere, witness centuries of devotion, and connect with the divine presence of our beloved saint.",
+            visitDescription: "The shrine of Khoury Youssef Abi Maroun, known as Saint Youssef, in Sereel has been a sanctuary of faith for generations. Experience the spiritual atmosphere, witness the devotion, and draw closer to God through the intercession of this blessed priest.",
             planVisit: "Plan Your Visit",
             aboutBadge: "Sacred Legacy",
             aboutTitle: "A Life of Divine Grace",
-            aboutDescription1: "Saint Khoury Youssef of Sereel stands as a beacon of faith and devotion. His life exemplifies the power of prayer, the strength of conviction, and the boundless love of the divine.",
-            aboutDescription2: "Through centuries, his intercession has brought healing, hope, and miracles to countless faithful. His legacy continues to inspire generations in our beloved village of Sereel.",
+            aboutDescription1: "Khoury Youssef Abi Maroun, known as Saint Youssef, lived a life characterized by piety, patience, and perseverance in prayer, leaving a deep spiritual impact on his village and its people.",
             discoverStory: "Discover His Story",
             miraclesBadge: "Divine Interventions",
             churchBadge: "Sacred Place"
         },
         story: storyTranslations.story,
         ...miraclesTranslations,
+        ...newsTranslations,
         miracles: {
             title: "Divine Miracles",
             subtitle: "Testimonies of Faith and Grace",
             healing: "Healing Miracles",
             healingDesc: "Countless testimonies of physical and spiritual healing through the saint's intercession.",
             prayers: "Answered Prayers",
-            prayersDesc: "Faithful from across the region share stories of prayers answered through Khoury Youssef.",
+            prayersDesc: "Faithful from across the region share stories of answered prayers through Khoury Youssef.",
             records: "Historical Records",
             recordsDesc: "Documented miracles spanning centuries, preserved in church archives and testimonies.",
             viewAll: "View All Miracles"
@@ -81,21 +77,21 @@ export default {
         },
         news: {
             title: "Latest News",
-            subtitle: "Stay updated with our community events and announcements",
+            subtitle: "Stay updated with our community events",
             readMore: "Read More",
             viewAll: "View All News",
             badge: "Latest Updates",
             items: {
                 item1: {
                     title: "Bishop Youssef Suwaif on the Committee",
-                    content: "His Eminence Bishop Youssef Suwaif speaks about the committee formed to study the file of Khoury Youssef Abi Maroun Maatouk. Summer headquarters of the Archdiocese in Karm Saddeh on 1-1-2023"
+                    content: "His Eminence Bishop Youssef Suwaif speaks about the committee..."
                 },
                 item2: {
                     title: "Sermon by Bishop Youssef Suwaif",
-                    content: "From the sermon of His Eminence Bishop Youssef Suwaif about Khoury Youssef Abi Maroun Maatouk on the feast of Khoury Youssef on 8-11-2022 at Khoury Youssef Church in Sereel"
+                    content: "From the sermon of His Eminence Bishop Youssef Suwaif..."
                 },
                 item3: {
-                    title: "Fairuz at Khoury Youssef Church in Sereel",
+                    title: "Fairuz at Khoury Youssef Church",
                     content: ""
                 },
                 item4: {
@@ -103,12 +99,6 @@ export default {
                     content: ""
                 }
             }
-        },
-        footer: {
-            about: "About Khoury Youssef",
-            village: "Village of Sereel",
-            rights: "All rights reserved"
         }
     }
 };
-

@@ -25,7 +25,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         { opacity: 0, scale: 0.8, y: 20 },
         { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.7)", delay: 0.2 }
       );
-      
+
       gsap.fromTo(
         titleRef.current,
         { opacity: 0, y: 20 },
@@ -94,7 +94,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
 
       <div className="text-center relative z-10">
         {/* Elegant Icon - Saint Icon or Cross */}
-        <div 
+        <div
           ref={iconRef}
           className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-8 relative"
         >
@@ -109,7 +109,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         </div>
 
         {/* Title with elegant typography */}
-        <h1 
+        <h1
           ref={titleRef}
           className="font-serif text-4xl md:text-6xl font-bold mb-3 text-foreground tracking-tight"
           style={{
@@ -120,11 +120,11 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         </h1>
 
         {/* Subtitle */}
-        <p 
+        <p
           ref={subtitleRef}
           className="text-sm md:text-base text-muted-foreground mb-8 font-medium tracking-wide uppercase"
         >
-          {i18n.language === 'ar' ? 'السريلي' : i18n.language === 'fr' ? 'de Sereel' : 'of Sereel'}
+          {i18n.language === 'ar' ? 'سرعلي' : i18n.language === 'fr' ? 'de Sereel' : 'of Sereel'}
         </p>
 
         {/* Modern Progress Bar */}

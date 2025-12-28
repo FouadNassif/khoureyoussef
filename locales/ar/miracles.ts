@@ -1,5 +1,6 @@
 export default {
     miracle9: {
+        isFeatured: true,
         title: "عجيبة مازن صليبا و ابنته تريسي",
         date: "27 1 2005",
         type: "شفاء",

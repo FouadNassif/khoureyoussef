@@ -33,14 +33,14 @@ const VideoCardNews = ({ item, onClick }: { item: NewsItem; onClick: () => void 
   useEffect(() => {
     if (item.type === "video" && item.video && !item.thumbnail && videoRef.current) {
       const video = videoRef.current;
-      
+
       const handleLoadedMetadata = () => {
         setIsLoaded(true);
         video.currentTime = 1;
       };
 
       video.addEventListener('loadedmetadata', handleLoadedMetadata);
-      
+
       return () => {
         video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       };
@@ -48,7 +48,7 @@ const VideoCardNews = ({ item, onClick }: { item: NewsItem; onClick: () => void 
   }, [item.type, item.video, item.thumbnail]);
 
   return (
-    <div 
+    <div
       className="relative aspect-square overflow-hidden bg-muted cursor-pointer"
       onClick={onClick}
     >
@@ -61,7 +61,7 @@ const VideoCardNews = ({ item, onClick }: { item: NewsItem; onClick: () => void 
           loading="lazy"
         />
       )}
-      
+
       {/* Video Element */}
       <video
         ref={videoRef}
@@ -74,14 +74,14 @@ const VideoCardNews = ({ item, onClick }: { item: NewsItem; onClick: () => void 
         poster={item.thumbnail}
         onLoadedData={() => setIsLoaded(true)}
       />
-      
+
       {/* Play Overlay */}
       <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors">
         <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform">
           <Play className="w-8 h-8 text-white ml-1" fill="white" />
         </div>
       </div>
-      
+
       {/* Loading indicator */}
       {!isLoaded && !item.thumbnail && (
         <div className="absolute inset-0 flex items-center justify-center bg-muted">
@@ -106,45 +106,17 @@ const News = () => {
   const lightboxRef = useRef<HTMLDivElement>(null);
   const lightboxContentRef = useRef<HTMLDivElement>(null);
 
-  // Sample news data with thumbnails
-  const newsItems: NewsItem[] = useMemo(() => [
-    {
-      id: 1,
-      title: t("news.items.item1.title", "اللجنة عن سويف يوسف المطران"),
-      content: t("news.items.item1.content", "سيّدنا المطران يوسف سويف يتكلّم عن اللّجنة المؤلّفة لدراسة ملفّ الخوري يوسف أبي مارون معتوق. المقرّ الصيّفي للمطرانية كرمسدّة في ١-١-٢٠٢٣"),
-      date: "2023-01-01",
-      video: "/assets/videos/news/Video1.mp4",
-      thumbnail: "/assets/thumbnails/Video1.jpg", // Add thumbnail
-      type: "video"
-    },
-    {
-      id: 2,
-      title: t("news.items.item2.title", "عظة سيادة المطران يوسف سويف"),
-      content: t("news.items.item2.content", "من عظة سيادة المطران يوسف سويف عن الخوري يوسف أبي مارون معتوق في عيد الخوري يوسف في ٨-١١-٢.٢٢ في كنيسة الخوري يوسف سرعل"),
-      date: "2022-11-08",
-      video: "/assets/videos/news/Video2.mp4",
-      thumbnail: "/assets/thumbnails/Video2.jpg", // Add thumbnail
-      type: "video"
-    },
-    {
-      id: 3,
-      title: t("news.items.item3.title", "فيروز في كنيسة الخوري يوسف سرعل"),
-      content: t("news.items.item3.content", ""),
-      date: "2010-01-01",
-      video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",
-      thumbnail: "/assets/thumbnails/Video3.jpg", // Add thumbnail
-      type: "video"
-    },
-    {
-      id: 4,
-      title: t("news.items.item4.title", "ترتيلة"),
-      content: t("news.items.item4.content", ""),
-      date: "2024-08-28",
-      type: "video",
-      video: "/assets/videos/news/Video3.mp4",
-      thumbnail: "/assets/thumbnails/Video4.jpg", // Add thumbnail
-    },
-  ], [t]);
+  // Get data from translations
+  const resources = i18n.getResourceBundle(i18n.language, "translation") || {};
+
+  // Get news items from the news page data
+  const newsItems: NewsItem[] = useMemo(() => {
+    const items: any[] = resources.newsItems || [];
+
+    // Sort by date (newest first)
+    return items
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }, [resources]);
 
   const formatDate = (dateString: string) => {
     try {
@@ -272,7 +244,7 @@ const News = () => {
                 <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border cursor-pointer h-full flex flex-col">
                   {/* Image Section */}
                   {item.type === "image" && item.image && (
-                    <div 
+                    <div
                       className="relative aspect-square overflow-hidden bg-muted"
                       onClick={() => openLightbox(item)}
                     >
@@ -317,7 +289,7 @@ const News = () => {
                     <p className="text-muted-foreground text-sm line-clamp-3 mb-4 flex-1">
                       {item.content}
                     </p>
-                    <Button 
+                    <Button
                       className="gradient-divine text-primary-foreground glow-divine"
                       size="sm"
                       onClick={() => openLightbox(item)}

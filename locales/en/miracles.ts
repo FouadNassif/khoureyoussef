@@ -102,6 +102,7 @@ On December 2, 2021, she entered Saint Paul Medical Laboratory in Jbeil to take 
 After presenting the case to Dr. Paul Maarras, he informed her that an MRI was necessary to determine the tumor’s spread and whether surgery would be possible, noting that surgery was most likely impossible due to the tumor’s invasion of the bone.`,
     },
     miracle9: {
+        isFeatured: true,
         title: "The Visit and the Healing",
         date: "27 1 2005",
         type: "Healing",
