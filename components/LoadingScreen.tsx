@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { useTranslation } from "react-i18next";
@@ -20,18 +18,31 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   useEffect(() => {
     // Animate elements on mount
     if (titleRef.current && subtitleRef.current && iconRef.current) {
+      // Icon entrance
       gsap.fromTo(
         iconRef.current,
         { opacity: 0, scale: 0.8, y: 20 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.7)", delay: 0.2 }
+        { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }
       );
 
+      // Continuous breathing animation for icon
+      gsap.to(iconRef.current, {
+        y: -5,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 1.2
+      });
+
+      // Title entrance
       gsap.fromTo(
         titleRef.current,
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.4 }
       );
 
+      // Subtitle entrance
       gsap.fromTo(
         subtitleRef.current,
         { opacity: 0, y: 10 },
@@ -46,9 +57,10 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
           clearInterval(interval);
           return 100;
         }
-        return Math.min(prev + Math.random() * 12 + 3, 100);
+        // Slightly faster loading for better UX
+        return Math.min(prev + Math.random() * 15 + 5, 100);
       });
-    }, 80);
+    }, 100);
 
     return () => clearInterval(interval);
   }, []);
@@ -69,86 +81,89 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         if (containerRef.current) {
           gsap.to(containerRef.current, {
             opacity: 0,
-            scale: 1.05,
-            duration: 0.6,
-            ease: "power2.in",
+            duration: 0.8,
+            ease: "power2.inOut",
             onComplete: () => {
               onComplete();
             },
           });
         }
-      }, 500);
+      }, 600);
     }
   }, [progress, onComplete]);
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[9999] bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-[9999] bg-background flex items-center justify-center overflow-hidden"
     >
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      {/* Divine Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-primary/10" />
+
+      {/* Animated background orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '4s' }} />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
       </div>
 
-      <div className="text-center relative z-10">
-        {/* Elegant Icon - Saint Icon or Cross */}
+      <div className="text-center relative z-10 px-4">
+        {/* Elegant Icon - Saint Icon */}
         <div
           ref={iconRef}
-          className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-8 relative"
+          className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-8 relative"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl blur-xl" />
-          <div className="relative w-full h-full rounded-2xl bg-white/5 dark:bg-black/10 backdrop-blur-md border border-white/10 dark:border-white/5 flex items-center justify-center shadow-2xl">
-            <img
-              src="/assets/saint-icon.jpg"
-              alt="Khoury Youssef"
-              className="w-full h-full object-cover rounded-2xl opacity-90"
-            />
+          {/* Glowing halo effect */}
+          <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl transform scale-110" />
+
+          <div className="relative w-full h-full rounded-full p-1 bg-gradient-to-br from-primary/30 to-transparent">
+            <div className="w-full h-full rounded-full overflow-hidden border-2 border-primary/20 shadow-2xl bg-background">
+              <img
+                src="/assets/saint-icon.jpg"
+                alt="Saint Khoury Youssef"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
 
         {/* Title with elegant typography */}
         <h1
           ref={titleRef}
-          className="font-serif text-4xl md:text-6xl font-bold mb-3 text-foreground tracking-tight"
-          style={{
-            textShadow: '0 2px 20px rgba(0, 0, 0, 0.1)',
-          }}
+          className="font-serif text-3xl md:text-5xl font-bold mb-3 text-foreground tracking-wide"
         >
-          {i18n.language === 'ar' ? 'الخوري يوسف' : 'Khoury Youssef'}
+          {i18n.language === 'ar' ? 'القديس الخوري يوسف' : 'Saint Khoury Youssef'}
         </h1>
 
         {/* Subtitle */}
         <p
           ref={subtitleRef}
-          className="text-sm md:text-base text-muted-foreground mb-8 font-medium tracking-wide uppercase"
+          className="text-sm md:text-lg text-muted-foreground mb-10 font-light tracking-[0.2em] uppercase"
         >
-          {i18n.language === 'ar' ? 'سرعلي' : i18n.language === 'fr' ? 'de Sereel' : 'of Sereel'}
+          {i18n.language === 'ar' ? 'سرعل' : i18n.language === 'fr' ? 'de Sereel' : 'of Sereel'}
         </p>
 
-        {/* Modern Progress Bar */}
-        <div className="w-72 md:w-80 mx-auto mb-6">
-          <div className="h-0.5 bg-secondary/30 rounded-full overflow-hidden backdrop-blur-sm">
+        {/* Minimalist Progress Bar */}
+        <div className="w-64 md:w-80 mx-auto mb-4">
+          <div className="h-1 bg-primary/10 rounded-full overflow-hidden">
             <div
               ref={progressBarRef}
-              className="h-full bg-gradient-to-r from-primary via-primary to-primary/80 rounded-full transition-all duration-300 ease-out relative overflow-hidden"
-              style={{ width: `${progress}%`, transformOrigin: 'left' }}
+              className="h-full bg-primary rounded-full relative"
+              style={{ width: `${progress}%`, transition: 'width 0.1s ease-out' }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+              <div className="absolute inset-0 bg-white/30 w-full h-full animate-shimmer" />
             </div>
           </div>
         </div>
 
-        {/* Loading Text with elegant animation */}
-        <p className="text-xs md:text-sm text-muted-foreground font-light tracking-wider">
+        {/* Loading Text */}
+        <p className="text-xs text-muted-foreground/60 font-medium tracking-widest uppercase">
           {progress < 100 ? (
-            <span className="inline-block animate-pulse">
-              {i18n.language === 'ar' ? 'جاري التحميل...' : i18n.language === 'fr' ? 'Chargement...' : 'Loading...'}
+            <span className="animate-pulse">
+              {i18n.language === 'ar' ? 'جاري التحميل' : i18n.language === 'fr' ? 'Chargement' : 'Loading'}
             </span>
           ) : (
-            <span className="inline-block">
-              {i18n.language === 'ar' ? 'جاهز' : i18n.language === 'fr' ? 'Prêt' : 'Ready'}
+            <span>
+              {i18n.language === 'ar' ? 'مكتمل' : i18n.language === 'fr' ? 'Prêt' : 'Ready'}
             </span>
           )}
         </p>
