@@ -105,7 +105,7 @@ const Miracles = () => {
       <Navigation />
 
       {/* Hero Header */}
-      <section className="pt-32 pb-20 gradient-heavenly">
+      <section className="pt-32 pb-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div
             ref={(el) => {

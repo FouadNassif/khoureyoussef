@@ -73,8 +73,11 @@ export default {
             serviceWeekdays: "Weekdays: 6:00 PM",
             serviceFeast: "Feast Day: Special Services",
             contactLabel: "Contact",
-            contactName: "Maria Sassine",
-            contactPhone: "+961 71 797 415"
+            contactName1: "Tony Sassine",
+            contactPhone1: "+961 76 740 377",
+            contactName2: "Maria Sassine",
+            contactPhone2: "+961 71 797 415",
+
         },
         news: {
             title: "Latest News",

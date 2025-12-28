@@ -292,7 +292,7 @@ const Story = () => {
       <Navigation />
 
       {/* Hero Header */}
-      <section className="pt-32 pb-20 gradient-heavenly">
+      <section className="pt-32 pb-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div
             ref={(el) => {
@@ -317,7 +317,7 @@ const Story = () => {
       </section>
 
       {/* Saint Portrait with Parallax */}
-      <section className="py-16 bg-background relative overflow-hidden">
+      <section className="py-16 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             <div className="relative">
@@ -334,7 +334,7 @@ const Story = () => {
       </section>
 
       {/* Story Sections with Sequential Stacking Effect */}
-      <section ref={sectionsRef} className="relative bg-background overflow-hidden">
+      <section ref={sectionsRef} className="relative bg-white overflow-hidden">
         <div ref={storyContainerRef} className="container mx-auto px-4 py-8 md:py-20">
           <div className="max-w-4xl mx-auto relative space-y-12 md:space-y-0">
             {storySections.map((section, index) => (
@@ -399,7 +399,7 @@ const Story = () => {
       </section>
 
       {/* About Section - From the writings */}
-      <section ref={timelineRef} className="relative pt-12 pb-20 md:pt-20 md:pb-32 bg-background z-10">
+      <section ref={timelineRef} className="relative pt-12 pb-20 md:pt-20 md:pb-32 bg-white z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div ref={timelineElementRef}>

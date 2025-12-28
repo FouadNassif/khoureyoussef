@@ -184,194 +184,75 @@ const News = () => {
             }
           ),
           once: true,
-        });
-      }
-    });
-  }, [newsItems]);
-
-  // Animate lightbox
-  useEffect(() => {
-    if (lightboxOpen && lightboxContentRef.current) {
-      gsap.fromTo(
-        lightboxContentRef.current,
-        { opacity: 0, scale: 0.9 },
-        { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" }
-      );
-    }
-  }, [lightboxOpen]);
-
-  return (
-    <div className="min-h-screen">
-      <Navigation />
-
-      {/* Hero Header */}
-      <section className="pt-32 pb-20 gradient-heavenly">
-        <div className="container mx-auto px-4">
-          <div
-            ref={(el) => {
-              headerRef(el);
-              headerElementRef.current = el;
-            }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-6">
-              <span className="text-primary font-medium text-sm">
-                {t("news.badge", t("news.title"))}
-              </span>
-            </div>
-            <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-foreground">
-              {t("news.title")}
-            </h1>
-            <p className="text-xl text-muted-foreground">
-              {t("news.subtitle")}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* News Grid - Instagram Style with Optimized Video Cards */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {newsItems.map((item, index) => (
-              <div
-                key={item.id}
-                ref={(el) => {
-                  newsItemsRef.current[index] = el;
-                }}
-                className="group"
-              >
-                <Card className="overflow-hidden hover:shadow-sacred transition-sacred bg-card border-border cursor-pointer h-full flex flex-col">
-                  {/* Image Section */}
-                  {item.type === "image" && item.image && (
-                    <div
-                      className="relative aspect-square overflow-hidden bg-muted"
-                      onClick={() => openLightbox(item)}
-                    >
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                        <ImageIcon className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Optimized Video Section */}
-                  {item.type === "video" && item.video && (
-                    <VideoCardNews item={item} onClick={() => openLightbox(item)} />
-                  )}
-
-                  {/* Text Section */}
-                  {item.type === "text" && (
-                    <div className="aspect-square bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-8">
-                      <div className="text-center">
-                        <Calendar className="w-16 h-16 text-primary mx-auto mb-4 opacity-50" />
-                        <p className="text-muted-foreground text-sm">{formatDate(item.date)}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Content Section */}
-                  <div className="p-4 flex-1 flex flex-col">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Calendar className="w-4 h-4 text-muted-foreground" />
-                      <span className="text-xs text-muted-foreground">
-                        {formatDate(item.date)}
-                      </span>
-                    </div>
-                    <h3 className="font-serif text-xl font-bold text-foreground mb-2 line-clamp-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm line-clamp-3 mb-4 flex-1">
-                      {item.content}
-                    </p>
-                    <Button
-                      className="gradient-divine text-primary-foreground glow-divine"
-                      size="sm"
-                      onClick={() => openLightbox(item)}
-                    >
-                      {t("news.readMore", "Read More")}
-                    </Button>
-                  </div>
-                </Card>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Lightbox Modal */}
-      {lightboxOpen && selectedNews && (
-        <div
-          ref={lightboxRef}
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={closeLightbox}
-        >
-          <div
-            ref={lightboxContentRef}
-            className="max-w-4xl w-full max-h-[90vh] overflow-auto bg-card rounded-lg shadow-2xl relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close Button */}
-            <button
+{
+            lightboxOpen && selectedNews && (
+            <div
+              ref={lightboxRef}
+              className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
               onClick={closeLightbox}
-              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors"
             >
-              <X className="w-6 h-6" />
-            </button>
+              <div
+                ref={lightboxContentRef}
+                className="max-w-4xl w-full max-h-[90vh] overflow-auto bg-card rounded-lg shadow-2xl relative"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Close Button */}
+                <button
+                  onClick={closeLightbox}
+                  className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
 
-            {/* Image */}
-            {selectedNews.type === "image" && selectedNews.image && (
-              <div className="relative w-full aspect-video overflow-hidden bg-muted">
-                <img
-                  src={selectedNews.image}
-                  alt={selectedNews.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            )}
+                {/* Image */}
+                {selectedNews.type === "image" && selectedNews.image && (
+                  <div className="relative w-full aspect-video overflow-hidden bg-muted">
+                    <img
+                      src={selectedNews.image}
+                      alt={selectedNews.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
 
-            {/* Video with better controls */}
-            {selectedNews.type === "video" && selectedNews.video && (
-              <div className="relative w-full aspect-video overflow-hidden bg-black">
-                <video
-                  src={selectedNews.video}
-                  className="w-full h-full object-contain"
-                  controls
-                  autoPlay
-                  preload="auto"
-                  poster={selectedNews.thumbnail}
-                />
-              </div>
-            )}
+                {/* Video with better controls */}
+                {selectedNews.type === "video" && selectedNews.video && (
+                  <div className="relative w-full aspect-video overflow-hidden bg-black">
+                    <video
+                      src={selectedNews.video}
+                      className="w-full h-full object-contain"
+                      controls
+                      autoPlay
+                      preload="auto"
+                      poster={selectedNews.thumbnail}
+                    />
+                  </div>
+                )}
 
-            {/* Content */}
-            <div className="p-6 md:p-8">
-              <div className="flex items-center gap-2 mb-4">
-                <Calendar className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">
-                  {formatDate(selectedNews.date)}
-                </span>
+                {/* Content */}
+                <div className="p-6 md:p-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Calendar className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">
+                      {formatDate(selectedNews.date)}
+                    </span>
+                  </div>
+                  <h2 className="font-serif text-3xl font-bold text-foreground mb-4">
+                    {selectedNews.title}
+                  </h2>
+                  {selectedNews.content && (
+                    <p className="text-foreground leading-relaxed whitespace-pre-line">
+                      {selectedNews.content}
+                    </p>
+                  )}
+                </div>
               </div>
-              <h2 className="font-serif text-3xl font-bold text-foreground mb-4">
-                {selectedNews.title}
-              </h2>
-              {selectedNews.content && (
-                <p className="text-foreground leading-relaxed whitespace-pre-line">
-                  {selectedNews.content}
-                </p>
-              )}
             </div>
-          </div>
-        </div>
-      )}
+          )
+}
 
       <Footer />
-    </div>
+    </div >
   );
 };
 

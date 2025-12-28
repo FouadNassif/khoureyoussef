@@ -74,7 +74,7 @@ const Contact = () => {
       <Navigation />
 
       {/* Hero Header */}
-      <section className="pt-32 pb-20 gradient-heavenly">
+      <section className="pt-32 pb-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div
             ref={(el) => {
@@ -99,7 +99,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Content */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Map Location */}
@@ -190,9 +190,30 @@ const Contact = () => {
                           {t("contact.contactLabel")}
                         </h3>
                         <p className="text-muted-foreground group-hover:text-foreground transition-sacred">
-                          {t("contact.contactName")}
+                          {t("contact.contactName1")}
                           <br />
-                          <span className="text-primary font-semibold" dir="ltr">{t("contact.contactPhone")}</span>
+                          <span className="text-primary font-semibold" dir="ltr">{t("contact.contactPhone1")}</span>
+                        </p>
+                      </div>
+                    </a>
+                  </Card>
+                  <Card className="p-6 bg-card border-border hover:shadow-sacred transition-sacred cursor-pointer group">
+                    <a
+                      href="tel:+96171797415"
+                      className="flex items-start gap-4 no-underline"
+                      dir="ltr"
+                    >
+                      <div className="w-12 h-12 rounded-full gradient-divine flex items-center justify-center shrink-0 group-hover:scale-110 transition-sacred">
+                        <Phone className="w-6 h-6 text-primary-foreground" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold mb-2 text-foreground group-hover:text-primary transition-sacred">
+                          {t("contact.contactLabel")}
+                        </h3>
+                        <p className="text-muted-foreground group-hover:text-foreground transition-sacred">
+                          {t("contact.contactName2")}
+                          <br />
+                          <span className="text-primary font-semibold" dir="ltr">{t("contact.contactPhone2")}</span>
                         </p>
                       </div>
                     </a>
