@@ -26,44 +26,91 @@ export const galleryImages: GalleryImage[] = [
 
   // Village/Sereel Images
   {
-    src: "/assets/village-sereel.jpg",
-    alt: "Village of Sereel",
+    src: "/assets/Church/img1.jpg",
+    alt: "Church Interior",
+    category: "Church",
+  },
+  {
+    src: "/assets/Church/img2.jpg",
+    alt: "Church Interior",
+    category: "Church",
+  },
+  {
+    src: "/assets/Church/img3.jpg",
+    alt: "Church Interior",
+    category: "Church",
+  },
+  {
+    src: "/assets/Church/img4.jpg",
+    alt: "Church Interior",
+    category: "Church",
+  },
+  {
+    src: "/assets/Church/img5.jpg",
+    alt: "Church Interior",
+    category: "Church",
+  },
+  {
+    src: "/assets/Church/img6.jpg",
+    alt: "Church Interior",
+    category: "Church",
+  },
+  {
+    src: "/assets/Church/img7.jpg",
+    alt: "Church Interior",
+    category: "Church",
+  },
+
+
+  {
+    src: "/assets/Sereel/img1.jpg",
+    alt: "",
     category: "Sereel",
   },
   {
-    src: "/assets/Sereel/img1.jpg",
-    alt: "Church Interior",
-    category: "Church",
-  },
-  {
     src: "/assets/Sereel/img2.jpg",
-    alt: "Church Interior",
-    category: "Church",
+    alt: "",
+    category: "Sereel",
   },
   {
     src: "/assets/Sereel/img3.jpg",
-    alt: "Church Interior",
-    category: "Church",
+    alt: "",
+    category: "Sereel",
   },
   {
     src: "/assets/Sereel/img4.jpg",
-    alt: "Church Interior",
-    category: "Church",
+    alt: "",
+    category: "Sereel",
   },
   {
     src: "/assets/Sereel/img5.jpg",
-    alt: "Church Interior",
-    category: "Church",
+    alt: "",
+    category: "Sereel",
   },
   {
     src: "/assets/Sereel/img6.jpg",
-    alt: "Church Interior",
-    category: "Church",
+    alt: "",
+    category: "Sereel",
   },
   {
     src: "/assets/Sereel/img7.jpg",
-    alt: "Church Interior",
-    category: "Church",
+    alt: "",
+    category: "Sereel",
+  },
+  {
+    src: "/assets/Sereel/img8.jpg",
+    alt: "",
+    category: "Sereel",
+  },
+  {
+    src: "/assets/Sereel/img9.jpg",
+    alt: "",
+    category: "Sereel",
+  },
+  {
+    src: "/assets/Sereel/img10.jpg",
+    alt: "",
+    category: "Sereel",
   },
 
 

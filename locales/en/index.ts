@@ -8,6 +8,7 @@ import newsTranslations from './news';
 export default {
     translation: {
         ...navTranslations,
+        ...footerTranslations,
         hero: {
             title: "Khoury Youssef Abi Maroun",
             subtitle: "Known as Saint Youssef",

@@ -130,7 +130,7 @@ const Miracles = () => {
       </section>
 
       {/* Miracles List */}
-      <section className="py-12 md:py-20">
+      <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-4 md:space-y-6">
             {miracles.map((miracle, index) => (
@@ -150,19 +150,9 @@ const Miracles = () => {
                             <h3 className={`font-serif text-2xl font-bold text-foreground mb-2 ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
                               {miracle.title}
                             </h3>
-                            <div className={`flex flex-wrap items-center gap-3 text-sm w-full ${i18n.language === 'ar' ? 'justify-end' : 'justify-start'}`}>
-                              <span className="px-3 py-1 bg-primary/10 rounded-full text-primary font-medium">
-                                {miracle.type}
-                              </span>
-                              <span className="text-muted-foreground">
-                                {miracle.date}
-                              </span>
-                              {miracle.location && (
-                                <span className="text-muted-foreground">
-                                  {miracle.location}
-                                </span>
-                              )}
-                            </div>
+                            <span className="text-muted-foreground">
+                              {miracle.date}
+                            </span>
                           </div>
                         </div>
 
@@ -170,7 +160,13 @@ const Miracles = () => {
                           {expandedMiracle === index ? (
                             <div className="w-full">
                               <p className={`whitespace-pre-line text-foreground w-full ${i18n.language === 'ar' ? 'text-right' : 'text-left'}`}>
-                                {miracle.content}
+                                {miracle.content.split(/(\*\*.*?\*\*)/g).map((part, i) =>
+                                  part.startsWith('**') && part.endsWith('**') ? (
+                                    <strong key={i}>{part.slice(2, -2)}</strong>
+                                  ) : (
+                                    part
+                                  )
+                                )}
                               </p>
                             </div>
                           ) : (

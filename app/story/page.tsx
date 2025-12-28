@@ -336,30 +336,34 @@ const Story = () => {
       {/* Story Sections with Sequential Stacking Effect */}
       <section ref={sectionsRef} className="relative bg-background overflow-hidden">
         <div ref={storyContainerRef} className="container mx-auto px-4 py-8 md:py-20">
-          <div className="max-w-4xl mx-auto relative">
+          <div className="max-w-4xl mx-auto relative space-y-12 md:space-y-0">
             {storySections.map((section, index) => (
               <div
                 key={section.id}
                 ref={(el) => {
                   storySectionsRef.current[index] = el;
                 }}
-                className="sticky mb-6 md:mb-16"
+                className="md:sticky md:mb-16"
                 style={{
-                  top: typeof window !== 'undefined' && window.innerWidth < 768
-                    ? `${80 + index * 5}px`
-                    : `${100 + index * 10}px`,
+                  top: typeof window !== 'undefined' && window.innerWidth >= 768
+                    ? `${100 + index * 10}px`
+                    : 'auto',
                   zIndex: storySections.length - index,
                 } as React.CSSProperties}
               >
-                <Card className="p-4 md:p-8 lg:p-10 hover:shadow-sacred transition-sacred bg-card/95 backdrop-blur-sm border-border shadow-xl">
-                  <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-foreground">
+                <Card className="p-6 md:p-8 lg:p-10 hover:shadow-sacred transition-sacred bg-card/95 backdrop-blur-sm border-border shadow-xl">
+                  <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-foreground">
                     {section.title}
                   </h2>
-                  <div className="prose prose-base md:prose-lg max-w-none">
+                  <div className="prose prose-base md:prose-lg max-w-none clearfix">
                     {/* Wikipedia-style Small Inline Image */}
                     {sectionImages[section.id as keyof typeof sectionImages] && (
                       <div
-                        className="float-right ml-4 mb-4 w-32 sm:w-40 md:w-48 cursor-pointer group"
+                        className={`
+                          ${i18n.language === 'ar' ? 'float-left mr-6' : 'float-right ml-6'}
+                          mb-4 w-full sm:w-48 md:w-56 cursor-pointer group
+                          clear-both sm:clear-none
+                        `}
                         onClick={() => {
                           const img = sectionImages[section.id as keyof typeof sectionImages];
                           openLightbox(img.src, img.alt, img.caption);
@@ -378,12 +382,12 @@ const Story = () => {
                             </span>
                           </div>
                         </div>
-                        <p className="text-xs text-muted-foreground mt-1 italic leading-tight">
+                        <p className="text-xs text-muted-foreground mt-2 italic leading-tight text-center">
                           {sectionImages[section.id as keyof typeof sectionImages].caption}
                         </p>
                       </div>
                     )}
-                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed whitespace-pre-line clear-right">
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
                       {section.content}
                     </p>
                   </div>
@@ -394,17 +398,17 @@ const Story = () => {
         </div>
       </section>
 
-      {/* About Section */}
-      <section ref={timelineRef} className="pt-2 pb-6 md:pt-8 md:pb-12 bg-background">
+      {/* About Section - From the writings */}
+      <section ref={timelineRef} className="relative pt-12 pb-20 md:pt-20 md:pb-32 bg-background z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div ref={timelineElementRef}>
-              <div className="text-center mb-6 md:mb-8">
+              <div className="text-center mb-8 md:mb-12">
                 <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-foreground">
                   {t("story.sections.about.title")}
                 </h2>
               </div>
-              <Card className="p-4 md:p-8 lg:p-10 hover:shadow-sacred transition-sacred bg-card border-border">
+              <Card className="p-6 md:p-10 hover:shadow-sacred transition-sacred bg-card border-border shadow-lg">
                 <div className="prose prose-base md:prose-lg max-w-none space-y-4 md:space-y-6">
                   {aboutSection.paragraphs.map((paragraph, index) => (
                     <p
