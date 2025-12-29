@@ -8,9 +8,9 @@ export default {
     translation: {
         ...navTranslations,
         hero: {
-            title: "Khoury Youssef Abi Maroun",
-            subtitle: "Connu sous le nom de Saint Youssef",
-            description: "Découvrez la vie de Khoury Youssef Abi Maroun, connu sous le nom de Saint Youssef, sa foi profonde, les miracles associés à son intercession et l'héritage spirituel qui perdure aujourd'hui.",
+            title: "Khoury Youssef Abi Maroun Maatouk",
+            subtitle: "Gardien de notre village, connu sous le nom de Saint Youssef",
+            description: "Découvrez la vie de Khoury Youssef Abi Maroun Maatouk, connu sous le nom de Saint Youssef, sa foi profonde, les miracles associés à son intercession et l'héritage spirituel qui perdure aujourd'hui.",
             readMore: "Lire Son Histoire",
         },
         home: {
@@ -18,15 +18,15 @@ export default {
             featuredMiracleTitle: "Témoignage de Foi",
             miracleDate: "Décembre 2024",
             miracleHeading: "Guérison Miraculeuse par la Prière",
-            miracleDescription: "Un pèlerin fidèle a été complètement guéri d'une maladie grave après avoir prié au sanctuaire de Khoury Youssef. Les médecins ont confirmé que la guérison était médicalement inexplicable, l'attribuant à une intervention divine par l'intercession du saint.",
+            miracleDescription: "Un pèlerin fidèle a été complètement guéri d'une maladie grave après avoir prié au sanctuaire de Khoury Youssef. Les médecins ont confirmé que la guérison était médicalement inexplicable, l'attribuant à une intervention divine par l'intercession du saint prêtre.",
             readFullStory: "Lire l'Histoire Complète",
             showLess: "Afficher Moins",
-            visitSaint: "Visiter le Saint",
-            visitDescription: "Le sanctuaire de Khoury Youssef Abi Maroun, connu sous le nom de Saint Youssef, à Sereel est un refuge de foi depuis des générations. Vivez l'atmosphère spirituelle, témoignez de la dévotion et rapprochez-vous de Dieu par l'intercession de ce prêtre béni.",
+            visitSaint: "Visiter Khoury Youssef",
+            visitDescription: "Le sanctuaire de Khoury Youssef Abi Maroun Maatouk, connu sous le nom de Saint Youssef, à Sereel est un refuge de foi depuis des générations. Vivez l'atmosphère spirituelle, témoignez de la dévotion et rapprochez-vous de Dieu par l'intercession de ce prêtre béni.",
             planVisit: "Planifier Votre Visite",
             aboutBadge: "Héritage Sacré",
             aboutTitle: "Une Vie de Grâce Divine",
-            aboutDescription1: "Khoury Youssef Abi Maroun, connu sous le nom de Saint Youssef, a vécu une vie caractérisée par la piété, la patience et la persévérance dans la prière, laissant un impact spirituel profond sur son village et ses habitants.",
+            aboutDescription1: "Khoury Youssef Abi Maroun Maatouk, connu sous le nom de Saint Youssef, a vécu une vie caractérisée par la piété, la patience et la persévérance dans la prière, laissant un impact spirituel profond sur son village et ses habitants.",
             discoverStory: "Découvrir Son Histoire",
             miraclesBadge: "Interventions Divines",
             churchBadge: "Lieu Sacré"

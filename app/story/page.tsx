@@ -59,7 +59,7 @@ const Story = () => {
   ], [t, i18n.language]);
 
   const aboutSection = useMemo(() => ({
-    title: t("story.sections.about.title", "From the writings of Khoury Youssef Abi Maroun Maatooq:"),
+    title: t("story.sections.about.title", "From the writings of Khoury Youssef Abi Maroun Maatouk:"),
     paragraphs: [
       t("story.sections.about.content.paragraph1", ""),
       t("story.sections.about.content.paragraph2", ""),

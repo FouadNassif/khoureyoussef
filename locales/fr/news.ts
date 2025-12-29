@@ -20,7 +20,7 @@ export default {
         },
         {
             id: 3,
-            title: "Fairouz dans l'église du Père Youssef Sereel",
+            title: "Fairouz à l’église Saint-Michel – Seraal",
             content: "",
             date: "2010-01-01",
             video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",
@@ -29,7 +29,7 @@ export default {
         },
         {
             id: 4,
-            title: "Hymne",
+            title: "Un chant en l’honneur du Père Youssef",
             content: "",
             date: "2024-08-28",
             type: "video",

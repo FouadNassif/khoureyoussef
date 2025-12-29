@@ -1,32 +1,18 @@
 "use client";
 import { useTranslation } from "react-i18next";
-import { useInView } from "react-intersection-observer";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useMemo } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { X } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { X, Loader2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { galleryImages, getCategories } from "@/lib/galleryData";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import Image from "next/image";
 
 const Gallery = () => {
   const { t } = useTranslation();
-  const [headerRef, headerInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  });
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-
-  const headerElementRef = useRef<HTMLDivElement>(null);
-  const galleryItemsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const lightboxRef = useRef<HTMLDivElement>(null);
-  const lightboxImageRef = useRef<HTMLImageElement>(null);
-  const categoryNavRef = useRef<HTMLDivElement>(null);
+  const [imageLoading, setImageLoading] = useState(true);
 
   // Get unique categories and add "All" option
   const categories = useMemo(() => {
@@ -41,151 +27,39 @@ const Gallery = () => {
     return galleryImages.filter((img) => img.category === selectedCategory);
   }, [selectedCategory]);
 
-  // Animate header
-  useEffect(() => {
-    if (headerInView && headerElementRef.current) {
-      gsap.fromTo(
-        headerElementRef.current,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
-      );
-    }
-  }, [headerInView]);
-
-  // Animate category navbar
-  useEffect(() => {
-    if (categoryNavRef.current) {
-      gsap.fromTo(
-        categoryNavRef.current.children,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.05,
-          ease: "power2.out",
-          delay: 0.3
-        }
-      );
-    }
-  }, []);
-
-  // Animate gallery items when they appear or when filter changes
-  useEffect(() => {
-    galleryItemsRef.current.forEach((ref, index) => {
-      if (ref) {
-        ScrollTrigger.create({
-          trigger: ref,
-          start: "top 85%",
-          animation: gsap.fromTo(
-            ref,
-            { opacity: 0, scale: 0.9 },
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.5,
-              delay: index * 0.1,
-              ease: "power2.out",
-            }
-          ),
-          once: true,
-        });
-      }
-    });
-  }, [filteredImages]);
-
-  // Animate category change
-  useEffect(() => {
-    galleryItemsRef.current.forEach((ref, index) => {
-      if (ref) {
-        gsap.fromTo(
-          ref,
-          { opacity: 0, y: 20 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.4,
-            delay: index * 0.05,
-            ease: "power2.out",
-          }
-        );
-      }
-    });
-  }, [selectedCategory]);
-
-  // Animate lightbox
-  useEffect(() => {
-    if (selectedImage) {
-      if (lightboxRef.current) {
-        gsap.fromTo(
-          lightboxRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.3, ease: "power2.out" }
-        );
-      }
-      if (lightboxImageRef.current) {
-        gsap.fromTo(
-          lightboxImageRef.current,
-          { scale: 0.9 },
-          { scale: 1, duration: 0.3, ease: "power2.out" }
-        );
-      }
-    }
-  }, [selectedImage]);
-
-  const closeLightbox = () => {
-    if (lightboxImageRef.current) {
-      gsap.to(lightboxImageRef.current, {
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in",
-        onComplete: () => {
-          if (lightboxRef.current) {
-            gsap.to(lightboxRef.current, {
-              opacity: 0,
-              duration: 0.2,
-              onComplete: () => setSelectedImage(null),
-            });
-          } else {
-            setSelectedImage(null);
-          }
-        },
-      });
-    } else {
-      setSelectedImage(null);
-    }
-  };
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background selection:bg-primary/20">
       <Navigation />
 
       {/* Hero Header */}
-      <section className="pt-32 pb-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div
-            ref={(el) => {
-              headerRef(el);
-              headerElementRef.current = el;
-            }}
+      <section className="relative pt-32 pb-12 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -z-10" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center max-w-3xl mx-auto"
           >
-            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-6">
-              <span className="text-primary font-medium text-sm">
+            <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+              <span className="text-primary font-medium text-sm tracking-wide uppercase">
                 {t("gallery.title")}
               </span>
             </div>
-            <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-foreground">
+            <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-foreground tracking-tight">
               {t("gallery.title")}
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-muted-foreground font-light leading-relaxed mb-8">
               {t("gallery.subtitle")}
             </p>
 
             {/* Category Navigation */}
-            <div
-              ref={categoryNavRef}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
               className="flex flex-wrap justify-center gap-3 mt-8"
             >
               {categories.map((category) => (
@@ -204,67 +78,100 @@ const Gallery = () => {
                   {t(`gallery.categories.${category.toLowerCase()}`, category)}
                 </button>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Gallery Grid */}
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {filteredImages.map((image, index) => (
-              <div
-                key={index}
-                ref={(el) => {
-                  galleryItemsRef.current[index] = el;
-                }}
-                className="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sacred hover:shadow-2xl transition-sacred"
-                onClick={() => setSelectedImage(image.src)}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-sacred" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <span className="inline-block px-3 py-1 bg-primary/90 rounded-full text-primary-foreground text-sm font-medium mb-2">
-                    {image.category}
-                  </span>
-                  <p className="text-white font-medium">{image.alt}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredImages.map((image, index) => (
+                <motion.div
+                  layout
+                  key={image.src}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 bg-muted"
+                  onClick={() => setSelectedImage(image.src)}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt || "Gallery Image"}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <span className="inline-block px-3 py-1 bg-primary/90 backdrop-blur-md rounded-full text-primary-foreground text-xs font-medium mb-2">
+                      {image.category}
+                    </span>
+                    {image.alt && (
+                      <p className="text-white font-medium line-clamp-2">{image.alt}</p>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </section>
 
       {/* Lightbox */}
-      {selectedImage && (
-        <div
-          ref={lightboxRef}
-          className="fixed inset-0 z-50 bg-background/95 backdrop-blur-md flex items-center justify-center p-4"
-          onClick={closeLightbox}
-        >
-          <button
-            className="absolute top-4 right-4 w-12 h-12 rounded-full bg-card border-2 border-primary flex items-center justify-center hover:scale-110 transition-transform z-10"
-            onClick={closeLightbox}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-xl flex items-center justify-center p-4"
+            onClick={() => setSelectedImage(null)}
           >
-            <X className="w-6 h-6 text-foreground" />
-          </button>
-          <img
-            ref={lightboxImageRef}
-            src={selectedImage}
-            alt="Gallery view"
-            loading="eager"
-            decoding="async"
-            className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl glow-divine"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              className="absolute top-4 right-4 w-12 h-12 rounded-full bg-card/10 border border-white/20 flex items-center justify-center hover:bg-card/20 transition-colors z-50"
+              onClick={() => setSelectedImage(null)}
+            >
+              <X className="w-6 h-6 text-white" />
+            </motion.button>
+
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-5xl h-[80vh] flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {imageLoading && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Loader2 className="w-10 h-10 text-primary animate-spin" />
+                </div>
+              )}
+              <Image
+                src={selectedImage}
+                alt="Gallery view"
+                fill
+                className="object-contain"
+                sizes="100vw"
+                priority
+                onLoad={() => setImageLoading(false)}
+                onLoadingComplete={() => setImageLoading(false)}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>

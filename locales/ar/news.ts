@@ -20,7 +20,7 @@ export default {
         },
         {
             id: 3,
-            title: "فيروز في كنيسة الخوري يوسف سرعل",
+            title: "فيروز في كنيسة مار ميخائيل - سرعل",
             content: "",
             date: "2010-01-01",
             video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",
@@ -29,7 +29,7 @@ export default {
         },
         {
             id: 4,
-            title: "ترتيلة",
+            title: "ترتيلة إكرامًا للخوري يوسف",
             content: "",
             date: "2024-08-28",
             type: "video",

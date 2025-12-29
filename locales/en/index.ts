@@ -10,9 +10,9 @@ export default {
         ...navTranslations,
         ...footerTranslations,
         hero: {
-            title: "Khoury Youssef Abi Maroun",
+            title: "Khoury Youssef Abi Maroun Maatouk",
             subtitle: "Known as Saint Youssef",
-            description: "Discover the life of Khoury Youssef Abi Maroun, known as Saint Youssef, his deep faith, the miracles associated with his intercession, and the spiritual legacy that lives on today.",
+            description: "Discover the life of Khoury Youssef Abi Maroun Maatouk, known as Saint Youssef, his deep faith, the miracles associated with his intercession, and the spiritual legacy that lives on today.",
             readMore: "Read His Story",
         },
         home: {
@@ -23,12 +23,12 @@ export default {
             miracleDescription: "A faithful pilgrim was completely healed from a serious illness after praying at Khoury Youssef's shrine. Doctors confirmed the recovery was medically unexplainable, attributing it to divine intervention through the saint's intercession.",
             readFullStory: "Read Full Story",
             showLess: "Show Less",
-            visitSaint: "Visit the Saint",
-            visitDescription: "The shrine of Khoury Youssef Abi Maroun, known as Saint Youssef, in Sereel has been a sanctuary of faith for generations. Experience the spiritual atmosphere, witness the devotion, and draw closer to God through the intercession of this blessed priest.",
+            visitSaint: "Visit Khoury Youssef",
+            visitDescription: "The shrine of Khoury Youssef Abi Maroun Maatouk, known as Saint Youssef, in Sereel has been a sanctuary of faith for generations. Experience the spiritual atmosphere, witness the devotion, and draw closer to God through the intercession of this blessed priest.",
             planVisit: "Plan Your Visit",
             aboutBadge: "Sacred Legacy",
             aboutTitle: "A Life of Divine Grace",
-            aboutDescription1: "Khoury Youssef Abi Maroun, known as Saint Youssef, lived a life characterized by piety, patience, and perseverance in prayer, leaving a deep spiritual impact on his village and its people.",
+            aboutDescription1: "Khoury Youssef Abi Maroun Maatouk, known as Saint Youssef, lived a life characterized by piety, patience, and perseverance in prayer, leaving a deep spiritual impact on his village and its people.",
             discoverStory: "Discover His Story",
             miraclesBadge: "Divine Interventions",
             churchBadge: "Sacred Place"

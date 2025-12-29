@@ -131,7 +131,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
           ref={titleRef}
           className="font-serif text-3xl md:text-5xl font-bold mb-3 text-foreground tracking-wide"
         >
-          {i18n.language === 'ar' ? 'القديس الخوري يوسف' : 'Saint Khoury Youssef'}
+          {i18n.language === 'ar' ? 'القديس الخوري يوسف أبي مارون معتوق' : 'Khoury Youssef Abi Maroun Maatouk, Known as Saint Youssef'}
         </h1>
 
         {/* Subtitle */}

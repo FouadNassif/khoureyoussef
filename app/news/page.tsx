@@ -184,75 +184,148 @@ const News = () => {
             }
           ),
           once: true,
-{
-            lightboxOpen && selectedNews && (
-            <div
-              ref={lightboxRef}
-              className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-              onClick={closeLightbox}
-            >
-              <div
-                ref={lightboxContentRef}
-                className="max-w-4xl w-full max-h-[90vh] overflow-auto bg-card rounded-lg shadow-2xl relative"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Close Button */}
-                <button
-                  onClick={closeLightbox}
-                  className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors"
-                >
-                  <X className="w-6 h-6" />
-                </button>
+        });
+      }
+    });
+  }, []);
 
-                {/* Image */}
-                {selectedNews.type === "image" && selectedNews.image && (
-                  <div className="relative w-full aspect-video overflow-hidden bg-muted">
-                    <img
-                      src={selectedNews.image}
-                      alt={selectedNews.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                )}
+  return (
+    <div className="min-h-screen bg-background selection:bg-primary/20">
+      <Navigation />
 
-                {/* Video with better controls */}
-                {selectedNews.type === "video" && selectedNews.video && (
-                  <div className="relative w-full aspect-video overflow-hidden bg-black">
-                    <video
-                      src={selectedNews.video}
-                      className="w-full h-full object-contain"
-                      controls
-                      autoPlay
-                      preload="auto"
-                      poster={selectedNews.thumbnail}
-                    />
-                  </div>
-                )}
-
-                {/* Content */}
-                <div className="p-6 md:p-8">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Calendar className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">
-                      {formatDate(selectedNews.date)}
-                    </span>
-                  </div>
-                  <h2 className="font-serif text-3xl font-bold text-foreground mb-4">
-                    {selectedNews.title}
-                  </h2>
-                  {selectedNews.content && (
-                    <p className="text-foreground leading-relaxed whitespace-pre-line">
-                      {selectedNews.content}
-                    </p>
-                  )}
-                </div>
-              </div>
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-12 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div ref={headerElementRef} className="text-center max-w-3xl mx-auto">
+            <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+              <span className="text-primary font-medium text-sm tracking-wide uppercase">
+                {t("news.badge")}
+              </span>
             </div>
-          )
-}
+            <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-foreground tracking-tight">
+              {t("news.title")}
+            </h1>
+            <p className="text-xl text-muted-foreground font-light leading-relaxed">
+              {t("news.subtitle")}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* News Grid */}
+      <section className="pb-24">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {newsItems.map((item, index) => (
+              <div
+                key={item.id}
+                ref={(el) => {
+                  newsItemsRef.current[index] = el;
+                }}
+                className="group"
+              >
+                <Card className="overflow-hidden border-none shadow-lg bg-card hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+                  <VideoCardNews item={item} onClick={() => openLightbox(item)} />
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Calendar className="w-4 h-4 text-primary" />
+                      <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        {formatDate(item.date)}
+                      </span>
+                    </div>
+                    <h3
+                      className="font-serif text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors cursor-pointer line-clamp-2"
+                      onClick={() => openLightbox(item)}
+                    >
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm line-clamp-3 mb-4 flex-1">
+                      {item.content}
+                    </p>
+                    <Button
+                      variant="ghost"
+                      className="w-full mt-auto group/btn hover:bg-primary/5 hover:text-primary"
+                      onClick={() => openLightbox(item)}
+                    >
+                      {t("news.readMore")}
+                    </Button>
+                  </div>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Lightbox */}
+      {lightboxOpen && selectedNews && (
+        <div
+          ref={lightboxRef}
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={closeLightbox}
+        >
+          <div
+            ref={lightboxContentRef}
+            className="max-w-4xl w-full max-h-[90vh] overflow-auto bg-card rounded-lg shadow-2xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Image */}
+            {selectedNews.type === "image" && selectedNews.image && (
+              <div className="relative w-full aspect-video overflow-hidden bg-muted">
+                <img
+                  src={selectedNews.image}
+                  alt={selectedNews.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+
+            {/* Video with better controls */}
+            {selectedNews.type === "video" && selectedNews.video && (
+              <div className="relative w-full aspect-video overflow-hidden bg-black">
+                <video
+                  src={selectedNews.video}
+                  className="w-full h-full object-contain"
+                  controls
+                  autoPlay
+                  preload="auto"
+                  poster={selectedNews.thumbnail}
+                />
+              </div>
+            )}
+
+            {/* Content */}
+            <div className="p-6 md:p-8">
+              <div className="flex items-center gap-2 mb-4">
+                <Calendar className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">
+                  {formatDate(selectedNews.date)}
+                </span>
+              </div>
+              <h2 className="font-serif text-3xl font-bold text-foreground mb-4">
+                {selectedNews.title}
+              </h2>
+              {selectedNews.content && (
+                <p className="text-foreground leading-relaxed whitespace-pre-line">
+                  {selectedNews.content}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
-    </div >
+    </div>
   );
 };
 

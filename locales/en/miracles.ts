@@ -9,9 +9,9 @@ export default {
 
 His relatives decided to bring him to Lebanon to show his file to doctors there and visit saints and churches. The doctors in Lebanon agreed with those abroad: there was no solution. Mazen had given up and agreed to whatever they suggested.
 
-One day, they decided to go to Ouyoun Orghosh. Their car broke down in the town of Tourza, opposite Sereel. While the mechanic was checking the car, their attention was drawn to the small village of Sereel and its large church. The mechanic told them there was a saint there. The problem with the car was that it had no water (even though it was new and had water hours ago), but the surprise was that there was no place for the water to leak from!!
+One day, they decided to go to Ouyoun Orghosh. Their car broke down in the town of Tourza, opposite Sereel. While the mechanic was checking the car, their attention was drawn to the small village of Sereel and its large church. The mechanic told them there was a holy priest there. The problem with the car was that it had no water (even though it was new and had water hours ago), but the surprise was that there was no place for the water to leak from!!
 
-They continued their journey, and when they arrived in Sereel, they decided to visit Father Youssef. When Mazen was praying inside the tomb, he felt a "hot skewer" enter his lung. He said, "Here I will die, or by the hand of this saint, I will be healed." He told no one, and they continued their journey.
+They continued their journey, and when they arrived in Sereel, they decided to visit Father Youssef. When Mazen was praying inside the tomb, he felt a "hot skewer" enter his lung. He said, "Here I will die, or by the hand of this holy priest, I will be healed." He told no one, and they continued their journey.
 
 After a few minutes, the pain that had not left him for a minute in years disappeared completely. At night, while sitting in his bed before sleeping, he saw a person with dark skin wearing white, holding a child in his arms, saying to him: "Pray for me to the holy priest to heal my son as he healed you." Mazen began to pray and heard a voice he knew was Father Youssef's saying: "Mazen, you must pray, and when God wills, if He wills, he will be healed."
 
@@ -28,9 +28,9 @@ As for his daughter, he took her to her doctor, who said she now has a new, 100%
         date: "27 1 2005",
         type: "Healing",
         location: "Monastery of Saint Rafqa - Ayto - Lebanon",
-        content: `Maroun Tadros, from Sir'el, was living in Zgharta, the hometown of his wife. For an unknown reason, he suddenly lost his sight. He sought medical treatment and made vows to saints, but he was not healed.
+        content: `Maroun Tadros, from Sereel, was living in Zgharta, the hometown of his wife. For an unknown reason, he suddenly lost his sight. He sought medical treatment and made vows to saints, but he was not healed.
 
-Two years later, he decided to return to Sir'el to live there. His neighbor advised him to seek the intercession of Father Youssef. He replied: “All the doctors and saints did not heal me.”
+Two years later, he decided to return to Sereel to live there. His neighbor advised him to seek the intercession of Father Youssef. He replied: “All the doctors and saints did not heal me.”
 
 That night, he saw in a dream a priest saying to him: “Why don’t you believe, Maroun?” The neighbor described him, and Maroun realized it was Father Youssef. The next day, he went to his tomb accompanied by his wife.
 
@@ -87,7 +87,7 @@ Without realizing, she stood up from her bed, opened the door, and saw before he
         date: "27 1 2005",
         type: "Healing",
         location: "Monastery of Saint Rafqa - Ayto - Lebanon",
-        content: `Mrs. Leila Saade from Seb'el suffered from a herniated disc in her hip, and her condition was severe — she was supposed to undergo urgent surgery. She came to Sir'el, visited the tomb, and recounted: “I went down carried, and I went back up walking.” She couldn’t walk much or go down stairs, so her relatives carried her to the saint’s tomb. She was healed instantly and climbed the stairs on her own.
+        content: `Mrs. Leila Saade from Seb'el suffered from a herniated disc in her hip, and her condition was severe — she was supposed to undergo urgent surgery. She came to Sereel, visited the tomb, and recounted: “I went down carried, and I went back up walking.” She couldn’t walk much or go down stairs, so her relatives carried her to the holy priest’s tomb. She was healed instantly and climbed the stairs on her own.
 
 (It is worth noting that this incident took place before the church pathway was paved, and visitors had to go down stairs from the church yard to reach the tomb.)
 
@@ -136,7 +136,7 @@ On December 2, 2021, she entered Saint Paul Medical Laboratory in Jbeil to take 
 
 After presenting the case to Dr. Paul Maarras, he informed her that an MRI was necessary to determine the tumor’s spread and whether surgery would be possible, noting that surgery was most likely impossible due to the tumor’s invasion of the bone.
 
-Soon after, I went with my friend Melissa Tanous from Kfarabida to the Monastery of Saint Anthony Qozhaya. On the way, by divine providence, we met Rosette Mansour from Sir'el, who told us about the holy priest Father Youssef Maatouk, whose body remained incorrupt, still seated on his chair as if in a luminous sleep.
+Soon after, I went with my friend Melissa Tanous from Kfarabida to the Monastery of Saint Anthony Qozhaya. On the way, by divine providence, we met Rosette Mansour from Sereel, who told us about the holy priest Father Youssef Maatouk, whose body remained incorrupt, still seated on his chair as if in a luminous sleep.
 
 I asked her to guide me to the church so I could visit later, but she suggested we go immediately. We arrived and prayed before the Blessed Sacrament in Saint Michael’s Church. Then she accompanied us to the church hall where Father Youssef’s body rests.
 
@@ -153,7 +153,7 @@ I later had surgery at Maarras Hospital in Furn el-Chebbak, Beirut, performed by
 
 Medicine confirmed it — a complete healing, beyond scientific explanation.
 
-I thanked the Lord for this second miracle — the first through Saint Paul Habib in Anaya, and the second through Father Youssef Maatouk in Sir'el.
+I thanked the Lord for this second miracle — the first through Saint Paul Habib in Anaya, and the second through Father Youssef Maatouk in Sereel.
 
 After receiving the blessing of my parish priest, Monsignor Boutros Khalil, I bore witness before God and the Church.`,
     },

@@ -23,7 +23,7 @@ const Footer = () => {
                 <Church className="w-5 h-5 text-primary-foreground" />
               </div>
               <span className="font-serif text-xl font-bold">
-                Khoury Youssef
+                {t("hero.title")}
               </span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
@@ -86,7 +86,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Khoury Youssef of Sereel. {t("footer.rights")}
+            © {currentYear} {t("hero.title")}. {t("footer.rights")}
           </p>
         </div>
       </div>

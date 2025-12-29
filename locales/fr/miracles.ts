@@ -9,9 +9,9 @@ export default {
 
 Ses proches ont décidé de l'emmener au Liban pour montrer son dossier aux médecins sur place et visiter des saints et des églises. Les médecins au Liban étaient d'accord avec ceux de l'étranger : il n'y avait pas de solution. Mazen avait abandonné et acceptait tout ce qu'on lui proposait.
 
-Un jour, ils ont décidé d'aller à Ouyoun Orghosh. Leur voiture est tombée en panne dans la ville de Tourza, en face de Sereel. Pendant que le mécanicien vérifiait la voiture, leur attention a été attirée par le petit village de Sereel et sa grande église. Le mécanicien leur a dit qu'il y avait un saint là-bas. Le problème avec la voiture était qu'elle n'avait pas d'eau (même si elle était neuve et avait de l'eau quelques heures auparavant), mais la surprise était qu'il n'y avait aucun endroit par où l'eau pouvait fuir !!
+Un jour, ils ont décidé d'aller à Ouyoun Orghosh. Leur voiture est tombée en panne dans la ville de Tourza, en face de Sereel. Pendant que le mécanicien vérifiait la voiture, leur attention a été attirée par le petit village de Sereel et sa grande église. Le mécanicien leur a dit qu'il y avait un saint prêtre là-bas. Le problème avec la voiture était qu'elle n'avait pas d'eau (même si elle était neuve et avait de l'eau quelques heures auparavant), mais la surprise était qu'il n'y avait aucun endroit par où l'eau pouvait fuir !!
 
-Ils ont continué leur voyage, et quand ils sont arrivés à Sereel, ils ont décidé de visiter le Père Youssef. Lorsque Mazen priait à l'intérieur de la tombe, il a senti une "broche chaude" entrer dans son poumon. Il a dit : "Ici je mourrai, ou par la main de ce saint, je serai guéri." Il n'a rien dit à personne, et ils ont continué leur route.
+Ils ont continué leur voyage, et quand ils sont arrivés à Sereel, ils ont décidé de visiter le Père Youssef. Lorsque Mazen priait à l'intérieur de la tombe, il a senti une "broche chaude" entrer dans son poumon. Il a dit : "Ici je mourrai, ou par la main de ce saint prêtre, je serai guéri." Il n'a rien dit à personne, et ils ont continué leur route.
 
 Après quelques minutes, la douleur qui ne l'avait pas quitté une minute depuis des années a complètement disparu. La nuit, alors qu'il était assis dans son lit avant de dormir, il a vu une personne à la peau foncée vêtue de blanc, tenant un enfant dans ses bras, lui disant : "Prie pour moi le saint prêtre pour qu'il guérisse mon fils comme il t'a guéri." Mazen a commencé à prier et a entendu une voix qu'il savait être celle du Père Youssef disant : "Mazen, tu dois prier, et quand Dieu le voudra, s'Il le veut, il sera guéri."
 
@@ -23,15 +23,14 @@ Le médecin a demandé à Mazen de lui raconter ce qui s'était passé, car il n
 
 Quant à sa fille, il l'a emmenée chez son médecin, qui a dit qu'elle avait maintenant un nouveau cœur, 100% sain. Elle a maintenant 21 ans. Le dossier des deux miracles et les rapports médicaux ont été envoyés au Liban et sont maintenant à l'Évêché.`,
     },
-
     miracle1: {
         title: "Guérison de Maroun Tadros de la Cécité",
         date: "27 1 2005",
         type: "Guérison",
         location: "Monastère de Saint Rafqa - Ayto - Liban",
-        content: `Maroun Tadros, de Sir'el, vivait à Zgharta, la ville natale de sa femme. Pour une raison inconnue, il a soudainement perdu la vue. Il a cherché un traitement médical et a fait des vœux aux saints, mais il n'a pas été guéri.
+        content: `Maroun Tadros, de Sereel, vivait à Zgharta, la ville natale de sa femme. Pour une raison inconnue, il a soudainement perdu la vue. Il a cherché un traitement médical et a fait des vœux aux saints, mais il n'a pas été guéri.
 
-Deux ans plus tard, il a décidé de retourner à Sir'el pour y vivre. Sa voisine lui a conseillé de demander l'intercession du Père Youssef. Il a répondu : "Tous les médecins et les saints ne m'ont pas guéri."
+Deux ans plus tard, il a décidé de retourner à Sereel pour y vivre. Sa voisine lui a conseillé de demander l'intercession du Père Youssef. Il a répondu : "Tous les médecins et les saints ne m'ont pas guéri."
 
 Cette nuit-là, il a vu en rêve un prêtre lui disant : "Pourquoi ne crois-tu pas, Maroun ?" La voisine l'a décrit, et Maroun a réalisé que c'était le Père Youssef. Le lendemain, il est allé à sa tombe accompagné de sa femme.
 
@@ -88,7 +87,7 @@ Sans s'en rendre compte, elle s'est levée de son lit, a ouvert la porte et a vu
         date: "27 1 2005",
         type: "Guérison",
         location: "Monastère de Saint Rafqa - Ayto - Liban",
-        content: `Mme Leila Saade de Seb'el souffrait d'une hernie discale à la hanche, et son état était grave — elle devait subir une intervention chirurgicale urgente. Elle est venue à Sir'el, a visité la tombe et a raconté : "Je suis descendue portée, et je suis remontée en marchant." Elle ne pouvait pas beaucoup marcher ni descendre les escaliers, alors ses proches l'ont portée jusqu'à la tombe du saint. Elle a été guérie instantanément et a monté les escaliers toute seule.
+        content: `Mme Leila Saade de Seb'el souffrait d'une hernie discale à la hanche, et son état était grave — elle devait subir une intervention chirurgicale urgente. Elle est venue à Sereel, a visité la tombe et a raconté : "Je suis descendue portée, et je suis remontée en marchant." Elle ne pouvait pas beaucoup marcher ni descendre les escaliers, alors ses proches l'ont portée jusqu'à la tombe du saint prêtre. Elle a été guérie instantanément et a monté les escaliers toute seule.
 
 (Il est à noter que cet incident a eu lieu avant que le chemin de l'église ne soit pavé, et les visiteurs devaient descendre des escaliers depuis la cour de l'église pour atteindre la tombe.)
 
@@ -137,7 +136,7 @@ Le 2 décembre 2021, elle est entrée au laboratoire médical Saint-Paul à Jbei
 
 Après avoir présenté le cas au Dr Paul Maarras, il l'a informée qu'une IRM était nécessaire pour déterminer l'étendue de la tumeur et si une intervention chirurgicale serait possible, notant que la chirurgie était très probablement impossible en raison de l'invasion de l'os par la tumeur.
 
-Peu après, je suis allée avec mon amie Melissa Tanous de Kfarabida au Monastère de Saint Antoine Qozhaya. En chemin, par la providence divine, nous avons rencontré Rosette Mansour de Sir'el, qui nous a parlé du saint prêtre Père Youssef Maatouk, dont le corps est resté incorrompu, toujours assis sur sa chaise comme dans un sommeil lumineux.
+Peu après, je suis allée avec mon amie Melissa Tanous de Kfarabida au Monastère de Saint Antoine Qozhaya. En chemin, par la providence divine, nous avons rencontré Rosette Mansour de Sereel, qui nous a parlé du saint prêtre Père Youssef Maatouk, dont le corps est resté incorrompu, toujours assis sur sa chaise comme dans un sommeil lumineux.
 
 Je lui ai demandé de me guider vers l'église pour que je puisse visiter plus tard, mais elle a suggéré que nous y allions immédiatement. Nous sommes arrivés et avons prié devant le Saint-Sacrement dans l'église Saint-Michel. Ensuite, elle nous a accompagnés à la salle de l'église où repose le corps du Père Youssef.
 
@@ -154,7 +153,7 @@ J'ai ensuite été opérée à l'hôpital Maarras à Furn el-Chebbak, Beyrouth, 
 
 La médecine l'a confirmé — une guérison complète, au-delà de toute explication scientifique.
 
-J'ai remercié le Seigneur pour ce deuxième miracle — le premier par Saint Paul Habib à Anaya, et le second par le Père Youssef Maatouk à Sir'el.
+J'ai remercié le Seigneur pour ce deuxième miracle — le premier par Saint Paul Habib à Anaya, et le second par le Père Youssef Maatouk à Sereel.
 
 Après avoir reçu la bénédiction de mon curé, Monseigneur Boutros Khalil, j'ai témoigné devant Dieu et l'Église.`,
     },
