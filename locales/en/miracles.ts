@@ -32,16 +32,16 @@ As for his daughter, he took her to her doctor, who said she now has a new, 100%
 
 Two years later, he decided to return to Sereel to live there. His neighbor advised him to seek the intercession of Father Youssef. He replied: “All the doctors and saints did not heal me.”
 
-That night, he saw in a dream a priest saying to him: “Why don’t you believe, Maroun?” The neighbor described him, and Maroun realized it was Father Youssef. The next day, he went to his tomb accompanied by his wife.
+That night, he saw in a dream a priest saying to him: “Why don't you believe, Maroun?” The neighbor described him, and Maroun realized it was Father Youssef. The next day, he went to his tomb accompanied by his wife.
 
 They prayed together before the grave. His wife took some soil from the tomb, mixed it with water, and he washed his face with it, praying sincerely from his heart. He slept, and the next day everyone was astonished — Maroun had regained his sight completely, as if he had never lost it.`,
     },
     miracle2: {
-        title: "Tony Lahoud’s Vision – The Child Jesus in the Eucharist",
+        title: "Tony Lahoud's Vision – The Child Jesus in the Eucharist",
         date: "27 1 2005",
         type: "Healing",
         location: "Monastery of Saint Rafqa - Ayto - Lebanon",
-        content: `The son of the late Tony Lahoud, currently living in Canada, tells that when Father Youssef used to go to church, Tony, who was about ten years old at that time, would wait to hear the priest’s footsteps so he could rush to the church and serve at Mass.
+        content: `The son of the late Tony Lahoud, currently living in Canada, tells that when Father Youssef used to go to church, Tony, who was about ten years old at that time, would wait to hear the priest's footsteps so he could rush to the church and serve at Mass.
 
 One day, during the consecration in the Mass, when Father Youssef raised the Eucharist, Tony saw the Child Jesus descending and resting in the Eucharist. He continued to see this vision until the priest lowered his hands and placed the Eucharist on the altar.`,
     },
@@ -54,7 +54,7 @@ One day, during the consecration in the Mass, when Father Youssef raised the Euc
 
 As usual, the girl underwent her routine monthly blood test. When the doctor saw the results, he said there was something strange and asked her to repeat the test because her blood appeared clean, with no sign of leukemia.
 
-She smiled and said, “I’ll repeat the test, but the result will remain the same.” Indeed, the second test confirmed a complete recovery, with no trace of leukemia. The complete file of this miracle is preserved in the bishopric.`,
+She smiled and said, “I'll repeat the test, but the result will remain the same.” Indeed, the second test confirmed a complete recovery, with no trace of leukemia. The complete file of this miracle is preserved in the bishopric.`,
     },
     miracle4: {
         title: "Testimony of His Granddaughter About His Life of Prayer",
@@ -65,7 +65,7 @@ She smiled and said, “I’ll repeat the test, but the result will remain the s
 
 “In the harsh winter days, with freezing winds and heavy storms, we used to feel as if the house would move from its place — the doors and windows would rattle from the strong wind.
 
-At night, I would wake up several times and look at my grandfather’s bed (Father Youssef). I would never find him in his bed. He was always kneeling on the floor, praying.
+At night, I would wake up several times and look at my grandfather's bed (Father Youssef). I would never find him in his bed. He was always kneeling on the floor, praying.
 
 On many nights, when the wind was so strong, I woke up several times, and every single time, I would see him kneeling and praying.”`,
     },
@@ -74,9 +74,9 @@ On many nights, when the wind was so strong, I woke up several times, and every 
         date: "27 1 2005",
         type: "Healing",
         location: "Monastery of Saint Rafqa - Ayto - Lebanon",
-        content: `Shehda, the old woman who lived during Father Youssef’s time, used to go to the field to bring wild greens, and every time she went, she would take a portion and give it to the priest. In her final days, she could no longer walk.
+        content: `Shehda, the old woman who lived during Father Youssef's time, used to go to the field to bring wild greens, and every time she went, she would take a portion and give it to the priest. In her final days, she could no longer walk.
 
-One dark night, she prayed her rosary as usual, but this time she cried — she cried from loneliness, pain, and sorrow. At that time, Father Youssef had already passed away, but she firmly believed in his holiness. She reproached him and said: “Oh Father Youssef, how could you leave me like this? I can’t walk at the end of my life. I used to bring you wild greens.”
+One dark night, she prayed her rosary as usual, but this time she cried — she cried from loneliness, pain, and sorrow. At that time, Father Youssef had already passed away, but she firmly believed in his holiness. She reproached him and said: “Oh Father Youssef, how could you leave me like this? I can't walk at the end of my life. I used to bring you wild greens.”
 
 That night she fell asleep and woke up in the middle of the night to a knock on the door. She always left her door ajar in case someone would kindly offer her food. She said: “Come in, the door is open.” The knocking repeated a second time. She said again: “Come in, I told you the door is open.” Then it came a third time.
 
@@ -87,7 +87,7 @@ Without realizing, she stood up from her bed, opened the door, and saw before he
         date: "27 1 2005",
         type: "Healing",
         location: "Monastery of Saint Rafqa - Ayto - Lebanon",
-        content: `Mrs. Leila Saade from Seb'el suffered from a herniated disc in her hip, and her condition was severe — she was supposed to undergo urgent surgery. She came to Sereel, visited the tomb, and recounted: “I went down carried, and I went back up walking.” She couldn’t walk much or go down stairs, so her relatives carried her to the holy priest’s tomb. She was healed instantly and climbed the stairs on her own.
+        content: `Mrs. Leila Saade from Seb'el suffered from a herniated disc in her hip, and her condition was severe — she was supposed to undergo urgent surgery. She came to Sereel, visited the tomb, and recounted: “I went down carried, and I went back up walking.” She couldn't walk much or go down stairs, so her relatives carried her to the holy priest's tomb. She was healed instantly and climbed the stairs on her own.
 
 (It is worth noting that this incident took place before the church pathway was paved, and visitors had to go down stairs from the church yard to reach the tomb.)
 
@@ -100,7 +100,7 @@ Many visitors who took such bread have testified that it remained intact for yea
         date: "27 1 2005",
         type: "Healing",
         location: "Monastery of Saint Rafqa - Ayto - Lebanon",
-        content: `A swelling appeared on her side when she was two weeks old. It kept growing as she grew. The doctor said it would disappear around the age of 7 or 8 months. When Tala turned eight months old, the swelling became inflamed. Although it wasn’t dangerous, the prescribed medicine could affect the heartbeat, so the doctor referred her to a cardiologist.
+        content: `A swelling appeared on her side when she was two weeks old. It kept growing as she grew. The doctor said it would disappear around the age of 7 or 8 months. When Tala turned eight months old, the swelling became inflamed. Although it wasn't dangerous, the prescribed medicine could affect the heartbeat, so the doctor referred her to a cardiologist.
 
 **First examination – May 17, 2022:**
 An echocardiogram revealed that Tala had experienced a Supraventricular Tachycardia (SVT) — an abnormally rapid heartbeat originating from the upper chambers of the heart, reaching 322 beats per minute. Despite this, she showed no symptoms.
@@ -120,7 +120,7 @@ When the cardiologist saw the new echocardiogram, she was in shock, crying out, 
 
 She said: “A divine power has intervened.” Multiple doctors reviewed the case and all agreed with the same conclusion.
 
-Tala’s father prayed the rosary at the hospital and fell asleep on the chair. That night, he felt Father Youssef passing beside him and woke up suddenly.
+Tala's father prayed the rosary at the hospital and fell asleep on the chair. That night, he felt Father Youssef passing beside him and woke up suddenly.
 
 Glory be to God through His saints.`,
     },
@@ -132,17 +132,17 @@ Glory be to God through His saints.`,
         content: `Nadine Greige, married to Clovis Assad, mother of two children, Charbel and Rebecca.
 
 **Diagnosis – December 2, 2021:**
-On December 2, 2021, she entered Saint Paul Medical Laboratory in Jbeil to take an X-ray of her right thigh after feeling unusual pain. She didn’t know that moment would be a turning point in her life. After the examination, the result came: *Liposarcoma – Grade I cancer.*
+On December 2, 2021, she entered Saint Paul Medical Laboratory in Jbeil to take an X-ray of her right thigh after feeling unusual pain. She didn't know that moment would be a turning point in her life. After the examination, the result came: *Liposarcoma – Grade I cancer.*
 
-After presenting the case to Dr. Paul Maarras, he informed her that an MRI was necessary to determine the tumor’s spread and whether surgery would be possible, noting that surgery was most likely impossible due to the tumor’s invasion of the bone.
+After presenting the case to Dr. Paul Maarras, he informed her that an MRI was necessary to determine the tumor's spread and whether surgery would be possible, noting that surgery was most likely impossible due to the tumor's invasion of the bone.
 
 Soon after, I went with my friend Melissa Tanous from Kfarabida to the Monastery of Saint Anthony Qozhaya. On the way, by divine providence, we met Rosette Mansour from Sereel, who told us about the holy priest Father Youssef Maatouk, whose body remained incorrupt, still seated on his chair as if in a luminous sleep.
 
-I asked her to guide me to the church so I could visit later, but she suggested we go immediately. We arrived and prayed before the Blessed Sacrament in Saint Michael’s Church. Then she accompanied us to the church hall where Father Youssef’s body rests.
+I asked her to guide me to the church so I could visit later, but she suggested we go immediately. We arrived and prayed before the Blessed Sacrament in Saint Michael's Church. Then she accompanied us to the church hall where Father Youssef's body rests.
 
 There, I instinctively reached into my pocket — as if guided by a hidden force — and found a cotton ball soaked in the oil of Saint Charbel. I thought, “Let the blessing be doubled,” and placed the cotton on the glass separating us from the body, touching it to receive the blessing, then rubbed it on my thigh.
 
-I felt a burning sensation, as if fire had touched the spot where the tumor was — something inside had changed. I didn’t tell Rosette what I felt, but deep down, I knew something had happened.
+I felt a burning sensation, as if fire had touched the spot where the tumor was — something inside had changed. I didn't tell Rosette what I felt, but deep down, I knew something had happened.
 
 **Result – January 27, 2022:**
 Less than a month later, on January 27, 2022, I underwent another examination. The radiologist was astonished and called me, asking, “What happened? What did you do?”

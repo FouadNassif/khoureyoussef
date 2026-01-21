@@ -38,15 +38,14 @@ His granddaughter came and said to herself that if strangers take blessings from
             about: {
                 title: "From the Writings of Khoury Youssef",
                 content: {
-                    paragraph1: `The owner of this notebook, Khoury Youssef, son of Khoury Mikhael Abi Maroun Maatouk from Sereel, was born in the year 1847 AD on May 11, to virtuous parents known for their piety. He was ordained a priest in 1874, on October 10, by the blessed Patriarch Paul Massad in the old Diman. He was appointed to serve the parish of Sereel in 1899, in the last days of Bishop Estefanos Aouad of blessed memory, and remained serving the parish during the reign of His Beatitude Patriarch Mar Anton Arida. God took him in 1929, on November 11. He lived his entire life in piety and devotion to God and the Virgin Mary, and was known among all who knew him for holiness and doing good, especially for his great patience in trials. People took him as an example of patience and nicknamed him 'the saint.' When he was called to pray over a sick person, they would be healed immediately while he was still alive.`,
-                    paragraph2: `Humility makes a true Christian, and whoever falls into pride becomes a dwelling place for Satan, his son, and his captive. Whoever adorns himself with arrogance has Satan dwelling within him in disguise. On the contrary, whoever is clothed with humility is clothed with God, and Christ dwells in him. Whoever loves humility and desires it will find ease in love. But the son of pride hates God. Therefore, if we want to triumph over the evil one, let us take humility as our weapon; when Satan sees us armed with it, he trembles and flees from us. And if we want to please God, let us put on the garment of God.`
+                    paragraph1: `Humility makes a true Christian, and whoever falls into pride becomes a dwelling place for Satan, his son, and his captive. Whoever adorns himself with arrogance has Satan dwelling within him in disguise. On the contrary, whoever is clothed with humility is clothed with God, and Christ dwells in him. Whoever loves humility and desires it will find ease in love. But the son of pride hates God. Therefore, if we want to triumph over the evil one, let us take humility as our weapon; when Satan sees us armed with it, he trembles and flees from us. And if we want to please God, let us put on the garment of God.`
                 }
             }
         },
         images: {
-            whoIsKhourYoussef: "An icon depicting Khoury Youssef",
-            hisLife: "The church where he served",
-            hisDeath: "The shrine of Khoury Youssef in Sereel"
+            whoIsKhourYoussef: "Photo of Khoury Youssef",
+            hisLife: "The room that holds his body",
+            hisDeath: "A photo of Khoury Youssef's family"
         }
     }
 };

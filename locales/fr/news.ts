@@ -2,7 +2,7 @@ export default {
     newsItems: [
         {
             id: 1,
-            title: "Comité sur Mgr Youssef Soueif",
+            title: "Son Excellence Monseigneur Youssef Soueif parle de la commission constituée pour étudier le dossier du père Youssef Abi Maroun Maatouk.",
             content: "Son Excellence Mgr Youssef Soueif parle du comité formé pour étudier le dossier du Père Youssef Abi Maroun Maatouk. Résidence d'été de l'évêché à Karm Saddé le 1-1-2023",
             date: "2023-01-01",
             video: "/assets/videos/news/Video1.mp4",
@@ -20,7 +20,7 @@ export default {
         },
         {
             id: 3,
-            title: "Fairouz à l’église Saint-Michel – Seraal",
+            title: "Fairouz à l'église Saint-Michel – Seraal",
             content: "",
             date: "2010-01-01",
             video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",
@@ -29,7 +29,7 @@ export default {
         },
         {
             id: 4,
-            title: "Un chant en l’honneur du Père Youssef",
+            title: "Un chant en l'honneur du Père Youssef",
             content: "",
             date: "2024-08-28",
             type: "video",

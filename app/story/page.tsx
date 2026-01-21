@@ -79,7 +79,7 @@ const Story = () => {
       caption: t("story.images.hisLife", "The sacred church where Khoury Youssef dedicated his life to serving the faithful")
     },
     hisDeath: {
-      src: "/assets/hero-church.jpg",
+      src: "/assets/Family_photo.jpg",
       alt: "Khoury Youssef Church in Sereel",
       caption: t("story.images.hisDeath", "The church stands as a testament to his legacy and eternal presence")
     }

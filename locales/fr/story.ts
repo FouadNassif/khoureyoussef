@@ -38,15 +38,14 @@ Sa petite-fille vint et se dit que si des étrangers prennent des bénédictions
             about: {
                 title: "Des Écrits du Khoury Youssef",
                 content: {
-                    paragraph1: `Le propriétaire de ce cahier, le Khoury Youssef, fils du Khoury Mikhaïl Abi Maroun Maatouk de Sereel, est né en l'an 1847 après J.-C. le 11 mai, de parents vertueux connus pour leur piété. Il fut ordonné prêtre en 1874, le 10 octobre, par le bienheureux Patriarche Paul Massad dans l'ancien Diman. Il fut nommé pour servir la paroisse de Sereel en 1899, dans les derniers jours de l'Évêque Estefanos Aouad de bienheureuse mémoire, et resta au service de la paroisse sous le règne de Sa Béatitude le Patriarche Mar Anton Arida. Dieu le rappela en 1929, le 11 novembre. Il vécut toute sa vie dans la piété et la dévotion à Dieu et à la Vierge Marie, et fut connu parmi tous ceux qui le connaissaient pour sa sainteté et ses bonnes œuvres, surtout pour sa grande patience dans les épreuves. Les gens le prenaient comme exemple de patience et le surnommaient 'le saint'. Quand on l'appelait pour prier sur un malade, celui-ci était guéri immédiatement alors qu'il était encore en vie.`,
                     paragraph2: `L'humilité fait le véritable chrétien, et quiconque tombe dans l'orgueil devient une demeure pour Satan, son fils et son captif. Quiconque se pare d'arrogance a Satan qui habite en lui déguisé. Au contraire, quiconque est vêtu d'humilité est vêtu de Dieu, et le Christ habite en lui. Quiconque aime l'humilité et la désire trouvera la facilité dans l'amour. Mais le fils de l'orgueil déteste Dieu. Par conséquent, si nous voulons triompher du malin, prenons l'humilité comme notre arme ; quand Satan nous voit armés d'elle, il tremble et fuit devant nous. Et si nous voulons plaire à Dieu, revêtons le vêtement de Dieu.`
                 }
             }
         },
         images: {
-            whoIsKhourYoussef: "Une icône représentant le Khoury Youssef",
-            hisLife: "L'église où il a servi",
-            hisDeath: "Le sanctuaire du Khoury Youssef à Sereel"
+            whoIsKhourYoussef: "Photo of Khoury Youssef",
+            hisLife: "The room that holds his body",
+            hisDeath: "A photo of Khoury Youssef's family"
         }
     }
 };

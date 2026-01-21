@@ -2,7 +2,7 @@ export default {
     newsItems: [
         {
             id: 1,
-            title: "Committee on Bishop Youssef Soueif",
+            title: "His Excellency Bishop Youssef Soueif speaks about the committee formed to study the case file of Father Youssef Abi Maroun Maatouk.",
             content: "His Excellency Bishop Youssef Soueif speaks about the committee formed to study the file of Father Youssef Abi Maroun Maatouk. Summer residence of the Bishopric in Karm Saddé on 1-1-2023",
             date: "2023-01-01",
             video: "/assets/videos/news/Video1.mp4",
