@@ -8,10 +8,11 @@ import { Card } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
-import LoadingScreen from "@/components/LoadingScreen";
 import VideoCard from "@/components/VideoCard"; // Import the new component
+import DirectionsButtons from "@/components/DirectionsButtons";
 import { Sparkles, Book, Calendar, Play } from "lucide-react";
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -32,7 +33,6 @@ export default function Page() {
   const { t, i18n } = useTranslation();
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [showNavbar, setShowNavbar] = useState(false);
-  const [showLoading, setShowLoading] = useState(true);
 
   const [aboutRef, aboutInView] = useInView({
     triggerOnce: true,
@@ -56,21 +56,15 @@ export default function Page() {
     if (hasVisited) {
       setIsInitialLoad(false);
       setShowNavbar(true);
-      setShowLoading(false);
     } else {
       sessionStorage.setItem('hasVisited', 'true');
-      // Loading screen will handle its own completion
     }
   }, []);
 
-  const handleLoadingComplete = () => {
-    setShowLoading(false);
-  };
-
-  const handleHeroAnimationComplete = () => {
+  const handleHeroAnimationComplete = useCallback(() => {
     setIsInitialLoad(false);
     setShowNavbar(true);
-  };
+  }, []);
 
   // Get data from translations
   const resources = (i18n.getResourceBundle(i18n.language, "translation") || {}) as Record<string, any>;
@@ -167,7 +161,6 @@ export default function Page() {
   return (
     <>
       <div className="min-h-screen">
-        {showLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
         <Navigation show={showNavbar} />
         <Hero isInitialLoad={isInitialLoad} onAnimationComplete={handleHeroAnimationComplete} />
 
@@ -177,10 +170,13 @@ export default function Page() {
             <div ref={aboutSectionRef} className="grid md:grid-cols-2 gap-12 items-center">
               <div className="relative">
                 <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
-                <img
-                  src="/assets/saint-icon.jpg"
+                <Image
+                  src="/assets/saint-icon.webp"
                   alt={t("home.aboutTitle") || "Saint Khoury Youssef of Sereel - A Life of Divine Grace"}
-                  className="relative w-full rounded-2xl shadow-sacred glow-divine"
+                  width={964}
+                  height={1440}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="relative w-full h-auto rounded-2xl shadow-sacred glow-divine"
                 />
               </div>
 
@@ -284,20 +280,26 @@ export default function Page() {
                 </h2>
                 <div className="relative">
                   <div className="absolute -inset-4 gradient-divine opacity-20 blur-3xl rounded-full" />
-                  <img
-                    src="/assets/church-interior.jpg"
+                  <Image
+                    src="/assets/church-interior.webp"
                     alt={t("home.visitSaint") || "Khoury Youssef Church Interior - Sereel Village, Lebanon"}
-                    className="relative w-full rounded-2xl shadow-sacred"
+                    width={1920}
+                    height={1440}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="relative w-full h-auto rounded-2xl shadow-sacred"
                   />
                 </div>
                 <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                   {t("home.visitDescription")}
                 </p>
-                <Link href="/contact">
-                  <Button className="gradient-divine text-primary-foreground glow-divine">
-                    {t("home.planVisit")}
-                  </Button>
-                </Link>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link href="/contact">
+                    <Button className="gradient-divine text-primary-foreground glow-divine">
+                      {t("home.planVisit")}
+                    </Button>
+                  </Link>
+                  <DirectionsButtons />
+                </div>
               </div>
             </div>
           </div>

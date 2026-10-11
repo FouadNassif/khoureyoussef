@@ -118,7 +118,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
           <div className="relative w-full h-full rounded-full p-1 bg-gradient-to-br from-primary/30 to-transparent">
             <div className="w-full h-full rounded-full overflow-hidden border-2 border-primary/20 shadow-2xl bg-background">
               <img
-                src="/assets/saint-icon.jpg"
+                src="/assets/saint-icon.webp"
                 alt="Saint Khoury Youssef"
                 className="w-full h-full object-cover"
               />

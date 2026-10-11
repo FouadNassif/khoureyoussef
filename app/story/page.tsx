@@ -8,6 +8,7 @@ import { useEffect, useRef, useMemo, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { X } from "lucide-react";
+import Image from "next/image";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -69,17 +70,23 @@ const Story = () => {
   // Image data for each section
   const sectionImages = {
     whoIsKhourYoussef: {
-      src: "/assets/saint-icon.jpg",
+      src: "/assets/saint-icon.webp",
+      width: 964,
+      height: 1440,
       alt: "Portrait of Khoury Youssef",
       caption: t("story.images.whoIsKhourYoussef", "An icon depicting Khoury Youssef, the beloved priest of Sereel")
     },
     hisLife: {
-      src: "/assets/church-interior.jpg",
+      src: "/assets/church-interior.webp",
+      width: 1920,
+      height: 1440,
       alt: "Church where Khoury Youssef served",
       caption: t("story.images.hisLife", "The sacred church where Khoury Youssef dedicated his life to serving the faithful")
     },
     hisDeath: {
-      src: "/assets/Family_photo.jpg",
+      src: "/assets/Family_photo.webp",
+      width: 960,
+      height: 664,
       alt: "Khoury Youssef Church in Sereel",
       caption: t("story.images.hisDeath", "The church stands as a testament to his legacy and eternal presence")
     }
@@ -322,11 +329,14 @@ const Story = () => {
           <div className="max-w-2xl mx-auto">
             <div className="relative">
               <div className="absolute -inset-6 gradient-divine opacity-20 blur-3xl rounded-full" />
-              <img
+              <Image
                 ref={portraitImageRef}
-                src="/assets/saint-icon.jpg"
+                src="/assets/saint-icon.webp"
                 alt="Khoury Youssef Icon"
-                className="relative w-full rounded-2xl shadow-sacred glow-divine"
+                width={964}
+                height={1440}
+                sizes="(max-width: 768px) 100vw, 672px"
+                className="relative w-full h-auto rounded-2xl shadow-sacred glow-divine"
               />
             </div>
           </div>
@@ -370,11 +380,13 @@ const Story = () => {
                         }}
                       >
                         <div className="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 bg-card border border-border">
-                          <img
+                          <Image
                             src={sectionImages[section.id as keyof typeof sectionImages].src}
                             alt={sectionImages[section.id as keyof typeof sectionImages].alt}
+                            width={sectionImages[section.id as keyof typeof sectionImages].width}
+                            height={sectionImages[section.id as keyof typeof sectionImages].height}
+                            sizes="(max-width: 640px) 100vw, 320px"
                             className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
-                            loading="lazy"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
                             <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs bg-black/60 px-2 py-0.5 rounded">

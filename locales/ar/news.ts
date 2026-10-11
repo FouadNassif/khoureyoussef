@@ -6,7 +6,7 @@ export default {
             content: "سيّدنا المطران يوسف سويف يتكلّم عن اللّجنة المؤلّفة لدراسة ملفّ الخوري يوسف أبي مارون معتوق. المقرّ الصيّفي للمطرانية كرمسدّة في ١-١-٢٠٢٣",
             date: "2023-01-01",
             video: "/assets/videos/news/Video1.mp4",
-            thumbnail: "/assets/thumbnails/Video1.jpg",
+            thumbnail: "/assets/thumbnails/Video1.webp",
             type: "video"
         },
         {
@@ -15,7 +15,7 @@ export default {
             content: "من عظة سيادة المطران يوسف سويف عن الخوري يوسف أبي مارون معتوق في عيد الخوري يوسف في ٨-١١-٢.٢٢ في كنيسة الخوري يوسف سرعل",
             date: "2022-11-08",
             video: "/assets/videos/news/Video2.mp4",
-            thumbnail: "/assets/thumbnails/Video2.jpg",
+            thumbnail: "/assets/thumbnails/Video2.webp",
             type: "video"
         },
         {
@@ -24,7 +24,7 @@ export default {
             content: "",
             date: "2010-01-01",
             video: "https://youtu.be/V68VbGRj-QY?si=091trsX0ZeZo-1SJ",
-            thumbnail: "/assets/thumbnails/Video3.jpg",
+            thumbnail: "/assets/thumbnails/Video3.webp",
             type: "video"
         },
         {
@@ -34,7 +34,7 @@ export default {
             date: "2024-08-28",
             type: "video",
             video: "/assets/videos/news/Video3.mp4",
-            thumbnail: "/assets/thumbnails/Video4.jpg",
+            thumbnail: "/assets/thumbnails/Video4.webp",
         }
     ]
 };

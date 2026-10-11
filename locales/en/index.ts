@@ -77,7 +77,13 @@ export default {
             contactPhone1: "+961 76 740 377",
             contactName2: "Maria Sassine",
             contactPhone2: "+961 71 797 415",
+            getDirections: "Get Directions",
 
+        },
+        share: {
+            label: "Share:",
+            whatsapp: "Share on WhatsApp",
+            facebook: "Share on Facebook",
         },
         news: {
             title: "Latest News",

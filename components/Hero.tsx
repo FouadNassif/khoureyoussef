@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
+import Image from "next/image";
 
 interface HeroProps {
   isInitialLoad?: boolean;
@@ -13,7 +14,6 @@ interface HeroProps {
 
 const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
   const { t, i18n } = useTranslation();
-  const [zoomLevel, setZoomLevel] = useState(1);
   const [showContent, setShowContent] = useState(!isInitialLoad);
   const [mounted, setMounted] = useState(false);
   const bgImageRef = useRef<HTMLImageElement>(null);
@@ -34,7 +34,6 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
   useEffect(() => {
     if (!isInitialLoad) {
       setShowContent(true);
-      setZoomLevel(1);
       return;
     }
 
@@ -42,93 +41,26 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
     const isMobile = window.innerWidth < 768;
 
     // On mobile, skip animation and show content immediately
-    if (isMobile) {
+    if (isMobile || !bgImageRef.current) {
       setShowContent(true);
-      setZoomLevel(1);
       onAnimationComplete?.();
       return;
     }
 
-    let zoomInInterval: NodeJS.Timeout | null = null;
-    let zoomOutInterval: NodeJS.Timeout | null = null;
-    let retryTimeout: NodeJS.Timeout | null = null;
-
-    // Reset zoom level and hide content
-    setZoomLevel(1);
-    setShowContent(false);
-
-    // Wait for image to be available and start animation
-    const checkAndStart = () => {
-      if (!bgImageRef.current) {
-        // Retry after a short delay if image not ready
-        retryTimeout = setTimeout(checkAndStart, 50);
-        return;
-      }
-
-      // Start zoom in animation
-      let currentZoom = 1;
-      zoomInInterval = setInterval(() => {
-        currentZoom += 0.04; // Increment by 4% each time
-        setZoomLevel(currentZoom);
-
-        if (currentZoom >= 1.3) {
-          if (zoomInInterval) {
-            clearInterval(zoomInInterval);
-            zoomInInterval = null;
-          }
-
-          // Show content during zoom pause
-          setShowContent(true);
-
-          // After zoom in completes, wait 1.5 seconds then zoom out
-          setTimeout(() => {
-            let zoomOutLevel = 1.3;
-            zoomOutInterval = setInterval(() => {
-              zoomOutLevel -= 0.03; // Decrement by 3% each time
-              setZoomLevel(zoomOutLevel);
-
-              if (zoomOutLevel <= 1) {
-                if (zoomOutInterval) {
-                  clearInterval(zoomOutInterval);
-                  zoomOutInterval = null;
-                }
-                setZoomLevel(1);
-                onAnimationComplete?.();
-              }
-            }, 100);
-          }, 1500);
-        }
-      }, 100);
-    };
-
-    // Start checking after a brief delay to ensure component is mounted
-    const startDelay = setTimeout(checkAndStart, 300);
+    // Zoom in, show content, hold, then zoom out (single GPU-friendly timeline)
+    const tl = gsap.timeline({ onComplete: () => onAnimationComplete?.() });
+    tl.fromTo(
+      bgImageRef.current,
+      { scale: 1 },
+      { scale: 1.3, duration: 0.8, ease: "power2.out", transformOrigin: "center center" }
+    )
+      .call(() => setShowContent(true))
+      .to(bgImageRef.current, { scale: 1, duration: 1, ease: "power2.inOut" }, "+=1.5");
 
     return () => {
-      clearTimeout(startDelay);
-      if (retryTimeout) {
-        clearTimeout(retryTimeout);
-      }
-      if (zoomInInterval) {
-        clearInterval(zoomInInterval);
-      }
-      if (zoomOutInterval) {
-        clearInterval(zoomOutInterval);
-      }
+      tl.kill();
     };
   }, [isInitialLoad, onAnimationComplete]);
-
-  // Animate background image zoom only (parallax completely disabled for performance)
-  useEffect(() => {
-    if (bgImageRef.current) {
-      gsap.to(bgImageRef.current, {
-        scale: zoomLevel,
-        duration: 0.1,
-        ease: "power2.out",
-        transformOrigin: "center center",
-      });
-    }
-  }, [zoomLevel]);
 
   // Animate floating particles
   useEffect(() => {
@@ -152,7 +84,7 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
   useEffect(() => {
     if (!showContent || !contentRef.current) return;
 
-    const delay = isInitialLoad ? 2.5 : 0;
+    const delay = 0;
 
     // Fade in overlay with reduced opacity
     if (overlayRef.current) {
@@ -211,11 +143,14 @@ const Hero = ({ isInitialLoad = false, onAnimationComplete }: HeroProps) => {
     >
       {/* Background Image with Reduced Overlay */}
       <div className="absolute inset-0">
-        <img
+        <Image
           ref={bgImageRef}
-          src="/assets/Hero.jpg"
+          src="/assets/Hero.webp"
           alt="Khoury Youssef Church"
-          className="w-full h-full object-cover"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
           style={{ transformOrigin: "center center" }}
         />
         {/* Reduced transparency overlay - much lighter for clearer image */}

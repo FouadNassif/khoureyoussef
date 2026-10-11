@@ -6,6 +6,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import ShareButtons from "@/components/ShareButtons";
 import { Heart, ChevronDown, ChevronUp } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -64,6 +65,19 @@ const Miracles = () => {
   const toggleMiracle = (index: number) => {
     setExpandedMiracle(expandedMiracle === index ? null : index);
   };
+
+  // Open the miracle from a shared link (/miracles?m=miracle3): expand it and scroll to it
+  useEffect(() => {
+    const sharedKey = new URLSearchParams(window.location.search).get("m");
+    if (!sharedKey) return;
+    const index = miracles.findIndex((m) => m.key === sharedKey);
+    if (index === -1) return;
+    setExpandedMiracle(index);
+    const timer = setTimeout(() => {
+      miracleItemsRef.current[index]?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [miracles]);
 
   // Animate header
   useEffect(() => {
@@ -136,6 +150,8 @@ const Miracles = () => {
             {miracles.map((miracle, index) => (
               <div
                 key={miracle.key}
+                id={miracle.key}
+                className="scroll-mt-24"
                 ref={(el) => {
                   miracleItemsRef.current[index] = el;
                 }}
@@ -196,6 +212,7 @@ const Miracles = () => {
                             )}
                           </Button>
                         )}
+                        <ShareButtons title={miracle.title} path={`/miracles?m=${miracle.key}`} className="mt-4" />
                       </div>
                     </div>
                   </div>

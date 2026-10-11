@@ -75,6 +75,12 @@ export default {
             contactPhone1: "+961 76 740 377",
             contactName2: "Maria Sassine",
             contactPhone2: "+961 71 797 415",
+            getDirections: "Itinéraire",
+        },
+        share: {
+            label: "Partager :",
+            whatsapp: "Partager sur WhatsApp",
+            facebook: "Partager sur Facebook",
         },
         news: {
             title: "Dernières Nouvelles",

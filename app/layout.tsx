@@ -1,13 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Geist,
-  Geist_Mono,
-  Cairo,
-  Amiri,
-  Noto_Serif,
-  Tajawal,
-  Noto_Sans_Arabic,
-} from "next/font/google";
+import { Cairo, Amiri } from "next/font/google";
 import "./globals.css";
 import "./index.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -15,20 +7,6 @@ import { I18nProvider } from "@/components/I18nProvider";
 import { generateMetadata as generateSEOMetadata, siteConfig } from "@/lib/seo";
 import StructuredData from "@/components/StructuredData";
 import { Analytics } from "@vercel/analytics/next"
-
-// Geist Sans (UI)
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-// Geist Mono (code / mono text)
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 // Cairo – modern Arabic + Latin
 const cairo = Cairo({
@@ -43,30 +21,6 @@ const amiri = Amiri({
   variable: "--font-amiri",
   subsets: ["latin", "arabic"],
   weight: ["400", "700"],
-  display: "swap",
-});
-
-// Noto Sans Arabic – fallback for Arabic sans
-const notoSansArabic = Noto_Sans_Arabic({
-  variable: "--font-noto-sans-arabic",
-  subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-// Noto Serif – serif for English/Latin
-const notoSerif = Noto_Serif({
-  variable: "--font-noto-serif",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-// Tajawal – modern, clean Arabic font
-const tajawal = Tajawal({
-  variable: "--font-tajawal",
-  subsets: ["latin", "arabic"],
-  weight: ["400", "500", "700"],
   display: "swap",
 });
 
@@ -125,13 +79,8 @@ export default function RootLayout({
       </head>
       <body
         className={`
-          ${geistSans.variable}
-          ${geistMono.variable}
           ${cairo.variable}
           ${amiri.variable}
-          ${notoSansArabic.variable}
-          ${notoSerif.variable}
-          ${tajawal.variable}
           antialiased
         `}
       >

@@ -12,6 +12,7 @@ import {
   Clock,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import DirectionsButtons from "@/components/DirectionsButtons";
 
 const Contact = () => {
   const { t, i18n } = useTranslation();
@@ -100,6 +101,7 @@ const Contact = () => {
                         <br />
                         {t("contact.addressLine3")}
                       </p>
+                      <DirectionsButtons className="mt-5" />
                     </div>
                   </div>
                 </Card>

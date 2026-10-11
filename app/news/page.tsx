@@ -6,8 +6,10 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import ShareButtons from "@/components/ShareButtons";
 import { Calendar, Play, Image as ImageIcon, X } from "lucide-react";
 import { gsap } from "gsap";
+import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") {
@@ -54,11 +56,12 @@ const VideoCardNews = ({ item, onClick }: { item: NewsItem; onClick: () => void 
     >
       {/* Thumbnail Image - shows before video loads */}
       {item.thumbnail && (
-        <img
+        <Image
           src={item.thumbnail}
           alt={item.title}
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="lazy"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover"
         />
       )}
 
@@ -70,7 +73,7 @@ const VideoCardNews = ({ item, onClick }: { item: NewsItem; onClick: () => void 
         muted
         loop
         playsInline
-        preload="metadata"
+        preload={item.thumbnail ? "none" : "metadata"}
         poster={item.thumbnail}
         onLoadedData={() => setIsLoaded(true)}
       />
@@ -153,6 +156,16 @@ const News = () => {
       setSelectedNews(null);
     }
   };
+
+  // Open the news item from a shared link (/news?item=2)
+  useEffect(() => {
+    const sharedId = new URLSearchParams(window.location.search).get("item");
+    if (!sharedId) return;
+    const item = newsItems.find((n) => String(n.id) === sharedId);
+    if (item) openLightbox(item);
+    // Only run once the items are available, not on every lightbox change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newsItems.length]);
 
   // Animate header
   useEffect(() => {
@@ -250,6 +263,7 @@ const News = () => {
                     >
                       {t("news.readMore")}
                     </Button>
+                    <ShareButtons title={item.title} path={`/news?item=${item.id}`} className="mt-3 justify-center" />
                   </div>
                 </Card>
               </div>
@@ -319,6 +333,7 @@ const News = () => {
                   {selectedNews.content}
                 </p>
               )}
+              <ShareButtons title={selectedNews.title} path={`/news?item=${selectedNews.id}`} className="mt-6" />
             </div>
           </div>
         </div>

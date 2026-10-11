@@ -1,16 +1,18 @@
 "use client";
 import { useTranslation } from "react-i18next";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { X, Loader2 } from "lucide-react";
+import { X, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { galleryImages, getCategories } from "@/lib/galleryData";
 import Image from "next/image";
+import ShareButtons from "@/components/ShareButtons";
 
 const Gallery = () => {
   const { t } = useTranslation();
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  // Index into filteredImages of the photo open in the lightbox
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [imageLoading, setImageLoading] = useState(true);
 
@@ -26,6 +28,59 @@ const Gallery = () => {
     }
     return galleryImages.filter((img) => img.category === selectedCategory);
   }, [selectedCategory]);
+
+  const selectedImage = selectedIndex !== null ? filteredImages[selectedIndex] : null;
+
+  const openImage = (index: number) => {
+    setImageLoading(true);
+    setSelectedIndex(index);
+  };
+
+  const closeImage = useCallback(() => setSelectedIndex(null), []);
+
+  const showNext = useCallback(() => {
+    setImageLoading(true);
+    setSelectedIndex((i) => (i === null ? i : (i + 1) % filteredImages.length));
+  }, [filteredImages.length]);
+
+  const showPrev = useCallback(() => {
+    setImageLoading(true);
+    setSelectedIndex((i) => (i === null ? i : (i - 1 + filteredImages.length) % filteredImages.length));
+  }, [filteredImages.length]);
+
+  // Open the photo from a shared link (/gallery?img=/assets/Church/img2.webp)
+  useEffect(() => {
+    const sharedSrc = new URLSearchParams(window.location.search).get("img");
+    if (!sharedSrc) return;
+    const index = galleryImages.findIndex((img) => img.src === sharedSrc);
+    if (index !== -1) openImage(index);
+  }, []);
+
+  // Keyboard: arrows to switch, Escape to close
+  useEffect(() => {
+    if (selectedIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") showNext();
+      else if (e.key === "ArrowLeft") showPrev();
+      else if (e.key === "Escape") closeImage();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selectedIndex, showNext, showPrev, closeImage]);
+
+  // Swipe left/right on phones
+  const touchStartX = useRef<number | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(dx) < 50) return;
+    if (dx < 0) showNext();
+    else showPrev();
+  };
 
   return (
     <div className="min-h-screen bg-background selection:bg-primary/20">
@@ -100,7 +155,7 @@ const Gallery = () => {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   className="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 bg-muted"
-                  onClick={() => setSelectedImage(image.src)}
+                  onClick={() => openImage(index)}
                 >
                   <Image
                     src={image.src}
@@ -133,24 +188,62 @@ const Gallery = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-xl flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+            dir="ltr"
+            onClick={closeImage}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
           >
-            <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              className="absolute top-4 right-4 w-12 h-12 rounded-full bg-card/10 border border-white/20 flex items-center justify-center hover:bg-card/20 transition-colors z-50"
-              onClick={() => setSelectedImage(null)}
+            {/* Counter */}
+            <div className="absolute top-5 left-5 text-white/80 text-sm font-medium z-50">
+              {selectedIndex! + 1} / {filteredImages.length}
+            </div>
+
+            {/* Close */}
+            <button
+              type="button"
+              aria-label="Close"
+              className="absolute top-4 right-4 w-12 h-12 rounded-full bg-black/50 hover:bg-black/70 border border-white/40 backdrop-blur-sm flex items-center justify-center transition-colors z-50"
+              onClick={closeImage}
             >
               <X className="w-6 h-6 text-white" />
-            </motion.button>
+            </button>
+
+            {/* Previous / Next */}
+            {filteredImages.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  aria-label="Previous image"
+                  className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/50 hover:bg-black/70 border border-white/40 backdrop-blur-sm flex items-center justify-center transition-colors z-50"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    showPrev();
+                  }}
+                >
+                  <ChevronLeft className="w-7 h-7 text-white" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next image"
+                  className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/50 hover:bg-black/70 border border-white/40 backdrop-blur-sm flex items-center justify-center transition-colors z-50"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    showNext();
+                  }}
+                >
+                  <ChevronRight className="w-7 h-7 text-white" />
+                </button>
+              </>
+            )}
 
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              key={selectedImage.src}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-5xl h-[80vh] flex items-center justify-center"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="relative w-full max-w-5xl h-[75vh] flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
               {imageLoading && (
@@ -159,16 +252,26 @@ const Gallery = () => {
                 </div>
               )}
               <Image
-                src={selectedImage}
-                alt="Gallery view"
+                src={selectedImage.src}
+                alt={selectedImage.alt || "Gallery view"}
                 fill
                 className="object-contain"
                 sizes="100vw"
                 priority
                 onLoad={() => setImageLoading(false)}
-                onLoadingComplete={() => setImageLoading(false)}
               />
             </motion.div>
+
+            {/* Share */}
+            <div
+              className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-full bg-white/90 shadow-lg"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ShareButtons
+                title={selectedImage.alt || t("gallery.title")}
+                path={`/gallery?img=${encodeURIComponent(selectedImage.src)}`}
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

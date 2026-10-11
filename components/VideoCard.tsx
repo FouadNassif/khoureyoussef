@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Play, Calendar } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import Image from "next/image";
 
 interface VideoCardProps {
   item: {
@@ -61,11 +62,12 @@ const VideoCard = ({ item, i18n, cardRef }: VideoCardProps) => {
         <div className="relative aspect-video overflow-hidden bg-muted">
           {/* Thumbnail Image - shows before video loads or as poster */}
           {item.thumbnail && !isPlaying && (
-            <img
+            <Image
               src={item.thumbnail}
               alt={item.title}
-              className="absolute inset-0 w-full h-full object-cover"
-              loading="lazy"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
             />
           )}
           
@@ -77,7 +79,7 @@ const VideoCard = ({ item, i18n, cardRef }: VideoCardProps) => {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload={item.thumbnail ? "none" : "metadata"}
             poster={item.thumbnail} // Fallback poster
             onLoadedData={() => setIsLoaded(true)}
             onPlay={() => setIsPlaying(true)}

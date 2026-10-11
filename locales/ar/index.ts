@@ -74,7 +74,13 @@ export default {
             contactName1: "طوني ساسين",
             contactPhone1: "+961 76 740 377",
             contactName2: "ماريا ساسين",
-            contactPhone2: "+961 71 797 415"
+            contactPhone2: "+961 71 797 415",
+            getDirections: "احصل على الاتجاهات",
+        },
+        share: {
+            label: "شارك:",
+            whatsapp: "شارك عبر واتساب",
+            facebook: "شارك على فيسبوك",
         },
         news: {
             title: "أحدث الأخبار",
