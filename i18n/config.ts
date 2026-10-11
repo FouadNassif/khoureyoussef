@@ -26,25 +26,11 @@ i18n
         }
     });
 
-const supportedLanguages = ['en', 'ar', 'fr'];
-
-// Pick the first device language we support (e.g. "fr-CA" -> "fr"), otherwise English
-const getDeviceLanguage = () => {
-    const deviceLanguages = navigator.languages?.length ? navigator.languages : [navigator.language];
-    for (const lang of deviceLanguages) {
-        const code = lang?.toLowerCase().split('-')[0];
-        if (code && supportedLanguages.includes(code)) return code;
-    }
-    return 'en';
-};
-
-// Initialize language on client side: a saved choice wins, otherwise use the device language
+// Initialize language from localStorage on client side (Arabic by default)
 if (typeof window !== 'undefined') {
     const saved = localStorage.getItem('i18nextLng');
-    if (saved && supportedLanguages.includes(saved)) {
+    if (saved && ['en', 'ar', 'fr'].includes(saved)) {
         i18n.changeLanguage(saved);
-    } else {
-        i18n.changeLanguage(getDeviceLanguage());
     }
     
     // Save language preference when changed
